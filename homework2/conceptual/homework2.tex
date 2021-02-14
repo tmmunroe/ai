@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\title{COMS 4701 - Homework 2 - Written}
+\author
+{
+Turner Mandeville
+\and tmm2169
+}
+
+
+\begin{document}
+    \maketitle
+
+    \section*{Question 1}
+    Since h1(n) and h2(n) are admissible, by definition, the following relationships are true:
+    
+    \forall n$, h1(n) \leq h*(n)$, and
+    
+    \forall n$, h2(n) \leq h*(n)
+    
+    \newline
+    \newline
+    \begin{enumerate}
+        \item $h(n) = min\{h1(n), h2(n)\}$ is admissible
+        
+        For any n, let H(n) = \{h1(n), h2(n)\}
+        
+        From the definition of h(n), it follows that h(n) has either the value h1(n) or h2(n), and so, \forall n, h(n) \in H(n)
+        
+        Since h1 and h2 have the property of being admissible, and combining them forms the set H, we know that
+        
+        \forall n, \forall elements \in H(n), element <= h*(n)
+        
+        Since by the definition of h it is true that \forall n$, h(n) must come from the set H(n), it follows that \forall n, h(n) <= h*(n)
+        $
+        
+        \item $h(n) = max\{h1(n), h2(n)\}$ is admissible
+        
+        Same proof as (1)
+        
+        \item $h(n) = w*h1(n) + (1-w)*h2(n), $where $0 \leq w \leq 1$
+        
+        If $w = 1$, we see that $h(n) = h1(n)$, which makes it admissible by transitivity.
+        
+        Likewise, if $w = 0$, we see that $h(n) = h2(n)$, which makes it admissible by transitivity.
+        
+        Now, suppose that for $0 < w < 1$, suppose that h is not admissible. It follows that for some n, the following two conditions must be true:
+        
+        $h(n) > h1(n)$, and\newline
+        $h(n) > h2(n)$
+        
+        If one of these conditions were not true, then $\forall n, h(n) <=$ some admissible heuristic, which in turn implies that it too is admissible (by transitivity).
+        
+        For condition (1),
+        
+        $h(n) > h1(n) =>
+        \newline
+        w*h1(n) + (1-w)*h2(n) > h1(n) =>
+        \newline
+        (1-w) * h2(n) > (1-w) * h1(n)
+        $
+        \newline
+        
+        Since we are now considering just $0 < w < 1$, then $0 < (1-w) < 1$, and so we can cancel it and maintain the inequality:
+        
+        $h2(n) > h1(n)$
+        \newline
+        \newline
+        \newline
+        For condition (2),
+        
+        $h(n) > h2(n) =>
+        \newline
+        w*h1(n) + (1-w)*h2(n) > h2(n) =>
+        \newline
+        w*h1(n) > h2(n) - (1-w)*h2(n) =>
+        \newline
+        w*h1(n) > w*h2(n)
+        $
+        
+        Since we are now considering just $0 < w < 1$, we can cancel w and maintain the inequality:
+        
+        $h1(n) > h2(n)$
+
+        Since conditions (1) and (2) lead to a contradiction, h must be admissible for $0 < w < 1$.\newline
+        
+        So, for all values of $w \in [0,1]$, h must be admissible
+    \end{enumerate}
+    
+    
+    
+    \newpage
+    \section*{Question 2}
+    
+    Let a given state be denoted by an ordered list of the values in $\{0, 1, 2, ..., m^2-1\}$ where no value is repeated, 0 indicates the empty spot, and a particular index in the list corresponds to a particular position in the N-puzzle board.\newline
+    
+    Then, the state space, or set of all possible states, is all permutations of the ordered list $[0,1,2,...,m^2-1]$.\newline
+    
+    The upper bound on the state space is given by the number of possible permutations. To get the number of possible permutations, we can imagine walking through the ordered list, and for each index, selecting one of the values in the set $\{0, 1, 2, ..., m^2-1\}$ that has not already been selected for a previous index. That gives us:\newline
+    
+    $(m^2-1) * (m^2-2) * ... * 1 = (m^2 - 1)!$, which is the upper bound
+    \newline
+    For the 8-Puzzle, m=3. the upper bound is $(3^2 - 1)! = 8!$
+    
+    \newpage
+    \section*{Question 3}
+    Insert answer for question 3 here.
+    \newpage
+    \section*{Question 4}
+    Insert answer for question 4 here.
+\end{document}

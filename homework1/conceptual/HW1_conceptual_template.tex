@@ -1,0 +1,451 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+
+\title{COMS 4701 - Homework 1 - Conceptual}
+\author
+{
+Turner Mandeville
+\and tmm2169
+}
+
+\begin{document}
+    \maketitle
+    \section*{Question 1}
+    \begin{enumerate}
+        \item Letting location=Peg Number and acknowledging the ordering constraints described in the question, 
+        
+        State = [ location of Green Disk, location of Red Disk, location of Blue Disk ]
+        \item Initial State = [ 1, 1, 1 ]
+        \item Possible States = 3 possible locations of Green * 3 possible locations of Red * 3 possible locations of Blue = 27
+        \begin{itemize}
+          \item All possible states here are valid since there is an assumed constraint on how disks may be stacked on a peg. Since stacking is totally ordered, there is only one possible way for multiple disks to be on a shared peg
+        \end{itemize}
+        \item All Possible Actions (valid and invalid) = Move Disk D to Peg P
+        \begin{itemize}
+          \item For a particular state S, the Action set needs to be constrained to the set of Valid actions.
+          \newline The rules are:
+          \newline
+          \newline
+          1) D can only be moved \emph{from} P if there is not a smaller disk on P (which would mean a smaller disk is on top of D), and 
+          \newline
+          2) D can only be moved \emph{to} P if there is not a smaller disk on P (which would violate the stacking constraint)
+        \end{itemize}
+        \item Transition Model = T(State, Action) = New State
+        \begin{itemize}
+          \item For example, T( State=[1,1,1], Action=Move Disk 3 (Blue/Small) to Peg 3 ) = [1,1,3]
+        \end{itemize}
+        \item GoalTest(State) = State is [3,3,3]
+    \end{enumerate}
+
+    \newpage
+    \section*{Question 2}
+    \begin{enumerate}
+        \item BFS order: 
+        \newline
+        InitialState(1,1) - (2,1) - (1,2) - (2,2) - (1,3) - (3,2) - (2,3) - (3,1) - Goal(3,3) 
+        \item DFS order: 
+        \newline
+        InitialState(1,1) - (2,1) - (1,2) - (2,2) - (3,2) - (3,1) - (1,3) - (2,3) - Goal(3,3)
+    \end{enumerate}
+
+    \newpage
+    \section*{Question 3}
+    
+    In the Priority Queue Evolutions below, the Explored Set is to the left of the node marked Exploring, and the Fringe is to the right of the node marked Exploring. From Left-to-Right, the Fringe represents the Priority Queue.
+    
+    [ Explored ] .. [ Exploring ] .. [ Fringe ]
+    
+    \begin{enumerate}
+        \item UCS: 
+        \newline
+        Order of Visit: S, B, C, F, D, E, G, Z
+        \newline
+        Path: S, B, E, G, Z
+        \newline
+        \newline
+        Priority Queue Evolution:
+        \newline
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c}
+            \hline
+                Node & S \\
+                Cost & 0 \\
+                Source & N/A \\
+                State & Fringe \\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore S
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c}
+            \hline
+                Node & S & B & C & F \\
+                Cost & 0 & 2 & 3 & 4 \\
+                Source & N/A & S & S & S \\
+                State & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore B
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & E\\
+                Cost & 0 & 2 & 3 & 4 & 6\\
+                Source & N/A & S & S & S & B \\
+                State & Explored & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore C
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E\\
+                Cost & 0 & 2 & 3 & 4 & 5 & 6\\
+                Source & N/A & S & S & S & C & B \\
+                State & Explored & Explored & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore F
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E\\
+                Cost & 0 & 2 & 3 & 4 & 5 & 6\\
+                Source & N/A & S & S & S & C & B \\
+                State & Explored & Explored & Explored & Exploring & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore D
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G\\
+                Cost & 0 & 2 & 3 & 4 & 5 & 6 & 9\\
+                Source & N/A & S & S & S & C & B & D\\
+                State & Explored & Explored & Explored & Explored & Exploring & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore E
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G & Z\\
+                Cost & 0 & 2 & 3 & 4 & 5 & 6 & 8 & 14\\
+                Source & N/A & S & S & S & C & B & E & E\\
+                State & Explored & Explored & Explored & Explored & Explored & Exploring & Update & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore G
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G & Z\\
+                Cost & 0 & 2 & 3 & 4 & 5 & 6 & 8 & 13\\
+                Source & N/A & S & S & S & C & B & E & G\\
+                State & Explored & Explored & Explored & Explored & Explored & Explored & Exploring & Update\\
+            \hline
+            \end{tabular}
+        \end{left}
+        
+        \newline
+        \newline
+        
+        Explore Z - GOAL!
+        
+        
+        
+        
+        \item A*:
+        \newline
+        Order of Visit: S, B, C, F, D, E, G, Z
+        \newline
+        Path: S, B, E, G, Z
+        \newline
+        \newline
+        Priority Queue Evolution:
+        \newline where Cost(N) = F(N) = G(N) + H(N)
+        \newline and ties are broken in order to visit in lexicographic order 
+        \newline
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c}
+            \hline
+                Node & S \\
+                Cost & 8 \\
+                Source & N/A \\
+                State & Fringe \\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore S
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c}
+            \hline
+                Node & S & B & C & F \\
+                Cost & 8 & 9 & 9 & 9 \\
+                Source & N/A & S & S & S \\
+                State & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore B
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & E\\
+                Cost & 8 & 9 & 9 & 9 & 10\\
+                Source & N/A & S & S & S & B \\
+                State & Explored & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore C
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E\\
+                Cost & 8 & 9 & 9 & 9 & 10 & 10\\
+                Source & N/A & S & S & S & C & B \\
+                State & Explored & Explored & Exploring & Fringe & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore F
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E\\
+                Cost & 8 & 9 & 9 & 9 & 10 & 10\\
+                Source & N/A & S & S & S & C & B \\
+                State & Explored & Explored & Explored & Exploring & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore D
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G\\
+                Cost & 8 & 9 & 9 & 9 & 10 & 10 & 11\\
+                Source & N/A & S & S & S & C & B & D\\
+                State & Explored & Explored & Explored & Explored & Exploring & Fringe & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore E
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G & Z\\
+                Cost & 8 & 9 & 9 & 9 & 10 & 10 & 10 & 14\\
+                Source & N/A & S & S & S & C & B & E & E\\
+                State & Explored & Explored & Explored & Explored & Explored & Exploring & Update & Fringe\\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        
+        Explore G
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c|c|c}
+            \hline
+                Node & S & B & C & F & D & E & G & Z\\
+                Cost & 8 & 9 & 9 & 9 & 10 & 10 & 10 & 13\\
+                Source & N/A & S & S & S & C & B & E & G\\
+                State & Explored & Explored & Explored & Explored & Explored & Explored & Exploring & Update\\
+            \hline
+            \end{tabular}
+        \end{left}
+        
+        \newline
+        \newline
+        
+        Explore Z - GOAL!
+        
+        
+        
+    \end{enumerate}
+
+
+
+    \newpage
+    \section*{Question 4}
+    \begin{enumerate}
+        \item Heuristic 1:
+        
+        Admissible: Yes
+        
+        The heuristic for every node is less than or equal to the actual distance from each node to the goal
+        \newline
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c}
+            \hline
+                Node & h(Node) & h*(Node) \\
+            \hline
+                S & 4 & 4\\
+                B & 2 & 3\\
+                G & 0 & 0 \\
+            \hline
+            \end{tabular}
+        \end{left}
+        \newline
+        \newline
+        
+        Consistent: No
+        
+        Taking n=S, n'=B, the consistency of the heuristic is violated:
+        
+        4 = h(S) \nleq Cost(S, B, S-to-B) + h(B) = 1 + 2
+        \newline
+        \newline
+        
+        
+        \item Heuristic 2:
+        
+        Admissible: No
+        
+        6 = h(S) \nleq h*(S) = 4
+        \newline
+        \newline
+        
+        Consistent: No
+        
+        By lemma "every consistent heuristic is admissible", if a heuristic is \emph{not} admissible, it can not be consistent
+        \newline
+        \newline
+        
+        
+        \item Heuristic 3:
+        
+        Admissible: Yes
+        
+        Using the admissibility of Heuristic 1 (H1), Heuristic 3 (H3) is admissible:
+        
+        \forall n, H3(n) <= H1(n) <= h*(n)
+        \newline
+        \newline
+        
+        Consistent: Yes
+        \newline
+        \forall n, n'=succ(n), h(n) <= cost(n, n') + h(n')
+        
+        
+        \newline
+        The following table shows that the above definition of consistency is satisfied:
+        \newline
+        \begin{left}
+            \begin{tabular}{c|c|c|c|c|c|c}
+            \hline
+                Node & Succ(Node) & h(Node) & \leq & Cost(Node, Succ(Node)) & + & h(Succ(Node)) \\
+            \hline
+                S & G & 3 && 4 && 0\\
+                S & B & 3 && 1 && 2\\
+                B & G & 2 && 3 && 0\\
+            \hline
+            \end{tabular}
+        \end{left}
+        
+        
+        \newline
+        \newline
+        
+        
+        \item Heuristic 4:
+        
+        Admissible: Yes
+        
+        Using the admissibility of Heuristic 1 (H1), Heuristic 4 (H4) is admissible:
+        
+        \forall n, H4(n) <= H1(n) <= h*(n)
+        \newline
+        \newline
+        
+        Consistent: No.
+        
+        Using nodes S and B, the definition of consistency is violated:
+        
+        \newline
+        4 = h(S) \nleq cost(S,B,S->B) + h(B) = 1 + 1
+        
+    \end{enumerate}
+   
+\end{document}
