@@ -5,14 +5,10 @@ from __future__ import print_function
 import sys
 import math
 import time
-import queue as Q
 import resource
 from collections import deque
 import heapq
 from functools import total_ordering
-from memory_profiler import profile
-import itertools
-import click
 
 GoalState = None
 GoalStateHash = None
@@ -27,6 +23,7 @@ class SearchStatistics:
         self.nodes_expanded = 0
         self.max_search_depth = 0
         self.resource_usage = None
+        self.truncatePath = False
 
     @property
     def cost_of_path(self):
@@ -57,7 +54,7 @@ class SearchStatistics:
         self.resource_usage = None
 
     def report(self):
-        if len(self.path_to_goal) > 20:
+        if len(self.path_to_goal) > 20 and self.truncatePath:
             path = self.path_to_goal[:5]
             path.append('...')
             path.extend(self.path_to_goal[-5:])
@@ -93,7 +90,7 @@ class PuzzleState(object):
         """
         if n*n != len(config) or n < 2:
             raise Exception("The length of config is not correct!")
-        if set(config) != GoalStateRange:
+        if set(config) != set(range(n*n)):
             raise Exception("Config contains invalid/duplicate entries : ", config)
 
         self.n         = n
@@ -161,7 +158,7 @@ class PuzzleState(object):
     def display(self):
         """ Display this Puzzle state as a n*n board """
         for i in range(self.n):
-            print(self.config[3*i : 3*(i+1)])
+            print(self.config[self.n*i : self.n*(i+1)])
 
     def _is_valid_index(self, i):
         return 0 <= i <= self.max_index
@@ -185,14 +182,14 @@ class PuzzleState(object):
         Moves the blank tile one row up.
         :return a PuzzleState with the new configuration
         """
-        return self._new_puzzle_state(-3, 'U')
+        return self._new_puzzle_state(-self.n, 'U')
       
     def move_down(self):
         """
         Moves the blank tile one row down.
         :return a PuzzleState with the new configuration
         """
-        return self._new_puzzle_state(3, 'D')
+        return self._new_puzzle_state(self.n, 'D')
       
     def move_left(self):
         """
@@ -263,14 +260,30 @@ def updateStatsForGoalState(state:PuzzleState, searchStats: SearchStatistics):
     searchStats.path_to_goal = recover_path(state)
     searchStats.resource_usage = resource.getrusage(resource.RUSAGE_SELF)
 
+def initializeGoalState(initialState: PuzzleState):
+    global GoalState
+    global GoalStateHash
+    global GoalStateRange
+    GoalState = list(range(len(initialState.config)))
+    GoalStateHash = hashConfig(GoalState)
+    GoalStateRange = set(GoalState)
+    '''
+    print()
+    print(f'InitialState: {initialState.config}')
+    print(f'GoalState: {GoalState}')
+    print(f'GoalStateHash: {GoalStateHash}')
+    '''
+
+
 ### Students need to change the method to have the corresponding parameters
 def writeOutput(searchStats: SearchStatistics):
-    with open('output.txt', 'a') as f:
+    with open('output.txt', 'w') as f:
         print(searchStats.report(), file=f)
 
 
 def bfs_search(initial_state):
     """BFS search"""
+    initializeGoalState(initial_state)
     searchStats = SearchStatistics()
     seen = set()
     frontier_queue = deque()
@@ -310,6 +323,7 @@ def bfs_search(initial_state):
 
 def dfs_search(initial_state):
     """DFS search"""
+    initializeGoalState(initial_state)
     searchStats = SearchStatistics()
     seen = set()
     frontier_queue = deque()
@@ -349,6 +363,7 @@ def dfs_search(initial_state):
 
 def A_star_search(initial_state):
     """A * search"""
+    initializeGoalState(initial_state)
     searchStats = SearchStatistics()
     explored = set()
     frontier = dict()
@@ -448,22 +463,9 @@ def test_goal(puzzle_state):
 def findPath(search_mode:str, begin_state:list):
     begin_state = list(map(int, begin_state))
     board_size  = int(math.sqrt(len(begin_state)))
-    
-    global GoalState
-    global GoalStateHash
-    global GoalStateRange
-    GoalState = list(range(len(begin_state)))
-    GoalStateHash = hashConfig(GoalState)
-    GoalStateRange = set(range(board_size*board_size))
 
     hard_state  = PuzzleState(begin_state, board_size)
     start_time  = time.time()
-
-    print()
-    print(f'InitialState: {begin_state}')
-    print(f'Strategy: {search_mode}')
-    print(f'GoalState: {GoalState}')
-    print(f'GoalStateHash: {GoalStateHash}')
 
     if   search_mode == "bfs": bfs_search(hard_state)
     elif search_mode == "dfs": dfs_search(hard_state)
@@ -474,50 +476,6 @@ def findPath(search_mode:str, begin_state:list):
     end_time = time.time()
     print("Search completed in %.3f second(s)"%(end_time-start_time))
 
-def single_search(search_mode:str, begin_state:list):
-    findPath(search_mode, begin_state)
-
-@click.command()
-def batch():
-    startBatch = time.time()
-    initialState = [3,1,2,0,4,5,6,7,8]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [1,2,5,3,4,0,6,7,8]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [6,1,8,4,0,2,7,3,5]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [8,6,4,2,1,3,5,7,0]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [8,6,7,2,5,4,3,0,1]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [6,4,7,8,5,0,3,2,1]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-
-    initialState = [5,6,7,4,0,8,3,2,1]
-    single_search('dfs', initialState[:])
-    single_search('bfs', initialState[:])
-    single_search('ast', initialState[:])
-    endBatch = time.time()
-    print("Batch completed in %.3f second(s)"%(endBatch-startBatch))
-
-
 # Main Function that reads in Input and Runs corresponding Algorithm
 def main():
     r = resource.getrusage(resource.RUSAGE_SELF)
@@ -525,28 +483,8 @@ def main():
 
     search_mode = sys.argv[1].lower()
     begin_state = sys.argv[2].split(",")
-    
-    begin_state = list(map(int, begin_state))
-    board_size  = int(math.sqrt(len(begin_state)))
 
-    global GoalState
-    global GoalStateHash
-    global GoalStateRange
-    GoalState = list(range(len(begin_state)))
-    GoalStateHash = hashConfig(GoalState)
-    GoalStateRange = set(GoalState)
-
-    hard_state  = PuzzleState(begin_state, board_size)
-    start_time  = time.time()
-    
-    if   search_mode == "bfs": bfs_search(hard_state)
-    elif search_mode == "dfs": dfs_search(hard_state)
-    elif search_mode == "ast": A_star_search(hard_state)
-    else: 
-        print("Enter valid command arguments !")
-        
-    end_time = time.time()
-    print("Program completed in %.3f second(s)"%(end_time-start_time))
+    findPath(search_mode, begin_state)
 
 if __name__ == '__main__':
     main()
