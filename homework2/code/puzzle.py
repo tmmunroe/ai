@@ -19,11 +19,19 @@ def hashConfig(config: list):
 
 class SearchStatistics:
     def __init__(self):
+        self.start_time = None
+        self.end_time = None
         self.path_to_goal = None
         self.nodes_expanded = 0
         self.max_search_depth = 0
         self.resource_usage = None
         self.truncatePath = False
+
+    def start(self):
+        self.start_time = time.time()
+    
+    def end(self):
+        self.end_time = time.time()
 
     @property
     def cost_of_path(self):
@@ -37,8 +45,8 @@ class SearchStatistics:
 
     @property
     def running_time(self):
-        if self.resource_usage:
-            return self.resource_usage.ru_utime + self.resource_usage.ru_stime
+        if self.start_time and self.end_time:
+            return self.end_time - self.start_time
         return 0
 
     @property
@@ -285,6 +293,7 @@ def bfs_search(initial_state):
     """BFS search"""
     initializeGoalState(initial_state)
     searchStats = SearchStatistics()
+    searchStats.start()
     seen = set()
     frontier_queue = deque()
 
@@ -305,6 +314,7 @@ def bfs_search(initial_state):
         '''check if node satisfies goal'''
         if test_goal(node):
             updateStatsForGoalState(node, searchStats)
+            searchStats.end()
             writeOutput(searchStats)
             break
         
@@ -325,6 +335,7 @@ def dfs_search(initial_state):
     """DFS search"""
     initializeGoalState(initial_state)
     searchStats = SearchStatistics()
+    searchStats.start()
     seen = set()
     frontier_queue = deque()
 
@@ -345,6 +356,7 @@ def dfs_search(initial_state):
         '''check if node satisfies goal'''
         if test_goal(node):
             updateStatsForGoalState(node, searchStats)
+            searchStats.end()
             writeOutput(searchStats)
             break
         
@@ -365,6 +377,7 @@ def A_star_search(initial_state):
     """A * search"""
     initializeGoalState(initial_state)
     searchStats = SearchStatistics()
+    searchStats.start()
     explored = set()
     frontier = dict()
     frontier_queue = []
@@ -411,6 +424,7 @@ def A_star_search(initial_state):
         '''check if node satisfies goal'''
         if test_goal(node):
             updateStatsForGoalState(node, searchStats)
+            searchStats.end()
             writeOutput(searchStats)
             break
         
@@ -478,8 +492,10 @@ def findPath(search_mode:str, begin_state:list):
 
 # Main Function that reads in Input and Runs corresponding Algorithm
 def main():
+    '''
     r = resource.getrusage(resource.RUSAGE_SELF)
     print(f'Beginning size: {r.ru_maxrss / 1000.0}')
+    '''
 
     search_mode = sys.argv[1].lower()
     begin_state = sys.argv[2].split(",")
