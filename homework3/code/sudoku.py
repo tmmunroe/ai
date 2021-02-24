@@ -65,6 +65,16 @@ class BinaryConstraint:
             return False
         return self.testFunc(assignments[self.first], assignments[self.second])
 
+class Constraints:
+    def __init__(self, variables:Iterable[Hashable], constraints:Iterable[BinaryConstraint]):
+        self.variables = list(variables)
+        self.constraints = list(constraints)
+        self.varConstraints = { var: [c for c in constraints if var in c] for var in variables }
+    
+    def forVariable(self, variable:Hashable) -> Iterable[BinaryConstraint]:
+        if variable in self.varConstraints:
+            return self.varConstraints[variable]
+        return []
 
 def print_board(board:Dict):
     """Helper function to print board in a square."""
@@ -198,24 +208,24 @@ def goal_test(assignments:Dict, variables:Tuple, csp:Iterable[BinaryConstraint])
     return check_constraints(assignments, csp)
 
 
-def backtracking_recursive(variables:Tuple, assignments:Dict, domains:Dict, csp:Iterable[BinaryConstraint]) -> Optional[Dict]:
+def backtracking_recursive(variables:Tuple, assignments:Dict, domains:Dict, csp:Iterable[BinaryConstraint], cspDict) -> Optional[Dict]:
     """returns None if no solution was found or a solved board"""
     if goal_test(assignments, variables, csp):
         return assignments
 
     var, values = pop_minimum_remaining_value(domains)
-    
+    var_csps = cspDict[var]
     '''
-    ordered_values = order_domain_values(var, values, domains, csp)
+    ordered_values = order_domain_values(var, values, domains, var_csps)
     for value, fc_domains, _ in ordered_values:
     '''
     for value in values:
-        ok, fc_domains = forward_check((var,value), domains, csp)
+        ok, fc_domains = forward_check((var,value), domains, var_csps)
         if not ok:
             continue
     
         assignments[var] = value
-        result = backtracking_recursive(variables, assignments, fc_domains, csp)
+        result = backtracking_recursive(variables, assignments, fc_domains, csp, cspDict)
         if result:
             return result
         del assignments[var]
@@ -227,6 +237,7 @@ def backtracking(board:Dict):
     """Takes a board and returns solved board."""
     variables, assignments, domains = generateInitialState(board)
     csp: List[BinaryConstraint] = generateConstraints()
+    cspDict = { var: [c for c in csp if var in c] for var in variables }
 
     for assigment in assignments.items():
         ok, new_domains = forward_check(assigment, domains, csp)
@@ -234,10 +245,7 @@ def backtracking(board:Dict):
             raise Exception("Unsolvable board???")
         domains = new_domains
 
-    #print(f"Variables: {len(variables)}")
-    #print(f"Assignments: {len(assignments)}")
-    #print(f"Domains: {len(domains)}")
-    solved_board = backtracking_recursive(tuple(variables), assignments, domains, csp)
+    solved_board = backtracking_recursive(tuple(variables), assignments, domains, csp, cspDict)
     return solved_board
 
 def solve_line_board(line:str) -> Tuple[str, BoardStats]:
