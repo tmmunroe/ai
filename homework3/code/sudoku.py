@@ -171,7 +171,7 @@ def forward_check(assignment:Tuple[Hashable,Any], domains:Dict, csp:CSP) -> Tupl
         if not domain:
             continue
 
-        fc_domain = [ value for value in domain if constraint.check(assignment, (other,value)) ]
+        fc_domain = { value for value in domain if constraint.check(assignment, (other,value)) }
         if len(fc_domain) == 0:
             return False, {}
         
