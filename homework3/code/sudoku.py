@@ -2,9 +2,10 @@
 #coding:utf-8
 
 from typing import Optional, Iterable, Tuple, Set, List, Dict, Hashable, Any, Callable, Sequence
-from collections import UserDict
+from collections import UserDict, deque
 import sys
 import time
+import math
 
 """
 Each sudoku board is represented as a dictionary with string keys and
@@ -297,11 +298,17 @@ def batch_file():
         outfile.write(solved_board)
         outfile.write('\n')
 
-    print(f'Solved {len( [bs for bs in allBs if bs.solved] )} of {len(allBs)} Sudokus')
-    print(f'Total runtime: {sum((bs.runTime() for bs in allBs))}')
-    print(f'Mean runtime: {sum((bs.runTime() for bs in allBs)) / len(allBs)}')
-    print(f'Max runtime: {max((bs.runTime() for bs in allBs))}')
-    print(f'Min runtime: {min((bs.runTime() for bs in allBs))}')
+    with open('README.txt', 'w') as f:
+        totalTime = sum((bs.runTime() for bs in allBs))
+        mean = totalTime / len(allBs)
+        variance = sum(((bs.runTime() - mean)**2 for bs in allBs)) / len(allBs)
+        print(f'Solved: {len( [bs for bs in allBs if bs.solved] )} / {len(allBs)}', file=f)
+        print(f'Total runtime: {totalTime}', file=f)
+        print(f'Mean runtime: {mean}', file=f)
+        print(f'Standard Deviation: {math.sqrt(variance)}', file=f)
+        print(f'Max runtime: {max((bs.runTime() for bs in allBs))}', file=f)
+        print(f'Min runtime: {min((bs.runTime() for bs in allBs))}', file=f)
+
     print("Finishing all boards in file.")
 
 def test_batch_file():
@@ -322,17 +329,24 @@ def test_batch_file():
 
 if __name__ == '__main__':
     '''
-    if len(sys.argv) == 1:
-        test_batch_file()
-    else:
-        board = sys.argv[1]
-        solve_line_board(board)
-    '''
     test_batch_file()
-    
     
     solvedBoard, bs = solve_line_board('800000000003600000070090200050007000000045700000100030001000068008500010090000400')
     if solvedBoard != '812753649943682175675491283154237896369845721287169534521974368438526917796318452':
         print('UGH.. no good')
     else:
         print('Success!!')
+    '''
+    
+    if len(sys.argv) == 1:
+        test_batch_file()
+    elif len(sys.argv) == 2:
+        board = sys.argv[1]
+        solution, _ = solve_line_board(board)
+        with open('output.txt', 'w') as f:
+            print(solution, file=f)
+    elif len(sys.argv) == 3:
+        board = sys.argv[1]
+        expected = sys.argv[2]
+        solution, _ = solve_line_board(board)
+        print(f"Solved: {solution==expected}")    

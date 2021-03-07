@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{graphicx}
+
+\title{COMS 4701 - Homework 3 - Written}
+\author
+{
+Turner Mandeville
+\and tmm2169
+}
+
+
+\begin{document}
+    \maketitle
+
+    \section*{Question 1}
+    a) Give a domain for A so B is pruned.
+    \newline
+    A = 6
+    \newline
+    In $\alpha-\beta$ pruning, a Max node will terminate any further search of it's children once it knows that it's lower bound, signified by $\alpha$, exceeds Min's upper bound, signified by $\beta$. This is because the Max node knows that it's parent Min will never choose the value it returns.
+    \newline
+    In the example, Min's range after searching the first Max child is $(-\infty, 5]$. It will return a 5 or less. It passes this information to the second Max child which will terminate it's search once it realizes that it must return a value greater than 5. Letting A=6, Max's range of possible values after searching A is $[6, \infty)$, which means it will return a value greater than or equal to 6. Since it knows Min will never choose a value above 5, it will never choose a value from the range $[6, \infty)$ and Max can forego any further search of B.
+    \newline
+    \newline
+    b) Let A = B = 5. Suggest values for C and D such as the subtree with children E and F is pruned.
+    \newline
+    C = D = 4
+    \newline
+    In the example with A = B = 5, the Min node in the second layer will return the value 5 to the root Max node. The root Max node will update it's value for $\alpha$ because it knows it will never return a value less than 5. It passes $\alpha=5$ to it's right child to indicate that only values in the range $[5, \infty)$ will be selected by the root Max. 
+    \newline
+    From the $\alpha$ value passed down by Max, Min knows that if it's possible range of values is ever less than 5, it can terminate any further search because it will never return a value that Max will select.
+    \newline
+    By setting C = D = 4, Min will receive a value of 4 from it's left child. It will update $\beta$ to 4. Since Min's range is now $(-\infty, 4]$, it knows it will never return a value that Max will select. It can prune the subtree containing E and F.
+    
+    \newpage
+    \section*{Question 2}
+    Provide at least two reasons why Iterative Depth Search (also called Depth Frist Iterative Deepening) is useful in solving adversarial two-player games like chess.
+    \newline
+    \begin{enumerate}
+        \item Iterative Depth Search is useful in adversarial two-player games because it has the best performance of brute force search algorithms, which are used by the minimax algorithm to systematically search game states that could arise from the current state. Compared to BFS's exponential space complexity, IDS linear space complexity reduces the memory footprint required by the minimax algorithm. In games with huge state spaces, this enables it to avoid issues associated with managing large memory requirements, like disk IO and high numbers of in memory faults. Compared to DFS, IDS is better because it guarantees that any given ply will be searched completely before proceeding to the next ply. For this reason, given a certain amount of time to search, IDS will return an optimal next move given the search depth it attained whereas DFS may not even have investigated some set of next moves. (Section 7,Depth-First Iterative Deepening, Korf 1985)
+        \item Iterative Depth Search is useful in adversarial two-player games because it can collect information in each iteration to improve the performance of $\alpha-\beta$ minimax algorithms. Since the effectiveness of $\alpha-\beta$ pruning greatly depends on the order in which nodes are visited (each child provides information about whether it's siblings can be pruned), knowing the optimal order to visit the children can greatly improve the algorithm's performance. Using IDS, each iteration of depth-limited search can use information gathered from the previous iteration to visit nodes in such a way that the maximum number of descendants can be pruned. This is significant because cutting the effective branching factor of the search space reduces the breadth of a search space. Given a fixed amount of time in which to execute a search, the savings made in reducing breadth can be applied to depth, increasing the number of plies any given search can reach. (Section 7,Depth-First Iterative Deepening, Korf 1985)
+    \end{enumerate}
+    \newpage
+    \section*{Question 3}
+    Consider a dataset with 90 negative examples and 10 positive examples.
+    \newline
+    a) Suppose a model built using this data predicts 30 of the examples as positive (only 10 of them are actually positive) and 70 as negative. What are the number of True Positives (TP), False Positives (FP), True Negatives (NP), and False Negatives (FN)?
+    \newline
+    True Positives = 10
+    \newline
+    False Positives = 20
+    \newline
+    True Negatives = 70
+    \newline
+    False Negatives = 0
+    \newline
+    b) What measure derived from these numbers can help detect the poor prediction ability of the model? Consider accuracy, precision, recall and specificity as defined below. Justify your choice.
+    \newline
+    $Accuracy = \frac{TP + TN}{TP + TN + FP + FN} = \frac{10 + 70}{10 + 70 + 20 + 0} = \frac{80}{100}$
+    \newline
+    $Precision = \frac{TP}{TP + FP} = \frac{10}{10 + 20} = \frac{10}{30}$
+    \newline
+    $Recall = \frac{TP}{TP + FN} = \frac{10}{10 + 0} = \frac{10}{10}$
+    \newline
+    $Specificity = \frac{TN}{TN + FP} = \frac{70}{70 + 20} = \frac{70}{90}$
+    \newline
+    \newline
+    The best indicator of the model's poor prediction ability is precision. Precision is the number of true positives divided by the number of predicted positives. It is a metric that indicates how confident we should be when the model predicts that an individual or instance is Positive.
+    \newline
+    In this model, we see that only $\frac{1}{3}$ of predicted positives are actually positive. This indicates that if we were to randomly select one of the individuals that was predicted to be positive, there would only be a 33 percent chance that it was actually positive. In other words, this model over-predicts positives.
+    
+\end{document}
