@@ -303,7 +303,7 @@ def batch_file():
         mean = totalTime / len(allBs)
         variance = sum(((bs.runTime() - mean)**2 for bs in allBs)) / len(allBs)
         print(f'Solved: {len( [bs for bs in allBs if bs.solved] )} / {len(allBs)}', file=f)
-        print(f'Total runtime: {totalTime}', file=f)
+        #print(f'Total runtime: {totalTime}', file=f)
         print(f'Mean runtime: {mean}', file=f)
         print(f'Standard Deviation: {math.sqrt(variance)}', file=f)
         print(f'Max runtime: {max((bs.runTime() for bs in allBs))}', file=f)
