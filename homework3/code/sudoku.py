@@ -2,7 +2,6 @@
 #coding:utf-8
 
 from typing import Optional, Iterable, Tuple, Set, List, Dict, Hashable, Any, Callable, Sequence
-from collections import UserDict, deque
 import sys
 import time
 import math
