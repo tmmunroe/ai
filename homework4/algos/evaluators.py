@@ -1,5 +1,61 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
+class TwentyFortyEightHeuristic(Evaluator):
+    def __init__(self, emptyWeight=0, mergeableWeight=0, montonicWeight=25, weightedCellsWeight=25):
+        self.minValue = 0.0
+        self.maxValue = float('inf')
+        self.emptyWeight = emptyWeight
+        self.mergeableWeight = mergeableWeight
+        self.montonicWeight = montonicWeight
+        self.weightedCellsWeight = weightedCellsWeight
+
+    def __call__(self,state:GameState) -> Value:
+        "empty and mergeable cells"
+        baseValue = 1
+        mergeable = 0
+        empty = 0
+        increasing = 0
+        weightedCells = 0
+        cellWeight = 1
+        values = list(range(state.state.size))
+        rows = [[state.state.map[j][i]] for i in values
+                        for j in values]
+        columns = [[state.state.map[i][j]] for i in values
+                        for j in values]
+        reverseDirection = False
+        for row in rows + columns:
+            last = None
+            increased = True
+            rowIter = row if not reverseDirection else reversed(row)
+            for cell in row:
+                if cell == last:
+                    mergeable += 1
+                    if last and cell < last:
+                        increased = False
+                elif cell == 0:
+                    empty += 1
+                weightedCells += cellWeight * cell
+                cellWeight *= 2
+                last = cell
+            if increased:
+                increasing += 1
+            reverseDirection = not reverseDirection
+
+        return (baseValue
+            + mergeable*self.mergeableWeight
+            + empty*self.emptyWeight
+            + increasing*self.montonicWeight
+            + weightedCells*self.weightedCellsWeight)
+    
+    @property
+    def MinValue(self):
+        return self.minValue
+
+    @property
+    def MaxValue(self):
+        return self.maxValue
+
+
 class EmptySpaces(Evaluator):
     def __init__(self):
         self.minValue = 0
@@ -26,6 +82,63 @@ class MaxTile(Evaluator):
 
     def __call__(self,state:GameState) -> Value:
         return state.state.getMaxTile() / self.maxTile
+    
+    @property
+    def MinValue(self):
+        return self.minValue
+
+    @property
+    def MaxValue(self):
+        return self.maxValue
+
+
+class MergeableTiles(Evaluator):
+    def __init__(self):
+        self.minValue = 0
+        self.maxValue = 1
+        self.minMergeable = 0
+        self.maxMergeable = 24
+
+    def __call__(self,state:GameState) -> Value:
+        total = 0
+        for i in range(state.state.size):
+            for j in range(state.state.size):
+                val = state.state.getCellValue((i,j))
+                if state.state.crossBound((i,j+1)) and val == state.state.getCellValue((i,j+1)):
+                    total += 1
+                if state.state.crossBound((i+1,j)) and val == state.state.getCellValue((i,j+1)):
+                    total += 1
+        return total / self.maxMergeable
+    
+    @property
+    def MinValue(self):
+        return self.minValue
+
+    @property
+    def MaxValue(self):
+        return self.maxValue
+
+
+class Monotonic(Evaluator):
+    def __init__(self):
+        self.minValue = 0
+        self.maxValue = 1
+        self.maxMonotonic = 24
+
+    def __call__(self,state:GameState) -> Value:
+        total = 0
+        for i in range(state.state.size):
+            for j in range(state.state.size):
+                val = state.state.getCellValue((i,j))
+                if val:
+                    right = state.state.getCellValue((i,j+1))
+                    if right and val <= right:
+                        total += 1
+                    down = state.state.getCellValue((i,j+1))
+                    if down and val <= down:
+                        total += 1
+
+        return total / self.maxMonotonic
     
     @property
     def MinValue(self):

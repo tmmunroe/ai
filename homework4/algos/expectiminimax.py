@@ -12,11 +12,30 @@ class ExpectiMinimax(GameAlgo):
         value:Value = self.evaluator.MinValue
 
         actionStates = state.maxMoves()
+        self.sortMoves(actionStates)
         self.stats.addBranchFactor(len(actionStates))
         for action, state in actionStates:
-            _, expectedMinValue = self.expectedValue(state, depth-1)
+            _, expectedMinValue = self.minimize(state, depth-1)
             if expectedMinValue > value:
                 best, value = action, expectedMinValue
+        
+        return best, value
+
+
+    def minimize(self, state:GameState, depth:int) -> Tuple[Action, Value]:
+        if depth == 0 or self.searchTerminated():
+            return NullAction, self.evaluate(state)
+        
+        best:Action = NullAction
+        value:Value = self.evaluator.MaxValue
+
+        actionStates = state.minMoves()
+        self.sortMoves(actionStates, reverse=True)
+        self.stats.addBranchFactor(len(actionStates))
+        for action, state in actionStates:
+            _, maxValue = self.expectedValue(state, depth-1)
+            if maxValue < value:
+                best, value = action, maxValue
         
         return best, value
 
@@ -29,27 +48,10 @@ class ExpectiMinimax(GameAlgo):
         actionStates = state.chanceMoves()
         self.stats.addBranchFactor(len(actionStates))
         for probability, state in actionStates:
-            _, value = self.minimize(state, depth-1)
+            _, value = self.maximize(state, depth-1)
             expectedValue += probability * value
 
         return NullAction, expectedValue
-
-
-    def minimize(self, state:GameState, depth:int) -> Tuple[Action, Value]:
-        if depth == 0 or self.searchTerminated():
-            return NullAction, self.evaluate(state)
-        
-        best:Action = NullAction
-        value:Value = self.evaluator.MaxValue
-
-        actionStates = state.minMoves()
-        self.stats.addBranchFactor(len(actionStates))
-        for action, state in actionStates:
-            _, maxValue = self.maximize(state, depth-1)
-            if maxValue < value:
-                best, value = action, maxValue
-        
-        return best, value
 
 
     def search(self) -> Action:

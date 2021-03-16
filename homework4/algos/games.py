@@ -1,7 +1,7 @@
 import random
 import threading
 import time
-from typing import Any, Callable, Iterable, NewType, Protocol, Sequence, Tuple, Optional, Union, Type
+from typing import Any, Callable, Iterable, NewType, Protocol, Sequence, Tuple, Optional, Union, Type, List
 import Grid
 import random
 
@@ -143,6 +143,9 @@ class GameAlgo:
         self.moveLock = threading.Lock()
         self.stop = threading.Event()
         self.stats = stats
+
+    def sortMoves(self, moves:List[Tuple[Any,GameState]], reverse=False):
+        moves.sort(key=lambda tup: self.evaluate(tup[1]), reverse=reverse)
 
     def search(self) -> Action:
         self.stats.addSearchDepth(1)

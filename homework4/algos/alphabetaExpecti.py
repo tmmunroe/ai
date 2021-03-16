@@ -12,33 +12,19 @@ class ExpectiAlphaBeta(GameAlgo):
         value:Value = self.evaluator.MinValue
 
         actionStates = state.maxMoves()
+        #self.sortMoves(actionStates)
         self.stats.addBranchFactor(len(actionStates))
         for i, (action, state) in enumerate(actionStates):
-            _, minValue = self.expectedValue(state, depth-1, alpha, beta)
-            if minValue > value:
+            _, minValue = self.minimize(state, depth-1, alpha, beta)
+            if minValue >= value:
                 best, value = action, minValue
-                if value > alpha:
+                if value >= alpha:
                     alpha = value
-                    if alpha > beta:
+                    if alpha >= beta:
                         self.stats.addPrunedBranches(len(actionStates) - i)
                         break
         
         return best, value
-
-
-    def expectedValue(self, state:GameState, depth:int, alpha:Value, beta:Value) -> Tuple[Action, Value]:
-        if depth == 0 or self.searchTerminated():
-            return NullAction, self.evaluate(state)
-        
-        expectedValue = 0
-        actionStates = state.chanceMoves()
-        self.stats.addBranchFactor(len(actionStates))
-        for probability, state in actionStates:
-            _, value = self.minimize(state, depth-1, alpha, beta)
-            expectedValue += probability * value
-
-        return NullAction, expectedValue
-
 
     def minimize(self, state:GameState, depth:int, alpha:Value, beta:Value) -> Tuple[Action, Value]:
         if depth == 0 or self.searchTerminated():
@@ -48,19 +34,32 @@ class ExpectiAlphaBeta(GameAlgo):
         value:Value = self.evaluator.MaxValue
 
         actionStates = state.minMoves()
+        #self.sortMoves(actionStates, reverse=True)
         self.stats.addBranchFactor(len(actionStates))
-        for i, (action, state) in enumerate(actionStates):
-            _, maxValue = self.maximize(state, depth-1, alpha, beta)
-            if maxValue < value:
+        for i, (action, state) in enumerate(actionStates[:max(3,len(actionStates))]):
+            _, maxValue = self.expectedValue(state, depth-1, alpha, beta)
+            if maxValue <= value:
                 best, value = action, maxValue
-                if value < beta:
+                if value <= beta:
                     beta = value
-                    if alpha > beta:
+                    if alpha >= beta:
                         self.stats.addPrunedBranches(len(actionStates) - i)
                         break
         
         return best, value
 
+    def expectedValue(self, state:GameState, depth:int, alpha:Value, beta:Value) -> Tuple[Action, Value]:
+        if depth == 0 or self.searchTerminated():
+            return NullAction, self.evaluate(state)
+        
+        expectedValue = 0
+        actionStates = state.chanceMoves()
+        self.stats.addBranchFactor(len(actionStates))
+        for probability, state in actionStates:
+            _, value = self.maximize(state, depth-1, alpha, beta)
+            expectedValue += probability * value
+
+        return NullAction, expectedValue
 
     def search(self) -> Action:
         depth = 1

@@ -12,6 +12,7 @@ class AlphaBeta(GameAlgo):
         value:Value = self.evaluator.MinValue
 
         actionStates = state.maxMoves()
+        self.sortMoves(actionStates)
         self.stats.addBranchFactor(len(actionStates))
         for i, (action, state) in enumerate(actionStates):
             _, minValue = self.minimize(state, depth-1, alpha, beta)
@@ -33,6 +34,7 @@ class AlphaBeta(GameAlgo):
         value:Value = self.evaluator.MaxValue
 
         actionStates = state.minMoves()
+        self.sortMoves(actionStates,reverse=True)
         self.stats.addBranchFactor(len(actionStates))
         for i, (action, state) in enumerate(actionStates):
             _, maxValue = self.maximize(state, depth-1, alpha, beta)
