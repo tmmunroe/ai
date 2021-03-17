@@ -107,7 +107,7 @@ class GameManager:
             self.updateAlarm()
             turn = 1 - turn
 
-        self.displayer.display(self.grid)
+        #self.displayer.display(self.grid)
         return self.grid.getMaxTile()
 
 def main():
