@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, montonicWeight=100, totalValueWeight=100):
+    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=400, totalValueWeight=100):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -27,7 +27,7 @@ class Monotonic(Evaluator):
         columns = [[state.state.map[i][j] for i in values]
                 for j in values ]
 
-        for i, row in enumerate(columns + rows):
+        for row in columns + rows:
             last = None
             for cell in row:
                 totalValue += cell*cell
