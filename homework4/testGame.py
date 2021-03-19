@@ -6,7 +6,7 @@ import multiprocessing as mp
 from typing import Iterable
 
 from algos.games import CompositeEvaluator, GameAlgo, GameConfig, GameStatistics
-from algos.evaluators import TwentyFortyEightHeuristic
+from algos.evaluators import Monotonic, Snake, Corner
 from algos.minimax import Minimax
 from algos.alphabeta import AlphaBeta
 from algos.expectiminimax import ExpectiMinimax
@@ -21,12 +21,14 @@ Algorithms = {
 }
 
 Heuristics = {
-    "twentyfortyeight": TwentyFortyEightHeuristic
+    "monotonic": Monotonic,
+    "snake": Snake,
+    "corner": Corner
 }
 
 DefaultTimePerMove = 0.18
 DefaultAlgo = 'abexpecti'
-DefaultHeuristics = ["twentyfortyeight"]
+DefaultHeuristics = ['corner']
 
 def _playGame(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float) -> GameStatistics:
     algo = Algorithms[algorithm]
