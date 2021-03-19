@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, montonicWeight=50, totalValueWeight=50):
+    def __init__(self, emptyWeight=50, mergeableWeight=50, montonicWeight=100, totalValueWeight=100):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -37,9 +37,9 @@ class Monotonic(Evaluator):
                     mergeable += 1
                 if last:
                     if cell < last:
-                        increasingLeft += (last - cell)*(last - cell)
+                        increasingLeft += (last - cell)*(last - cell)*(last - cell)
                     else:
-                        increasingRight += (cell - last)*(cell - last)
+                        increasingRight += (cell - last)*(cell - last)*(cell - last)
                 last = cell
 
         if empty == 0:
@@ -63,11 +63,12 @@ class Monotonic(Evaluator):
 
 
 class Snake(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, snakeWeight=50):
+    def __init__(self, emptyWeight=50, mergeableWeight=50, snakeWeight=50, totalValueWeight=50):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
         self.mergeableWeight = mergeableWeight
+        self.totalValueWeight = totalValueWeight
         self.snakeWeight = snakeWeight
 
     def __call__(self,state:GameState) -> Value:
@@ -81,6 +82,7 @@ class Snake(Evaluator):
         empty = 0
         snake = 0
         cellWeight = 4
+        totalValue = 0
 
         values = list(range(state.state.size))
         rows = [r for r in state.state.map]
@@ -91,6 +93,7 @@ class Snake(Evaluator):
             last = None
             rowIter = reversed(row) if reverseIt else row
             for cell in rowIter:
+                totalValue += cell * cell
                 if cell == 0:
                     empty += 1
                 elif cell == last:
@@ -117,6 +120,7 @@ class Snake(Evaluator):
             baseValue
             + mergeable*self.mergeableWeight
             + empty*self.emptyWeight
+            + totalValue*self.totalValueWeight
             + snake*self.snakeWeight
         )
     
@@ -172,7 +176,6 @@ class Corner(Evaluator):
         for col in cols:
             last = None
             for cell in col:
-                totalValue += cell * cell
                 if cell == 0:
                     empty += 1
                 elif cell == last:

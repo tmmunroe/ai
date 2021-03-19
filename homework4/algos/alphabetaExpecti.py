@@ -36,7 +36,7 @@ class ExpectiAlphaBeta(GameAlgo):
         actionStates = state.minMoves()
         self.sortMoves(actionStates, reverse=True)
         self.stats.addBranchFactor(len(actionStates))
-        for i, (action, state) in enumerate(actionStates[:max(5,len(actionStates))]):
+        for i, (action, state) in enumerate(actionStates):
             _, maxValue = self.expectedValue(state, depth-1, alpha, beta)
             if maxValue <= value:
                 best, value = action, maxValue

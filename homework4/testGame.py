@@ -28,7 +28,7 @@ Heuristics = {
 
 DefaultTimePerMove = 0.18
 DefaultAlgo = 'abexpecti'
-DefaultHeuristics = ['corner']
+DefaultHeuristics = ['monotonic']
 
 def _playGame(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float) -> GameStatistics:
     algo = Algorithms[algorithm]
