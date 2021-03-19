@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=400, totalValueWeight=100):
+    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=600, totalValueWeight=100):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -30,16 +30,16 @@ class Monotonic(Evaluator):
         for row in columns + rows:
             last = None
             for cell in row:
-                totalValue += cell*cell
+                totalValue += pow(cell,4)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
                 if last:
                     if cell < last:
-                        increasingLeft += (last - cell)*(last - cell)*(last - cell)
+                        increasingLeft += pow(last,3) - pow(cell,3)
                     else:
-                        increasingRight += (cell - last)*(cell - last)*(cell - last)
+                        increasingRight += pow(cell,3) - pow(last,3)
                 last = cell
 
         if empty == 0:
@@ -63,13 +63,14 @@ class Monotonic(Evaluator):
 
 
 class Snake(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, snakeWeight=50, totalValueWeight=50):
+    def __init__(self, emptyWeight=50, mergeableWeight=50, snakeWeight=50, totalValueWeight=50, unsmoothPenaltyWeight=50):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
         self.mergeableWeight = mergeableWeight
         self.totalValueWeight = totalValueWeight
         self.snakeWeight = snakeWeight
+        self.unsmoothPenaltyWeight = unsmoothPenaltyWeight
 
     def __call__(self,state:GameState) -> Value:
         """
@@ -83,6 +84,7 @@ class Snake(Evaluator):
         snake = 0
         cellWeight = 4
         totalValue = 0
+        unsmoothPenalty = 0
 
         values = list(range(state.state.size))
         rows = [r for r in state.state.map]
@@ -93,24 +95,31 @@ class Snake(Evaluator):
             last = None
             rowIter = reversed(row) if reverseIt else row
             for cell in rowIter:
-                totalValue += cell * cell
+                totalValue += pow(cell,4)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                    last = cell
+                if last and cell < last:
+                    unsmoothPenalty += pow(last,6) - pow(cell,6)
+                last = cell
                 snake += cell * cellWeight
                 cellWeight *= 4
             reverseIt = not reverseIt
 
         for col in cols:
             last = None
+            cellWeight = 4
             for cell in col:
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                    last = cell
+                if last and cell < last:
+                    unsmoothPenalty += pow(last,6) - pow(cell,6)
+                last = cell
+                snake += cell * cellWeight
+                cellWeight *= 4
 
 
         if empty == 0:
@@ -122,6 +131,7 @@ class Snake(Evaluator):
             + empty*self.emptyWeight
             + totalValue*self.totalValueWeight
             + snake*self.snakeWeight
+            - unsmoothPenalty*self.unsmoothPenaltyWeight
         )
     
     @property
