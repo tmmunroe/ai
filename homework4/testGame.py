@@ -28,6 +28,9 @@ Heuristics = {
     "twentyfortyeight": TwentyFortyEightHeuristic
 }
 
+DefaultTimePerMove = 0.18
+DefaultAlgo = 'abexpecti'
+DefaultHeuristics = ("twentyfortyeight")
 
 def _playGame(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float) -> GameStatistics:
     algo = Algorithms[algorithm]
@@ -92,18 +95,17 @@ def run():
 
 @run.command()
 @click.option('--algorithm', '-a', 
-    default='abexpecti',
+    default=DefaultAlgo,
     type=click.Choice(list(Algorithms), case_sensitive=True))
 @click.option('--heuristic', '-h',
-    default=['twentyfortyeight'],
+    default=DefaultHeuristics,
     type=click.Choice(list(Heuristics), case_sensitive=True),
     multiple=True)
 @click.option('--weight', '-w',
     default=[1],
     type=click.FLOAT,
     multiple=True)
-@click.option('--timepermove', '-t',
-    default=0.2)
+@click.option('--timepermove', '-t', default=DefaultTimePerMove)
 def playgame(algorithm, heuristic, weight, timepermove):
     print(f'Algorithm: {algorithm}')
     print(f'Heuristics: {heuristic}')
@@ -116,9 +118,9 @@ def playgame(algorithm, heuristic, weight, timepermove):
 
 @run.command()
 @click.option('--algorithm', '-a', 
-    default='abexpecti',
+    default=DefaultAlgo,
     type=click.Choice(list(Algorithms), case_sensitive=True))
-@click.option('--timepermove', '-t', default=0.2)
+@click.option('--timepermove', '-t', default=DefaultTimePerMove)
 @click.option('--games', '-g', default=1)
 def optimize(algorithm, timepermove, games):
     _optimize(algorithm, timepermove, games)

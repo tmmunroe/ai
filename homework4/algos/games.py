@@ -1,7 +1,7 @@
 import random
 import threading
 import time
-from typing import Any, Callable, Iterable, NewType, Protocol, Sequence, Tuple, Optional, Union, Type, List
+from typing import Any, Callable, Iterable, NewType, Protocol, Sequence, Tuple, Optional, Union, Type, List, Dict
 import Grid
 import random
 
@@ -12,17 +12,25 @@ Player = int
 
 MinPlayer, MaxPlayer = Player(0), Player(1)
 
+HeuristicCache:Dict[int,Value] = {}
+
 class GameState:
     def __init__(self, state: Grid.Grid, newTile: int = 0):
         self.state = state
         self.newTile = newTile
+        self.gridHash = None
         if self.newTile == 0:
             self.newTile = 2 if random.uniform(0,1) < 0.9 else 4
     
+    def hashGrid(self):
+        if self.gridHash is None:
+            self.gridHash = hash(tuple(tuple(r) for r in self.state.map))
+        return self.gridHash
+
     def maxMoves(self):
         actionStates = self.state.getAvailableMoves()
         return [ (a, GameState(grid)) for a,grid in actionStates ]
-    
+
     def minMoves(self):
         actionStates = []
         availableCells = self.state.getAvailableCells()
@@ -153,10 +161,17 @@ class GameAlgo:
         self.stats.addBranchFactor(len(moveset))
         return random.choice(moveset)[0] if moveset else NullAction
 
-    def evaluate(self, state: Grid.Grid) -> float:
-        return self.evaluator(state)
+    def evaluate(self, state: GameState) -> float:
+        global HeuristicCache
+        if state.hashGrid() not in HeuristicCache:
+            h = self.evaluator(state)
+            HeuristicCache[state.hashGrid()] = h
+            return h
+        return HeuristicCache[state.hashGrid()]
 
     def terminateSearch(self) -> Action:
+        #global SubTreeCache
+        #SubTreeCache.clear()
         self.stop.set()
         return self.bestAction()
         

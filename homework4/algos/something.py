@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class TwentyFortyEightHeuristic(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=25, montonicWeight=75, weightedCellsWeight=50):
+    def __init__(self, emptyWeight=0, mergeableWeight=0, montonicWeight=20, weightedCellsWeight=25):
         self.minValue = 0.0
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -10,64 +10,50 @@ class TwentyFortyEightHeuristic(Evaluator):
         self.weightedCellsWeight = weightedCellsWeight
 
     def __call__(self,state:GameState) -> Value:
-        """
-        TODO:
-        figure out best way to impose smoothness
-        try non-snake pattern, weighting a corner heavily
-        """
+        "empty and mergeable cells"
         baseValue = 1
-        mergeable = 1
-        mergeableWeight = 2
-        empty = 1
-        emptyWeight = 2
-        increasing = 1
-        increasingWeight = 4
+        mergeable = 0
+        empty = 0
+        increasing = 0
         weightedCells = 0
         cellWeight = 1
         values = list(range(state.state.size))
         rows = [r for r in state.state.map]
         columns = [[state.state.map[i][j] for i in values]
                 for j in values ]
-
-        for i, col in enumerate(reversed(columns)):
-            last = None
-            increased = True
-            cellSum = 0
-            for cell in col:
-                if cell == last:
-                    mergeable += last*cell
-                    if last and cell < last:
-                        increased = False
-                elif cell == 0:
-                    empty *= emptyWeight
-                last = cell
-                cellSum += cell
-            if increased:
-                increasing += cellSum
-
         reverseDirection = False
         for i, row in enumerate(rows):
             last = None
-            cellSum = 0
             increased = True
             rowIter = row if not reverseDirection else reversed(row)
             for cell in rowIter:
                 if cell == last:
-                    mergeable += last*cell
+                    mergeable += 1
                     if last and cell < last:
                         increased = False
                 elif cell == 0:
-                    empty *= emptyWeight
+                    empty += 1
                 weightedCells += cellWeight * cell
                 cellWeight *= 4
-                cellSum += cell
                 last = cell
             if increased:
-                increasing += cellSum
+                increasing += 1
             #snake along rows
             reverseDirection = not reverseDirection
-        if empty == 1:
-            return 0
+
+        for i, col in enumerate(columns):
+            last = None
+            increased = True
+            for cell in col:
+                if cell == last:
+                    mergeable += 1
+                    if last and cell < last:
+                        increased = False
+                elif cell == 0:
+                    empty += 1
+                last = cell
+            if increased:
+                increasing += 1
 
         return (baseValue
             + mergeable*self.mergeableWeight

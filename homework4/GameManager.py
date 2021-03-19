@@ -40,6 +40,7 @@ class GameManager:
     def updateAlarm(self) -> None:
         """ Checks if move exceeded the time limit and updates the alarm """
         if time.process_time() - self.prevTime > maxTime:
+            print("Exceeded time limit!")
             self.over = True
         
         self.prevTime = time.process_time()
