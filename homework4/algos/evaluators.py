@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=600, totalValueWeight=100):
+    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=700, totalValueWeight=100):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -15,12 +15,12 @@ class Monotonic(Evaluator):
         figure out best way to impose smoothness
         try non-snake pattern, weighting a corner heavily
         """
-        baseValue = 1000
+        baseValue = 10000
         mergeable = 0
         empty = 0
-        increasingLeft = 0
-        increasingRight = 0
+        nonMonotonicity = 0
         totalValue = 0
+        value = 0
 
         values = list(range(state.state.size))
         rows = [r for r in state.state.map]
@@ -28,29 +28,39 @@ class Monotonic(Evaluator):
                 for j in values ]
 
         for row in columns + rows:
+            """
+            print()
+            print(f"{row}")
+            """
             last = None
+            increasingLeft = 0
+            increasingRight = 0
             for cell in row:
-                totalValue += pow(cell,4)
+                totalValue += pow(cell,2)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                if last:
+                if last is not None:
                     if cell < last:
-                        increasingLeft += pow(last,3) - pow(cell,3)
+                        increasingLeft += pow(last,2) - pow(cell,2)
                     else:
-                        increasingRight += pow(cell,3) - pow(last,3)
+                        increasingRight += pow(cell,2) - pow(last,2)
+                    """print(f"cell:{cell} last: {last} --> left: {increasingLeft} right: {increasingRight}")"""
                 last = cell
+            nonMonotonicity += min(increasingLeft, increasingRight)
+            """print(f"nonmonotonicity: {min(increasingLeft, increasingRight)} = min({increasingLeft}, {increasingRight})")"""
 
         if empty == 0:
             return -100000
 
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
         return (
             baseValue
             + mergeable*self.mergeableWeight
             + empty*self.emptyWeight
             + totalValue*self.totalValueWeight
-            - min(increasingLeft, increasingRight)*self.montonicWeight
+            - nonMonotonicity*self.montonicWeight
         )
     
     @property
@@ -95,13 +105,13 @@ class Snake(Evaluator):
             last = None
             rowIter = reversed(row) if reverseIt else row
             for cell in rowIter:
-                totalValue += pow(cell,4)
+                totalValue += pow(cell,2)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                if last and cell < last:
-                    unsmoothPenalty += pow(last,6) - pow(cell,6)
+                if last is not None and cell < last:
+                    unsmoothPenalty += pow(last,3) - pow(cell,3)
                 last = cell
                 snake += cell * cellWeight
                 cellWeight *= 4
@@ -115,8 +125,8 @@ class Snake(Evaluator):
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                if last and cell < last:
-                    unsmoothPenalty += pow(last,6) - pow(cell,6)
+                if last is not None and cell < last:
+                    unsmoothPenalty += pow(last,3) - pow(cell,3)
                 last = cell
                 snake += cell * cellWeight
                 cellWeight *= 4
@@ -124,6 +134,8 @@ class Snake(Evaluator):
 
         if empty == 0:
             return -100000
+
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
 
         return (
             baseValue
@@ -178,11 +190,10 @@ class Corner(Evaluator):
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                    last = cell
+                last = cell
                 corner += cell * cellWeight
                 cellWeight *= 4
 
-        cellWeight = 4
         for col in cols:
             last = None
             for cell in col:
@@ -190,12 +201,12 @@ class Corner(Evaluator):
                     empty += 1
                 elif cell == last:
                     mergeable += 1
-                    last = cell
-                corner += cell * cellWeight
-                cellWeight *= 4
+                last = cell
 
         if empty == 0:
             return -100000
+
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {corner*self.cornerWeight}")
 
         return (
             baseValue
