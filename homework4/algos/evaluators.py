@@ -111,31 +111,28 @@ class Snake(Evaluator):
                 elif cell == last:
                     mergeable += 1
                 if last is not None and cell < last:
-                    unsmoothPenalty += (last-cell) * cellWeight
+                    unsmoothPenalty += pow(last,4) - pow(cell,4)
                 last = cell
                 snake += cell * cellWeight
-                cellWeight *= 2
+                cellWeight *= 4
             reverseIt = not reverseIt
 
-        for col in cols:
+        for col in reversed(cols):
             last = None
-            cellWeight = 4
             for cell in col:
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
                 if last is not None and cell < last:
-                    unsmoothPenalty += (last-cell) * cellWeight
+                    unsmoothPenalty += pow(last,4) - pow(cell,4)
                 last = cell
-                snake += cell * cellWeight
-                cellWeight *= 2
 
 
         if empty == 0 and mergeable == 0:
             return float('-inf')
 
-        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
         return (
             baseValue
             + mergeable*self.mergeableWeight
