@@ -54,7 +54,7 @@ class Monotonic(Evaluator):
         if empty == 0 and mergeable == 0:
             return float('-inf')
 
-        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
+        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
         return (
             baseValue
             + mergeable*self.mergeableWeight
@@ -111,7 +111,7 @@ class Snake(Evaluator):
                 elif cell == last:
                     mergeable += 1
                 if last is not None and cell < last:
-                    unsmoothPenalty += pow(last,3) - pow(cell,3)
+                    unsmoothPenalty += (last-cell) * cellWeight
                 last = cell
                 snake += cell * cellWeight
                 cellWeight *= 2
@@ -126,7 +126,7 @@ class Snake(Evaluator):
                 elif cell == last:
                     mergeable += 1
                 if last is not None and cell < last:
-                    unsmoothPenalty += pow(last,3) - pow(cell,3)
+                    unsmoothPenalty += (last-cell) * cellWeight
                 last = cell
                 snake += cell * cellWeight
                 cellWeight *= 2
@@ -136,7 +136,6 @@ class Snake(Evaluator):
             return float('-inf')
 
         print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
-
         return (
             baseValue
             + mergeable*self.mergeableWeight
@@ -186,12 +185,14 @@ class Corner(Evaluator):
 
         for row in rows:
             last = None
-            for cell in row:
+            for cell in reversed(row):
                 totalValue += pow(cell, 2)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
+                if last is not None and cell < last:
+                    unsmoothPenalty +=  (last-cell) * cellWeight
                 last = cell
                 corner += cell * cellWeight
                 cellWeight *= 2
@@ -199,19 +200,19 @@ class Corner(Evaluator):
         for col in cols:
             last = None
             for cell in col:
+                totalValue += pow(cell, 2)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
                 if last is not None and cell < last:
-                    unsmoothPenalty += pow(last,3) - pow(cell,3)
+                    unsmoothPenalty +=  (last-cell) * cellWeight
                 last = cell
 
         if empty == 0 and mergeable == 0:
             return float('-inf')
 
-        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {corner*self.cornerWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
-
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {corner*self.cornerWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
         return (
             baseValue
             + mergeable*self.mergeableWeight
