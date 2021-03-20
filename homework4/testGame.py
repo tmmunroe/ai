@@ -4,7 +4,7 @@ import Grid
 import IntelligentAgent
 import multiprocessing as mp
 
-from typing import List, Iterable, Sequence
+from typing import Dict, List, Iterable, Sequence
 
 from algos.games import CompositeEvaluator,Evaluator, GameAlgo, GameConfig, GameState, GameStatistics
 from algos.evaluators import Monotonic, Snake, Corner
@@ -108,6 +108,29 @@ def getMiddleGrids() -> Sequence[Grid.Grid]:
     )
     return grids
 
+def getIslandGrids() -> Sequence[Grid.Grid]:
+    grids: List[Grid.Grid] = []
+    grids.append(
+        gridFor([
+            [2,0,0,0],
+            [2,4,8,16],
+            [16,32,64,128],
+            [2048,1024,512,2]
+        ])
+    )
+
+    grids.append(
+        gridFor([
+            [2,0,0,0],
+            [2,4,8,16],
+            [16,32,64,128],
+            [2,1024,512,2]
+        ])
+    )
+
+    return grids
+
+
 def getMonotonicGrids() -> Sequence[Grid.Grid]:
     grids: List[Grid.Grid] = []
     grids.append(
@@ -167,22 +190,83 @@ def getMergingGrids() -> Sequence[Grid.Grid]:
     return grids
 
 
-def getTestGrids() -> Sequence[Grid.Grid]:
+def getAliveButNotEmpty() -> Sequence[Grid.Grid]:
     grids: List[Grid.Grid] = []
     grids.append(
+        gridFor([
+            [4,4,8,16],
+            [256,256,128,32],
+            [2048,512,256,128],
+            [2048,512,256,128]
+        ])
+    )
+    return grids
+
+
+def getDeadGrids() -> Sequence[Grid.Grid]:
+    grids: List[Grid.Grid] = []
+
+    grids.append(
+        gridFor([
+            [2,4,8,16],
+            [512,128,64,32],
+            [1024,256,128,64],
+            [2048,512,256,128]
+        ])
+    )
+    return grids
+
+
+def getCornerTestGrids() -> Dict[str, Sequence[Grid.Grid]]:
+    grids: Dict[str, Sequence[Grid.Grid]] = {}
+    grids['corners'] = getCornerGrids()
+    grids['merging'] = getMergingGrids()
+    grids['aliveButNotEmpty'] = getAliveButNotEmpty()
+    grids['dead'] = getDeadGrids()
+    grids['islands'] = getIslandGrids()
+
+    return grids
+
+
+def getSnakeTestGrids() -> Dict[str, Sequence[Grid.Grid]]:
+    grids: Dict[str, Sequence[Grid.Grid]] = {}
+    grids['corners'] = getCornerGrids()
+    grids['merging'] = getMergingGrids()
+    grids['aliveButNotEmpty'] = getAliveButNotEmpty()
+    grids['dead'] = getDeadGrids()
+    grids['islands'] = getIslandGrids()
+
+    return grids
+
+
+def getMonotonicTestGrids() -> Dict[str, Sequence[Grid.Grid]]:
+    grids: Dict[str, Sequence[Grid.Grid]] = {}
+    grids['corners'] = getCornerGrids()
+    grids['merging'] = getMergingGrids()
+    grids['aliveButNotEmpty'] = getAliveButNotEmpty()
+    grids['dead'] = getDeadGrids()
+    grids['islands'] = getIslandGrids()
+    return grids
+
+
+def getTestGrids(h: str) -> Dict[str, Sequence[Grid.Grid]]:
+    grids: Dict[str, Sequence[Grid.Grid]] = {}
+    grids['empty'] = [
         gridFor([
             [0,0,0,0],
             [0,0,0,0],
             [0,0,0,0],
             [0,0,0,0]
         ])
-    )
+    ]
+    
 
-    grids.extend(getCornerGrids())
-    grids.extend(getMiddleGrids())
-    grids.extend(getMonotonicGrids())
-    grids.extend(getMergingGrids())
-
+    if h == 'monotonic':
+        grids.update(getMonotonicTestGrids())
+    elif h == 'snake':
+        grids.update(getSnakeTestGrids())
+    elif h == 'corner':
+        grids.update(getCornerTestGrids())
 
     return grids
 
@@ -190,11 +274,12 @@ def getTestGrids() -> Sequence[Grid.Grid]:
 def testHeuristic(heuristicNames: Sequence[str]):
     heuristicName = heuristicNames[0]
     heuristic = Heuristics[heuristicName]()
-    testGrids = getTestGrids()
-    for grid in testGrids:
-        print("===================================")
-        print("===================================")
-        printBoardAndValue(grid, heuristicName, heuristic)
+    testGrids = getTestGrids(heuristicName)
+    for testSet, grids in testGrids.items():
+        print(f"================={testSet}===============")
+        for grid in grids:
+            printBoardAndValue(grid, heuristicName, heuristic)
+            print("===================================")
 
 
 def _playGame(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float) -> GameStatistics:

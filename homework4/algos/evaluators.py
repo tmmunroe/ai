@@ -51,8 +51,8 @@ class Monotonic(Evaluator):
             nonMonotonicity += min(increasingLeft, increasingRight)
             """print(f"nonmonotonicity: {min(increasingLeft, increasingRight)} = min({increasingLeft}, {increasingRight})")"""
 
-        if empty == 0:
-            return -100000
+        if empty == 0 and mergeable == 0:
+            return float('-inf')
 
         #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
         return (
@@ -114,7 +114,7 @@ class Snake(Evaluator):
                     unsmoothPenalty += pow(last,3) - pow(cell,3)
                 last = cell
                 snake += cell * cellWeight
-                cellWeight *= 4
+                cellWeight *= 2
             reverseIt = not reverseIt
 
         for col in cols:
@@ -129,13 +129,13 @@ class Snake(Evaluator):
                     unsmoothPenalty += pow(last,3) - pow(cell,3)
                 last = cell
                 snake += cell * cellWeight
-                cellWeight *= 4
+                cellWeight *= 2
 
 
-        if empty == 0:
-            return -100000
+        if empty == 0 and mergeable == 0:
+            return float('-inf')
 
-        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
+        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} + {snake*self.snakeWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
 
         return (
             baseValue
@@ -157,13 +157,14 @@ class Snake(Evaluator):
 
 
 class Corner(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, cornerWeight=50, totalValueWeight=50):
+    def __init__(self, emptyWeight=50, mergeableWeight=50, cornerWeight=50, totalValueWeight=50, unsmoothPenaltyWeight=50):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
         self.mergeableWeight = mergeableWeight
         self.cornerWeight = cornerWeight
         self.totalValueWeight = totalValueWeight
+        self.unsmoothPenaltyWeight = unsmoothPenaltyWeight
 
     def __call__(self,state:GameState) -> Value:
         """
@@ -175,8 +176,9 @@ class Corner(Evaluator):
         mergeable = 0
         empty = 0
         corner = 0
-        cellWeight = 4
+        cellWeight = 2
         totalValue = 0
+        unsmoothPenalty = 0
 
         values = list(range(state.state.size))
         rows = [r for r in state.state.map]
@@ -185,14 +187,14 @@ class Corner(Evaluator):
         for row in rows:
             last = None
             for cell in row:
-                totalValue += cell * cell
+                totalValue += pow(cell, 2)
                 if cell == 0:
                     empty += 1
                 elif cell == last:
                     mergeable += 1
                 last = cell
                 corner += cell * cellWeight
-                cellWeight *= 4
+                cellWeight *= 2
 
         for col in cols:
             last = None
@@ -201,18 +203,21 @@ class Corner(Evaluator):
                     empty += 1
                 elif cell == last:
                     mergeable += 1
+                if last is not None and cell < last:
+                    unsmoothPenalty += pow(last,3) - pow(cell,3)
                 last = cell
 
-        if empty == 0:
-            return -100000
+        if empty == 0 and mergeable == 0:
+            return float('-inf')
 
-        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {corner*self.cornerWeight}")
+        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {corner*self.cornerWeight} - {unsmoothPenalty*self.unsmoothPenaltyWeight}")
 
         return (
             baseValue
             + mergeable*self.mergeableWeight
             + empty*self.emptyWeight
             + corner*self.cornerWeight
+            - unsmoothPenalty*self.unsmoothPenaltyWeight
         )
     
     @property
