@@ -12,8 +12,6 @@ Player = int
 
 MinPlayer, MaxPlayer = Player(0), Player(1)
 
-HeuristicCache:Dict[int,Value] = {}
-
 class GameState:
     def __init__(self, state: Grid.Grid, newTile: int = 0):
         self.state = state
@@ -50,6 +48,9 @@ class GameState:
 class Evaluator:
     def __call__(self, state:GameState) -> Value:
         return random.uniform(self.MinValue, self.MaxValue)
+
+    def __str__(self):
+        return "Evaluator"
 
     @property
     def MinValue(self) -> Value:
@@ -96,6 +97,23 @@ class GameStatistics:
 
         self.prunings: int = 0
         self.sumOfPrunings: int = 0
+
+        self.maxCacheSize = 0
+        self.cacheFlushes = 0
+        self.cacheHits = 0
+        self.cacheMisses = 0
+    
+    def updateCacheStats(self, cache: Dict[int,Value]):
+        self.maxCacheSize = max(self.maxCacheSize, len(cache))
+
+    def flushedCache(self):
+        self.cacheFlushes += 1
+
+    def addCacheHit(self):
+        self.cacheHits += 1
+
+    def addCacheMiss(self):
+        self.cacheMisses += 1
     
     def addSearchDepth(self, depth:int):
         self.searches += 1
@@ -123,7 +141,9 @@ class GameStatistics:
 
     def __str__(self):
         self.processFinalState()
-        return '\n'.join((f"Searches: {self.searches}",
+        return '\n'.join((
+            f"MaxTile:{self.maxTile}",
+            f"Searches: {self.searches}",
             f"TotalDepth:{self.sumOfDepths}",
             f"AverageDepth:{float(self.sumOfDepths)/self.searches}",
             f"MaxDepth:{self.maxDepth}",
@@ -136,14 +156,17 @@ class GameStatistics:
             f"Prunings:{self.prunings}",
             f"SumOfPrunings:{self.sumOfPrunings}",
             f"AveragedPrunings:{self.sumOfPrunings/self.prunings if self.prunings != 0 else 0}",
-            f"MaxTile:{self.maxTile}",
             f"SumOfTiles:{self.sumOfTiles}",
-            f"AverageTile:{self.averageTile}"
+            f"AverageTile:{self.averageTile}",
+            f"MaxCacheSize: {self.maxCacheSize}",
+            f"CacheFlushed: {self.cacheFlushes}",
+            f"CacheHits:{self.cacheHits}",
+            f"CacheMisses:{self.cacheMisses}"
         ))
 
 
 class GameAlgo:
-    def __init__(self, state: GameState, evaluator: Evaluator, stats:GameStatistics):
+    def __init__(self, state: GameState, evaluator: Evaluator, stats:GameStatistics, heuristicCache:Dict[int,Value]):
         self.initialState = state
         self.evaluator = evaluator
         self.bestMove: Action = NullAction
@@ -151,6 +174,7 @@ class GameAlgo:
         self.moveLock = threading.Lock()
         self.stop = threading.Event()
         self.stats = stats
+        self.heuristicCache = heuristicCache
 
     def sortMoves(self, moves:List[Tuple[Any,GameState]], reverse=False):
         moves.sort(key=lambda tup: self.evaluate(tup[1]), reverse=reverse)
@@ -162,12 +186,15 @@ class GameAlgo:
         return random.choice(moveset)[0] if moveset else NullAction
 
     def evaluate(self, state: GameState) -> float:
-        global HeuristicCache
-        if state.hashGrid() not in HeuristicCache:
-            h = self.evaluator(state)
-            HeuristicCache[state.hashGrid()] = h
-            return h
-        return HeuristicCache[state.hashGrid()]
+        hg = state.hashGrid()
+        if hg in self.heuristicCache:
+            self.stats.addCacheHit()
+            return self.heuristicCache[hg]
+
+        h = self.evaluator(state)
+        self.heuristicCache[hg] = h
+        self.stats.addCacheMiss()
+        return h
 
     def terminateSearch(self) -> Action:
         #global SubTreeCache
@@ -188,9 +215,15 @@ class GameAlgo:
                 self.bestMove, self.bestMoveValue = action, value
 
 class GameConfig:
-    def __init__(self, algo: Type[GameAlgo] = GameAlgo, 
-                    evaluator: Evaluator = Evaluator(), 
-                    timePerTurn: float = 0.2):
+    def __init__(self, algo: Type[GameAlgo], 
+                    evaluator: Evaluator, 
+                    timePerTurn: float):
         self.Algo = algo
         self.Evaluator = evaluator
         self.TimePerTurn = timePerTurn
+
+    def __str__(self):
+        return '\n'.join((f"Algo: {self.Algo}",
+            f"Evaluator: {self.Evaluator}",
+            f"TimePerTurn: {self.TimePerTurn}"
+        ))

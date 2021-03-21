@@ -2,9 +2,13 @@ import click
 import GameManager
 import Grid
 import IntelligentAgent
-import multiprocessing as mp
+import ComputerAI
+import Displayer
+import BaseDisplayer
+import random
+import concurrent.futures
 
-from typing import Dict, List, Iterable, Sequence
+from typing import Dict, List, Iterable, Sequence, Tuple
 
 from algos.games import CompositeEvaluator,Evaluator, GameAlgo, GameConfig, GameState, GameStatistics
 from algos.evaluators import Monotonic, Snake, Corner
@@ -13,11 +17,8 @@ from algos.alphabeta import AlphaBeta
 from algos.expectiminimax import ExpectiMinimax
 from algos.alphabetaExpecti import ExpectiAlphaBeta
 
+
 Algorithms = {
-    "random": GameAlgo,
-    "minimax": Minimax,
-    "alphabeta": AlphaBeta,
-    "expecti": ExpectiMinimax,
     "abexpecti": ExpectiAlphaBeta
 }
 
@@ -29,7 +30,20 @@ Heuristics = {
 
 DefaultTimePerMove = 0.18
 DefaultAlgo = 'abexpecti'
-DefaultHeuristics = ['monotonic']
+DefaultHeuristic = 'monotonic'
+
+
+def averageTile(stats: Sequence[GameStatistics]) -> float:
+    return sum([stat.maxTile for stat in stats]) / len(stats)
+
+class OptimizationScenario:
+    def __init__(self, config:GameConfig, games:int, display:bool):
+        self.config = config
+        self.games = games
+        self.display = display
+    
+    def __str__(self):
+        return f"{self.config} ({self.games} games)"
 
 
 def printBoardAndValue(grid: Grid.Grid, heuristicName:str, heuristic: Evaluator):
@@ -281,62 +295,86 @@ def testHeuristic(heuristicNames: Sequence[str]):
             printBoardAndValue(grid, heuristicName, heuristic)
             print("===================================")
 
+def _playConfig(config: GameConfig, display:bool = True) -> GameStatistics:
+    #GameManager.main()
+    intelligentAgent = IntelligentAgent.IntelligentAgent(config=config)
+    computerAI  = ComputerAI.ComputerAI()
+    displayer   = Displayer.Displayer() if display else BaseDisplayer.BaseDisplayer()
+    gameManager = GameManager.GameManager(4, intelligentAgent, computerAI, displayer)
 
-def _playGame(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float) -> GameStatistics:
-    algo = Algorithms[algorithm]
-    heuristics = [ Heuristics[h]() for h in heuristicNames ]
-    evaluator = None
+    maxTile     = gameManager.start()
+    print(maxTile)
 
-    if len(heuristics) == 1:
-        evaluator = heuristics[0]
-    else:
-        evaluator = CompositeEvaluator(heuristics, weights)
-
-    config = GameConfig(algo=algo, evaluator=evaluator, timePerTurn=timePerMove)
-    
-    IntelligentAgent.setGameConfig(config)
-    GameManager.main()
-    return IntelligentAgent.Statistics
+    return intelligentAgent.Statistics
 
 
-def testWeights(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float],timePerMove:float, games:int):
-    allStats = []
-    playHeuristics = []
-    playWeights = []
-    for h,w in zip(heuristicNames, weights):
-        if w != 0:
-            playHeuristics.append(h)
-            playWeights.append(w)
-
+def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -> Sequence[GameStatistics]:
+    stats = []
     for game in range(games):
-        s = _playGame(algorithm, playHeuristics, playWeights, timePerMove)
-        s.processFinalState()
-        allStats.append(s)
+        stats.append(_playConfig(config, display=display))
+    return stats
 
-    averageMax = sum((s.maxTile for s in allStats)) / len(allStats)
-    return averageMax, weights
+def _playOptimizationScenario(op: OptimizationScenario) -> Tuple[OptimizationScenario, Sequence[GameStatistics]]:
+    return op, _playMultipleGames(op.config, op.games, op.display)
+
+def _optimizeMonotonic():
+    algo = Algorithms['abexpecti']
+    evaluator = Heuristics['monotonic']
+    timePerMove = 0.01
+    gamesPerIteration = 3
+    populationSize = 8
+    crossoverProbability = 0.8
+    mutationProbability = 0.1
+    minWeight = 0
+    maxWeight = 1000
+    displayGames = False
+    population = [
+        {'emptyWeight':random.randint(minWeight, maxWeight),
+         'mergeableWeight':random.randint(minWeight, maxWeight),
+         'montonicWeight':random.randint(minWeight, maxWeight),
+         'totalValueWeight':random.randint(minWeight, maxWeight) }
+         for i in range(populationSize)
+    ]
+
+    with open('initialPopulation.txt', 'w') as fout:
+        for p in population:
+            print(p, file=fout)
+    
+    def toOptimizationScenario(weights:Dict[str, int], games:int, display:bool):
+        return OptimizationScenario(
+            config=GameConfig(algo=algo, evaluator=evaluator(**weights), timePerTurn=timePerMove),
+            games = games,
+            display = display)
+
+    best = []
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        optimizationScenarios = [ toOptimizationScenario(w, gamesPerIteration, displayGames) for w in population ]
+        futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
+        
+        for future in concurrent.futures.as_completed(futures):
+            scenario, stats = future.result()
+            for stat in stats:
+                stat.processFinalState()
+            best.append((scenario, stats))
+        
+        best.sort(key=lambda scenStats: averageTile(scenStats[1]), reverse=True)
+        with open('results.txt', 'w') as fout:
+            for scenario, stats in best:
+                print(f"{scenario}\nAverageMaxTile: {averageTile(stats)}")
+                print(f"{scenario}\nAverageMaxTile: {averageTile(stats)}", file=fout)
+                for i, stat in enumerate(stats):
+                    print(f"Statistics: Game {i}", file=fout)
+                    print(stat, file=fout)
+                    print(file=fout)
 
 
-def _optimize(algorithm:str, timePerMove:float, games:int):
-    weightRange = list(range(2))
-    heuristicNames = list(Heuristics.keys())
-    allCombinations = [ (a,b,c,d) 
-            for a in weightRange 
-            for b in weightRange
-            for c in weightRange
-            for d in weightRange ]
-    results = []
-    for weights in allCombinations:
-        if all((w == 0 for w in weights)):
-            continue
-        results.append(testWeights(algorithm, heuristicNames, weights, timePerMove, games))
-
-    results.sort()
-    print(results[:50])
-
-def _playGameAndReport(algorithm:str, heuristicNames:Iterable[str], weights:Iterable[float], timePerMove:float):
-    statistics = _playGame(algorithm, heuristicNames, weights, timePerMove)
-    print(IntelligentAgent.Statistics)
+def _playGameAndReport(algorithm:str, heuristicName:str, timePerMove:float):
+    algo = Algorithms[algorithm]
+    evaluator = Heuristics[heuristicName]()
+    config = GameConfig(algo=algo, evaluator=evaluator, timePerTurn=timePerMove)
+    stats = _playConfig(config, display=True)
+    print(f"--Config--\n{config}\n")
+    print(f"--Statistics--\n{stats}\n")
 
 
 @click.group()
@@ -345,10 +383,14 @@ def run():
 
 
 @run.command()
+def optimizemonotonic():
+    _optimizeMonotonic()
+
+
+@run.command()
 @click.option('--heuristic', '-h',
-    default=DefaultHeuristics,
-    type=click.Choice(list(Heuristics), case_sensitive=True),
-    multiple=True)
+    default=DefaultHeuristic,
+    type=click.Choice(list(Heuristics), case_sensitive=True))
 def checkheuristic(heuristic):
     testHeuristic(heuristic)
 
@@ -357,33 +399,14 @@ def checkheuristic(heuristic):
     default=DefaultAlgo,
     type=click.Choice(list(Algorithms), case_sensitive=True))
 @click.option('--heuristic', '-h',
-    default=DefaultHeuristics,
-    type=click.Choice(list(Heuristics), case_sensitive=True),
-    multiple=True)
-@click.option('--weight', '-w',
-    default=[1],
-    type=click.FLOAT,
-    multiple=True)
+    default=DefaultHeuristic,
+    type=click.Choice(list(Heuristics), case_sensitive=True))
 @click.option('--timepermove', '-t', default=DefaultTimePerMove)
-def playgame(algorithm, heuristic, weight, timepermove):
+def playgame(algorithm, heuristic, timepermove):
     print(f'Algorithm: {algorithm}')
     print(f'Heuristics: {heuristic}')
-    print(f'Weights: {weight}')
     print(f'Time per move: {timepermove}')
-    if len(heuristic) != len(weight):
-        raise Exception("Heuristic count should be the same as weight count")
-    _playGameAndReport(algorithm, heuristic, weight, timepermove)
-
-
-@run.command()
-@click.option('--algorithm', '-a', 
-    default=DefaultAlgo,
-    type=click.Choice(list(Algorithms), case_sensitive=True))
-@click.option('--timepermove', '-t', default=DefaultTimePerMove)
-@click.option('--games', '-g', default=1)
-def optimize(algorithm, timepermove, games):
-    _optimize(algorithm, timepermove, games)
-
+    _playGameAndReport(algorithm, heuristic, timepermove)
 
 if __name__ == "__main__":
     run()

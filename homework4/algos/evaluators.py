@@ -9,6 +9,9 @@ class Monotonic(Evaluator):
         self.montonicWeight = montonicWeight
         self.totalValueWeight = totalValueWeight
 
+    def __str__(self):
+        return f"Monotonic(emptyWeight={self.emptyWeight}, mergeableWeight={self.mergeableWeight}, montonicWeight={self.montonicWeight}, totalValueWeight={self.totalValueWeight})"
+
     def __call__(self,state:GameState) -> Value:
         """
         TODO:
@@ -54,7 +57,7 @@ class Monotonic(Evaluator):
         if empty == 0 and mergeable == 0:
             return float('-inf')
 
-        print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
+        #print(f"{baseValue} + {mergeable*self.mergeableWeight} + {empty*self.emptyWeight} + {totalValue*self.totalValueWeight} - {nonMonotonicity*self.montonicWeight}")
         return (
             baseValue
             + mergeable*self.mergeableWeight
@@ -153,7 +156,7 @@ class Snake(Evaluator):
 
 
 class Corner(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, cornerWeight=50, totalValueWeight=50, unsmoothPenaltyWeight=50):
+    def __init__(self, emptyWeight=50, mergeableWeight=50, cornerWeight=50, totalValueWeight=0, unsmoothPenaltyWeight=50):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -161,6 +164,9 @@ class Corner(Evaluator):
         self.cornerWeight = cornerWeight
         self.totalValueWeight = totalValueWeight
         self.unsmoothPenaltyWeight = unsmoothPenaltyWeight
+
+    def __str__(self):
+        return f"Corner(emptyWeight={self.emptyWeight}, mergeableWeight={self.mergeableWeight}, cornerWeight={self.cornerWeight}, totalValueWeight={self.totalValueWeight}, unsmoothPenaltyWeight={self.unsmoothPenaltyWeight})"
 
     def __call__(self,state:GameState) -> Value:
         """
@@ -215,6 +221,7 @@ class Corner(Evaluator):
             + mergeable*self.mergeableWeight
             + empty*self.emptyWeight
             + corner*self.cornerWeight
+            + totalValue*self.totalValueWeight
             - unsmoothPenalty*self.unsmoothPenaltyWeight
         )
     
