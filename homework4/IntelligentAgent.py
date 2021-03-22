@@ -23,7 +23,7 @@ class IntelligentAgent(BaseAI):
 		self.Statistics.updateState(gridState)
 		algo = self.Config.Algo(gridState, self.Config.Evaluator, self.Statistics, self.HeuristicCache)
 		s = self.Executor.submit(algo.search)
-		a = None
+		a = NullAction
 		try:
 			a = s.result(timeout=self.Config.TimePerTurn)
 		except concurrent.futures.TimeoutError:

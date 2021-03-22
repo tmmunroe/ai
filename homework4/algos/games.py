@@ -169,7 +169,8 @@ class GameAlgo:
     def __init__(self, state: GameState, evaluator: Evaluator, stats:GameStatistics, heuristicCache:Dict[int,Value]):
         self.initialState = state
         self.evaluator = evaluator
-        self.bestMove: Action = NullAction
+        #self.bestMove: Action = state.state.getAvailableMoves()[0]
+        self.bestMove = NullAction
         self.bestMoveValue: Value = evaluator.MinValue
         self.moveLock = threading.Lock()
         self.stop = threading.Event()

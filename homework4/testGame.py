@@ -7,8 +7,11 @@ import Displayer
 import BaseDisplayer
 import random
 import concurrent.futures
+import copy
+import statistics
+import time
 
-from typing import Dict, List, Iterable, Sequence, Tuple
+from typing import Dict, List, Iterable, Sequence, Tuple, Optional
 
 from algos.games import CompositeEvaluator,Evaluator, GameAlgo, GameConfig, GameState, GameStatistics
 from algos.evaluators import Monotonic, Snake, Corner
@@ -33,18 +36,61 @@ DefaultAlgo = 'abexpecti'
 DefaultHeuristic = 'monotonic'
 
 
-def averageTile(stats: Sequence[GameStatistics]) -> float:
-    return sum([stat.maxTile for stat in stats]) / len(stats)
-
 class OptimizationScenario:
-    def __init__(self, config:GameConfig, games:int, display:bool):
+    def __init__(self, weights:Dict[str,int], config:GameConfig, generation:int, games:int, display:bool):
+        self.weights = weights
         self.config = config
+        self.generation = generation
         self.games = games
         self.display = display
+        self.statistics: List[GameStatistics] = []
     
     def __str__(self):
         return f"{self.config} ({self.games} games)"
+    
+    def report(self):
+        rep = [
+            f"Weights: {self.weights}",
+            f"Config: {self.config}",
+            f"Games: {self.games}",
+            f"MaxTile: {self.maxTile()}",
+            f"MinTile: {self.minTile()}",
+            f"AvgTile: {self.averageTile()}",
+            f"StdDevTile: {self.stdDevTile()}",
+            f"MedianTile: {self.medianTile()}",
+            f"ModeTile: {self.modeTile()}"
+        ]
+        rep.extend([f"Game {i} Stats:\n{stat}\n" for i, stat in enumerate(self.statistics)])
+        return '\n'.join(rep)
 
+    def addStatistics(self, stats: List[GameStatistics]):
+        for stat in stats:
+            stat.processFinalState()
+        self.statistics.extend(stats)
+
+    def _maxTiles(self) -> List[int]:
+        return [stat.maxTile for stat in self.statistics]
+
+    def minTile(self) -> float:
+        return min(self._maxTiles())
+
+    def maxTile(self) -> float:
+        return max(self._maxTiles())
+
+    def stdDevTile(self) -> float:
+        return statistics.stdev(self._maxTiles())
+
+    def averageTile(self) -> float:
+        return statistics.mean(self._maxTiles())
+
+    def medianTile(self) -> float:
+        return statistics.median(self._maxTiles())
+
+    def modeTile(self) -> float:
+        return statistics.mode(self._maxTiles())
+    
+    def valueTile(self) -> float:
+        return (self.maxTile() + self.minTile() + self.averageTile() + self.medianTile() + self.modeTile()) / 5
 
 def printBoardAndValue(grid: Grid.Grid, heuristicName:str, heuristic: Evaluator):
     print('[')
@@ -303,76 +349,195 @@ def _playConfig(config: GameConfig, display:bool = True) -> GameStatistics:
     gameManager = GameManager.GameManager(4, intelligentAgent, computerAI, displayer)
 
     maxTile     = gameManager.start()
-    print(maxTile)
-
     return intelligentAgent.Statistics
 
 
-def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -> Sequence[GameStatistics]:
+def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -> List[GameStatistics]:
     stats = []
     for game in range(games):
         stats.append(_playConfig(config, display=display))
     return stats
 
-def _playOptimizationScenario(op: OptimizationScenario) -> Tuple[OptimizationScenario, Sequence[GameStatistics]]:
-    return op, _playMultipleGames(op.config, op.games, op.display)
+
+def _playOptimizationScenario(op: OptimizationScenario) -> OptimizationScenario:
+    stats = _playMultipleGames(op.config, op.games, op.display)
+    op.addStatistics(stats)
+    return op 
+
+
+def _crossover(parentA: Dict[str,int], parentB: Dict[str,int], probability: float) -> Sequence[Dict[str,int]]:
+    if random.random() > probability:
+        return []
+
+    traitCount = random.randint(1,len(parentA)-1)
+    traits: List[str] = random.choices(list(parentA.keys()), k=traitCount)
+
+    childA = copy.deepcopy(parentA)
+    childB = copy.deepcopy(parentB)
+    for trait in traits:
+        childA[trait], childB[trait] = childB[trait], childA[trait]
+
+    return [childA, childB]
+
+
+def _mutation(individual: Dict[str,int], probability:float, minWeight:int, maxWeight:int):
+    if random.random() > probability:
+        return None
+    
+    trait = random.choice(list(individual.keys()))
+    individual[trait] = random.randint(minWeight, maxWeight)
+
+def _evolvePopulation(individuals: List[Dict[str, int]], 
+        individualReproductiveProbability: List[float], 
+        crossOverProbabilty:float, 
+        mutationProbability:float, 
+        crossovers:int,
+        minWeight:int, 
+        maxWeight:int) -> Sequence[Dict[str,int]]:
+    newPopulation: List[Dict[str,int]] = []
+    for i in range(crossovers):
+        parentA, parentB = random.choices(individuals, weights=individualReproductiveProbability, k=2)
+        children = _crossover(parentA, parentB, crossOverProbabilty)
+        for child in children:
+            _mutation(child, mutationProbability, minWeight, maxWeight)
+        newPopulation.extend(children)
+    return newPopulation
+
+
+def _getReproductiveProbabilityForIndividuals(population: List[OptimizationScenario]) -> List[float]:
+    tileValues = [pow(op.valueTile(),2) for op in  population]
+    totalValueTiles = float(sum(tileValues))
+    probabilities = [tileValue / totalValueTiles for tileValue in tileValues]
+    
+    for op,p in zip(population, probabilities):
+        print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}:::: {p}")
+    print("......")
+
+    return probabilities
+    
 
 def _optimizeMonotonic():
+    pStart = time.time()
     algo = Algorithms['abexpecti']
     evaluator = Heuristics['monotonic']
-    timePerMove = 0.01
-    gamesPerIteration = 3
-    populationSize = 8
-    crossoverProbability = 0.8
-    mutationProbability = 0.1
+    timePerMove = 0.05
+    gamesPerIteration = 5
+    crossoverCount = 10
+    initialPopulationSize = 50  #start with a very large initial population
+    maxFitnessGroupSize = 30
+    maxIter = 25
+    crossOverProbabilty = 0.9
+    mutationProbability = 0.3
     minWeight = 0
     maxWeight = 1000
     displayGames = False
     population = [
+        {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713},
+        {'emptyWeight': 655, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 919},
+        {'emptyWeight': 578, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 919},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 343, 'totalValueWeight': 919},
+        {'emptyWeight': 655, 'mergeableWeight': 872, 'montonicWeight': 821, 'totalValueWeight': 919},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
+        {'emptyWeight': 578, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 919},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
+        {'emptyWeight': 151, 'mergeableWeight': 716, 'montonicWeight': 629, 'totalValueWeight': 286},
+        {'emptyWeight': 421, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 919},
+        {'emptyWeight': 578, 'mergeableWeight': 716, 'montonicWeight': 200, 'totalValueWeight': 143},
+        {'emptyWeight': 421, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 911},
+        {'emptyWeight': 655, 'mergeableWeight': 872, 'montonicWeight': 629, 'totalValueWeight': 919},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911}
+    ]
+    population.extend([
         {'emptyWeight':random.randint(minWeight, maxWeight),
          'mergeableWeight':random.randint(minWeight, maxWeight),
          'montonicWeight':random.randint(minWeight, maxWeight),
          'totalValueWeight':random.randint(minWeight, maxWeight) }
-         for i in range(populationSize)
-    ]
-
-    with open('initialPopulation.txt', 'w') as fout:
-        for p in population:
-            print(p, file=fout)
+         for i in range(initialPopulationSize)
+    ])
     
-    def toOptimizationScenario(weights:Dict[str, int], games:int, display:bool):
+    with open('populationEvolution.txt', 'w') as fout:
+        print("Population evolutions\n\n",file=fout)
+    
+    def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
         return OptimizationScenario(
+            weights=weights,
             config=GameConfig(algo=algo, evaluator=evaluator(**weights), timePerTurn=timePerMove),
+            generation=generation,
             games = games,
             display = display)
 
-    best = []
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        optimizationScenarios = [ toOptimizationScenario(w, gamesPerIteration, displayGames) for w in population ]
-        futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
-        
-        for future in concurrent.futures.as_completed(futures):
-            scenario, stats = future.result()
-            for stat in stats:
-                stat.processFinalState()
-            best.append((scenario, stats))
-        
-        best.sort(key=lambda scenStats: averageTile(scenStats[1]), reverse=True)
-        with open('results.txt', 'w') as fout:
-            for scenario, stats in best:
-                print(f"{scenario}\nAverageMaxTile: {averageTile(stats)}")
-                print(f"{scenario}\nAverageMaxTile: {averageTile(stats)}", file=fout)
-                for i, stat in enumerate(stats):
-                    print(f"Statistics: Game {i}", file=fout)
-                    print(stat, file=fout)
-                    print(file=fout)
+    individualFitnesses: List[OptimizationScenario] = []
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+        for generation in range(maxIter):
+            start = time.time()
+            print(f"----------------------------")
+            print(f"----------------------------")
+            print(f"Generation {generation} (Population Size: {len(population)})...")
+
+            """record new population"""
+            with open('populationEvolution.txt', 'a') as fout:
+                for p in population:
+                    print(p, file=fout)
+                    print(p)
+
+            print("......")
+            print("Running scenarios......")
+            
+            """run new population"""
+            optimizationScenarios = [ toOptimizationScenario(w, generation, gamesPerIteration, displayGames) for w in population ]
+            futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
+            """add results to individualFitnesses"""
+            totalCount = len(futures)
+            totalDone = 0
+            for future in concurrent.futures.as_completed(futures):
+                individualFitnesses.append(future.result())
+                totalDone += 1
+                if totalDone % 5 == 0:
+                    print(f"{totalCount -  totalDone} of {totalCount} remaining...")
+
+            
+            """take top [maxFitnessGroupSize] fitnesses, write to file"""
+            print("Recording results......")
+            individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
+            individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
+            with open('populationResults.txt', 'w') as fout:
+                print("Population results\n\n", file=fout)
+                for op in individualFitnesses:
+                    print(op.report(), file=fout)
+                    print("----------------------------\n", file=fout)
+                    print("----------------------------\n", file=fout)
+            
+            """get new population with individuals with top fitnesses"""
+            print("Evolving population......")
+            individuals = [op.weights for op in individualFitnesses]
+            reproductiveProbability = _getReproductiveProbabilityForIndividuals(individualFitnesses)
+            population = _evolvePopulation(
+                individuals=individuals,
+                individualReproductiveProbability=reproductiveProbability,
+                crossOverProbabilty=crossOverProbabilty,
+                mutationProbability=mutationProbability,
+                crossovers=crossoverCount,
+                minWeight=minWeight,
+                maxWeight=maxWeight)
+            end = time.time()
+
+            print(f"Started: {start}")
+            print(f"Ended: {end}")
+            print(f"Total time: {end - start}")
+    
+    pEnd = time.time()
+    print("Genetic Algorithm stats:")
+    print(f"Iterations: {maxIter}")
+    print(f"Start: {pStart}")
+    print(f"End: {pEnd}")
 
 
 def _playGameAndReport(algorithm:str, heuristicName:str, timePerMove:float):
     algo = Algorithms[algorithm]
     evaluator = Heuristics[heuristicName]()
     config = GameConfig(algo=algo, evaluator=evaluator, timePerTurn=timePerMove)
-    stats = _playConfig(config, display=True)
+    stats = _playConfig(config, display=False)
     print(f"--Config--\n{config}\n")
     print(f"--Statistics--\n{stats}\n")
 

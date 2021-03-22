@@ -1,0 +1,23 @@
+# A unique identifier for the head node and workers of this cluster.
+cluster_name: minimal
+
+# Cloud-provider specific configuration.
+provider:
+    type: gcp
+    region: us-west1
+    availability_zone: us-west1-a
+    project_id: coms4143 # Globally unique project id
+
+#autoscaling cpu cluster
+min_workers: 0
+max_workers: 10
+head_node:
+    InstanceType: m4.large
+worker_nodes:
+    InstanceMarketOptions:
+        MarketType: spot
+    InstanceType: m4.16xlarge
+
+# How Ray will authenticate with newly launched nodes.
+auth:
+    ssh_user: ubuntu

@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=1000, mergeableWeight=500, montonicWeight=700, totalValueWeight=100):
+    def __init__(self, emptyWeight=82, mergeableWeight=220, montonicWeight=821, totalValueWeight=713):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight

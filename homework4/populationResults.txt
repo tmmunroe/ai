@@ -1,0 +1,3753 @@
+Population results
+
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=220, montonicWeight=821, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 4096
+AvgTile: 4096
+StdDevTile: 0.0
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 3754
+TotalDepth:26821
+AverageDepth:7.144645711241343
+MaxDepth:23
+MinDepth:0
+Nodes:3857105
+TotalBranches:11530667
+AverageBranches:2.989461526196461
+MaxBranches:14
+MinBranches:0
+Prunings:844740
+SumOfPrunings:1978903
+AveragedPrunings:2.342617846911476
+SumOfTiles:8246
+AverageTile:515.375
+MaxCacheSize: 579818
+CacheFlushed: 12
+CacheHits:13228481
+CacheMisses:1267330
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2317
+TotalDepth:15475
+AverageDepth:6.678895123003884
+MaxDepth:14
+MinDepth:0
+Nodes:2251444
+TotalBranches:7326345
+AverageBranches:3.254064946763055
+MaxBranches:15
+MinBranches:0
+Prunings:451245
+SumOfPrunings:1232899
+AveragedPrunings:2.732216423450675
+SumOfTiles:5082
+AverageTile:317.625
+MaxCacheSize: 336839
+CacheFlushed: 12
+CacheHits:8421779
+CacheMisses:883956
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 1916
+TotalDepth:12979
+AverageDepth:6.774008350730689
+MaxDepth:11
+MinDepth:0
+Nodes:1902949
+TotalBranches:6044154
+AverageBranches:3.1762038814492666
+MaxBranches:14
+MinBranches:0
+Prunings:375967
+SumOfPrunings:991492
+AveragedPrunings:2.6371782629858473
+SumOfTiles:4198
+AverageTile:262.375
+MaxCacheSize: 311057
+CacheFlushed: 11
+CacheHits:6945433
+CacheMisses:703987
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2610
+TotalDepth:17983
+AverageDepth:6.890038314176246
+MaxDepth:17
+MinDepth:0
+Nodes:2601999
+TotalBranches:8145856
+AverageBranches:3.1306145774844647
+MaxBranches:14
+MinBranches:0
+Prunings:532181
+SumOfPrunings:1356502
+AveragedPrunings:2.5489485720083955
+SumOfTiles:5686
+AverageTile:355.375
+MaxCacheSize: 338706
+CacheFlushed: 12
+CacheHits:9379754
+CacheMisses:946700
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2792
+TotalDepth:19134
+AverageDepth:6.853151862464183
+MaxDepth:13
+MinDepth:0
+Nodes:2854319
+TotalBranches:8985281
+AverageBranches:3.147959635906148
+MaxBranches:15
+MinBranches:0
+Prunings:590498
+SumOfPrunings:1510877
+AveragedPrunings:2.558648801520073
+SumOfTiles:6160
+AverageTile:385.0
+MaxCacheSize: 330742
+CacheFlushed: 12
+CacheHits:10344717
+CacheMisses:1036319
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 898, 'mergeableWeight': 294, 'montonicWeight': 815, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=898, mergeableWeight=294, montonicWeight=815, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3481.6
+StdDevTile: 1373.8401653758708
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2663
+TotalDepth:18147
+AverageDepth:6.814494930529478
+MaxDepth:15
+MinDepth:0
+Nodes:2665199
+TotalBranches:8493292
+AverageBranches:3.1867384011475317
+MaxBranches:15
+MinBranches:0
+Prunings:552379
+SumOfPrunings:1450105
+AveragedPrunings:2.6251993649287897
+SumOfTiles:5868
+AverageTile:366.75
+MaxCacheSize: 309954
+CacheFlushed: 12
+CacheHits:9753672
+CacheMisses:997517
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 3587
+TotalDepth:24999
+AverageDepth:6.969333705045999
+MaxDepth:13
+MinDepth:0
+Nodes:3580895
+TotalBranches:10995828
+AverageBranches:3.070692662030023
+MaxBranches:14
+MinBranches:0
+Prunings:778455
+SumOfPrunings:1890724
+AveragedPrunings:2.42881605230874
+SumOfTiles:7906
+AverageTile:494.125
+MaxCacheSize: 578927
+CacheFlushed: 12
+CacheHits:12643361
+CacheMisses:1250628
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2230
+TotalDepth:15135
+AverageDepth:6.786995515695067
+MaxDepth:15
+MinDepth:0
+Nodes:2183131
+TotalBranches:6969925
+AverageBranches:3.1926279275041214
+MaxBranches:15
+MinBranches:0
+Prunings:429556
+SumOfPrunings:1146000
+AveragedPrunings:2.667871010997402
+SumOfTiles:4892
+AverageTile:305.75
+MaxCacheSize: 279442
+CacheFlushed: 12
+CacheHits:8037331
+CacheMisses:824947
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2888
+TotalDepth:20036
+AverageDepth:6.937673130193906
+MaxDepth:13
+MinDepth:0
+Nodes:2901554
+TotalBranches:8951770
+AverageBranches:3.0851640190049885
+MaxBranches:14
+MinBranches:0
+Prunings:616683
+SumOfPrunings:1518681
+AveragedPrunings:2.4626607187160987
+SumOfTiles:6352
+AverageTile:397.0
+MaxCacheSize: 329067
+CacheFlushed: 12
+CacheHits:10256683
+CacheMisses:1010561
+
+Game 4 Stats:
+MaxTile:1024
+Searches: 718
+TotalDepth:4645
+AverageDepth:6.469359331476323
+MaxDepth:10
+MinDepth:0
+Nodes:680870
+TotalBranches:2329084
+AverageBranches:3.4207469854744663
+MaxBranches:14
+MinBranches:0
+Prunings:127429
+SumOfPrunings:382416
+AveragedPrunings:3.0010123284338728
+SumOfTiles:1600
+AverageTile:100.0
+MaxCacheSize: 93552
+CacheFlushed: 10
+CacheHits:2706985
+CacheMisses:295130
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 421, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=220, montonicWeight=421, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 8192
+MinTile: 512
+AvgTile: 3379.2
+StdDevTile: 2976.6536916477203
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:8192
+Searches: 4196
+TotalDepth:29216
+AverageDepth:6.962821734985701
+MaxDepth:13
+MinDepth:0
+Nodes:4158051
+TotalBranches:12665476
+AverageBranches:3.046012663144343
+MaxBranches:15
+MinBranches:0
+Prunings:867786
+SumOfPrunings:2125675
+AveragedPrunings:2.4495382502137626
+SumOfTiles:9284
+AverageTile:580.25
+MaxCacheSize: 581953
+CacheFlushed: 12
+CacheHits:14513235
+CacheMisses:1430829
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1701
+TotalDepth:11426
+AverageDepth:6.717225161669606
+MaxDepth:21
+MinDepth:0
+Nodes:1681503
+TotalBranches:5412913
+AverageBranches:3.2190920860682377
+MaxBranches:14
+MinBranches:0
+Prunings:340779
+SumOfPrunings:920091
+AveragedPrunings:2.699963906226616
+SumOfTiles:3734
+AverageTile:233.375
+MaxCacheSize: 250177
+CacheFlushed: 11
+CacheHits:6193284
+CacheMisses:633485
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 3190
+TotalDepth:22100
+AverageDepth:6.927899686520377
+MaxDepth:18
+MinDepth:0
+Nodes:3264563
+TotalBranches:10105083
+AverageBranches:3.0953861205925572
+MaxBranches:14
+MinBranches:0
+Prunings:675522
+SumOfPrunings:1701598
+AveragedPrunings:2.5189379472467217
+SumOfTiles:6968
+AverageTile:435.5
+MaxCacheSize: 425083
+CacheFlushed: 12
+CacheHits:11588350
+CacheMisses:1135419
+
+Game 3 Stats:
+MaxTile:512
+Searches: 597
+TotalDepth:4043
+AverageDepth:6.772194304857622
+MaxDepth:15
+MinDepth:0
+Nodes:610076
+TotalBranches:2023856
+AverageBranches:3.317383407968843
+MaxBranches:14
+MinBranches:0
+Prunings:120151
+SumOfPrunings:341247
+AveragedPrunings:2.840151143144876
+SumOfTiles:1326
+AverageTile:82.875
+MaxCacheSize: 122697
+CacheFlushed: 9
+CacheHits:2351205
+CacheMisses:248253
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1644
+TotalDepth:11287
+AverageDepth:6.865571776155718
+MaxDepth:14
+MinDepth:0
+Nodes:1742044
+TotalBranches:5561711
+AverageBranches:3.1926352032440053
+MaxBranches:14
+MinBranches:0
+Prunings:352553
+SumOfPrunings:937633
+AveragedPrunings:2.6595518971615615
+SumOfTiles:3632
+AverageTile:227.0
+MaxCacheSize: 233213
+CacheFlushed: 10
+CacheHits:6381525
+CacheMisses:644498
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 550, 'mergeableWeight': 914, 'montonicWeight': 769, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=550, mergeableWeight=914, montonicWeight=769, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 3276.8
+StdDevTile: 1121.7357977705801
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:2048
+Searches: 1282
+TotalDepth:8392
+AverageDepth:6.546021840873635
+MaxDepth:11
+MinDepth:0
+Nodes:1244542
+TotalBranches:4142636
+AverageBranches:3.3286429867372895
+MaxBranches:14
+MinBranches:0
+Prunings:224579
+SumOfPrunings:649845
+AveragedPrunings:2.8936142738190123
+SumOfTiles:2840
+AverageTile:177.5
+MaxCacheSize: 177642
+CacheFlushed: 11
+CacheHits:4764829
+CacheMisses:511951
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2202
+TotalDepth:15232
+AverageDepth:6.917347865576748
+MaxDepth:13
+MinDepth:0
+Nodes:2170203
+TotalBranches:6799900
+AverageBranches:3.133301354758057
+MaxBranches:14
+MinBranches:0
+Prunings:454589
+SumOfPrunings:1159833
+AveragedPrunings:2.551388177012642
+SumOfTiles:4844
+AverageTile:302.75
+MaxCacheSize: 339836
+CacheFlushed: 12
+CacheHits:7813113
+CacheMisses:794831
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1067
+TotalDepth:7043
+AverageDepth:6.600749765698219
+MaxDepth:12
+MinDepth:0
+Nodes:1025635
+TotalBranches:3412643
+AverageBranches:3.32734647316053
+MaxBranches:15
+MinBranches:0
+Prunings:194841
+SumOfPrunings:563237
+AveragedPrunings:2.8907519464589075
+SumOfTiles:2334
+AverageTile:145.875
+MaxCacheSize: 166718
+CacheFlushed: 11
+CacheHits:3927481
+CacheMisses:421221
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2728
+TotalDepth:19341
+AverageDepth:7.089809384164223
+MaxDepth:107
+MinDepth:0
+Nodes:2723681
+TotalBranches:8284860
+AverageBranches:3.041787933315245
+MaxBranches:14
+MinBranches:0
+Prunings:593818
+SumOfPrunings:1436089
+AveragedPrunings:2.418399240171231
+SumOfTiles:6016
+AverageTile:376.0
+MaxCacheSize: 297274
+CacheFlushed: 12
+CacheHits:9510192
+CacheMisses:943612
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 3630
+TotalDepth:25401
+AverageDepth:6.997520661157025
+MaxDepth:16
+MinDepth:0
+Nodes:3641891
+TotalBranches:11087284
+AverageBranches:3.0443755730196207
+MaxBranches:14
+MinBranches:0
+Prunings:763990
+SumOfPrunings:1872699
+AveragedPrunings:2.451208785455307
+SumOfTiles:7982
+AverageTile:498.875
+MaxCacheSize: 556522
+CacheFlushed: 12
+CacheHits:12657410
+CacheMisses:1250649
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 539, 'montonicWeight': 769, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=539, montonicWeight=769, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 3276.8
+StdDevTile: 1121.7357977705801
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:2048
+Searches: 1260
+TotalDepth:8429
+AverageDepth:6.68968253968254
+MaxDepth:14
+MinDepth:0
+Nodes:1224691
+TotalBranches:3990435
+AverageBranches:3.2583198537426994
+MaxBranches:14
+MinBranches:0
+Prunings:236494
+SumOfPrunings:655827
+AveragedPrunings:2.7731232081997854
+SumOfTiles:2782
+AverageTile:173.875
+MaxCacheSize: 178291
+CacheFlushed: 11
+CacheHits:4600803
+CacheMisses:488684
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2378
+TotalDepth:16518
+AverageDepth:6.946173254835997
+MaxDepth:14
+MinDepth:0
+Nodes:2480900
+TotalBranches:7756254
+AverageBranches:3.1263871981942035
+MaxBranches:15
+MinBranches:0
+Prunings:542289
+SumOfPrunings:1362185
+AveragedPrunings:2.5119170774255055
+SumOfTiles:5208
+AverageTile:325.5
+MaxCacheSize: 345636
+CacheFlushed: 12
+CacheHits:8910624
+CacheMisses:894541
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2640
+TotalDepth:18334
+AverageDepth:6.944696969696969
+MaxDepth:13
+MinDepth:0
+Nodes:2992847
+TotalBranches:9339394
+AverageBranches:3.120571816735035
+MaxBranches:14
+MinBranches:0
+Prunings:642665
+SumOfPrunings:1607880
+AveragedPrunings:2.5018944551204747
+SumOfTiles:5838
+AverageTile:364.875
+MaxCacheSize: 341568
+CacheFlushed: 12
+CacheHits:10705242
+CacheMisses:1016444
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1430
+TotalDepth:9934
+AverageDepth:6.9468531468531465
+MaxDepth:16
+MinDepth:0
+Nodes:1631105
+TotalBranches:5151180
+AverageBranches:3.1580922135607454
+MaxBranches:14
+MinBranches:0
+Prunings:345827
+SumOfPrunings:874056
+AveragedPrunings:2.5274371289691087
+SumOfTiles:3154
+AverageTile:197.125
+MaxCacheSize: 172642
+CacheFlushed: 10
+CacheHits:5952280
+CacheMisses:573584
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 3503
+TotalDepth:24991
+AverageDepth:7.134170710819298
+MaxDepth:17
+MinDepth:0
+Nodes:4103716
+TotalBranches:12511202
+AverageBranches:3.0487494748661943
+MaxBranches:15
+MinBranches:0
+Prunings:901835
+SumOfPrunings:2155213
+AveragedPrunings:2.389808556997677
+SumOfTiles:7700
+AverageTile:481.25
+MaxCacheSize: 582508
+CacheFlushed: 12
+CacheHits:14453179
+CacheMisses:1337434
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 889, 'montonicWeight': 421, 'totalValueWeight': 945}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=889, montonicWeight=421, totalValueWeight=945)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3072
+StdDevTile: 1448.1546878700494
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:1024
+Searches: 636
+TotalDepth:4134
+AverageDepth:6.5
+MaxDepth:20
+MinDepth:0
+Nodes:629174
+TotalBranches:2167260
+AverageBranches:3.444611506514891
+MaxBranches:14
+MinBranches:0
+Prunings:114906
+SumOfPrunings:358593
+AveragedPrunings:3.120750874627957
+SumOfTiles:1392
+AverageTile:87.0
+MaxCacheSize: 88502
+CacheFlushed: 10
+CacheHits:2508415
+CacheMisses:272061
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2008
+TotalDepth:14077
+AverageDepth:7.010458167330677
+MaxDepth:14
+MinDepth:0
+Nodes:2005443
+TotalBranches:6157290
+AverageBranches:3.070289207920644
+MaxBranches:15
+MinBranches:0
+Prunings:419307
+SumOfPrunings:1043272
+AveragedPrunings:2.4880862947673186
+SumOfTiles:4460
+AverageTile:278.75
+MaxCacheSize: 314327
+CacheFlushed: 12
+CacheHits:7086764
+CacheMisses:715188
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1400
+TotalDepth:9228
+AverageDepth:6.591428571428572
+MaxDepth:21
+MinDepth:0
+Nodes:1351231
+TotalBranches:4501232
+AverageBranches:3.3312083574163114
+MaxBranches:15
+MinBranches:0
+Prunings:261591
+SumOfPrunings:747265
+AveragedPrunings:2.8566158621665116
+SumOfTiles:3084
+AverageTile:192.75
+MaxCacheSize: 174599
+CacheFlushed: 11
+CacheHits:5187347
+CacheMisses:548479
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 3382
+TotalDepth:23411
+AverageDepth:6.922235363690124
+MaxDepth:13
+MinDepth:0
+Nodes:3392054
+TotalBranches:10544376
+AverageBranches:3.1085519275341724
+MaxBranches:15
+MinBranches:0
+Prunings:692886
+SumOfPrunings:1754421
+AveragedPrunings:2.532048562101125
+SumOfTiles:7384
+AverageTile:461.5
+MaxCacheSize: 500267
+CacheFlushed: 12
+CacheHits:12114943
+CacheMisses:1213274
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2788
+TotalDepth:19051
+AverageDepth:6.8332137733142035
+MaxDepth:16
+MinDepth:0
+Nodes:2800093
+TotalBranches:8814539
+AverageBranches:3.14794508610964
+MaxBranches:15
+MinBranches:0
+Prunings:564468
+SumOfPrunings:1479102
+AveragedPrunings:2.620346946151066
+SumOfTiles:6062
+AverageTile:378.875
+MaxCacheSize: 320670
+CacheFlushed: 12
+CacheHits:10086905
+CacheMisses:1010757
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 625, 'mergeableWeight': 914, 'montonicWeight': 652, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=625, mergeableWeight=914, montonicWeight=652, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2969.6
+StdDevTile: 1635.1968688815423
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:512
+Searches: 380
+TotalDepth:2481
+AverageDepth:6.528947368421052
+MaxDepth:12
+MinDepth:0
+Nodes:379875
+TotalBranches:1334534
+AverageBranches:3.5130871997367557
+MaxBranches:15
+MinBranches:0
+Prunings:68615
+SumOfPrunings:217153
+AveragedPrunings:3.1648036143700358
+SumOfTiles:826
+AverageTile:51.625
+MaxCacheSize: 57923
+CacheFlushed: 9
+CacheHits:1557063
+CacheMisses:173139
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2013
+TotalDepth:13538
+AverageDepth:6.72528564331843
+MaxDepth:13
+MinDepth:0
+Nodes:1959801
+TotalBranches:6334977
+AverageBranches:3.2324593160223922
+MaxBranches:15
+MinBranches:0
+Prunings:396875
+SumOfPrunings:1061848
+AveragedPrunings:2.6755225196850394
+SumOfTiles:4406
+AverageTile:275.375
+MaxCacheSize: 322856
+CacheFlushed: 12
+CacheHits:7293821
+CacheMisses:756909
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 1944
+TotalDepth:13230
+AverageDepth:6.805555555555555
+MaxDepth:20
+MinDepth:0
+Nodes:1914939
+TotalBranches:6083648
+AverageBranches:3.1769408842788205
+MaxBranches:14
+MinBranches:0
+Prunings:389900
+SumOfPrunings:1016725
+AveragedPrunings:2.6076558091818414
+SumOfTiles:4288
+AverageTile:268.0
+MaxCacheSize: 317596
+CacheFlushed: 11
+CacheHits:6996465
+CacheMisses:709502
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2627
+TotalDepth:17847
+AverageDepth:6.793681004948611
+MaxDepth:13
+MinDepth:0
+Nodes:2598173
+TotalBranches:8228777
+AverageBranches:3.167139755512816
+MaxBranches:15
+MinBranches:0
+Prunings:519135
+SumOfPrunings:1364469
+AveragedPrunings:2.6283510069635065
+SumOfTiles:5804
+AverageTile:362.75
+MaxCacheSize: 333049
+CacheFlushed: 12
+CacheHits:9433787
+CacheMisses:965706
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1664
+TotalDepth:11176
+AverageDepth:6.716346153846154
+MaxDepth:13
+MinDepth:0
+Nodes:1616556
+TotalBranches:5244880
+AverageBranches:3.2444777663130755
+MaxBranches:14
+MinBranches:0
+Prunings:330412
+SumOfPrunings:889629
+AveragedPrunings:2.6924839291551153
+SumOfTiles:3660
+AverageTile:228.75
+MaxCacheSize: 244253
+CacheFlushed: 11
+CacheHits:6042375
+CacheMisses:639273
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 268, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=268, mergeableWeight=220, montonicWeight=821, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 256
+AvgTile: 2918.4
+StdDevTile: 1732.4978499265158
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 3242
+TotalDepth:22873
+AverageDepth:7.055212831585441
+MaxDepth:14
+MinDepth:0
+Nodes:3290971
+TotalBranches:10013815
+AverageBranches:3.0428147194247535
+MaxBranches:15
+MinBranches:0
+Prunings:730962
+SumOfPrunings:1764667
+AveragedPrunings:2.4141706408814687
+SumOfTiles:7114
+AverageTile:444.625
+MaxCacheSize: 420033
+CacheFlushed: 12
+CacheHits:11466800
+CacheMisses:1126915
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2260
+TotalDepth:15242
+AverageDepth:6.744247787610619
+MaxDepth:16
+MinDepth:0
+Nodes:2185685
+TotalBranches:7097640
+AverageBranches:3.2473297844840405
+MaxBranches:14
+MinBranches:0
+Prunings:443498
+SumOfPrunings:1205462
+AveragedPrunings:2.718077646347898
+SumOfTiles:4950
+AverageTile:309.375
+MaxCacheSize: 325647
+CacheFlushed: 12
+CacheHits:8196218
+CacheMisses:864174
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1852
+TotalDepth:12367
+AverageDepth:6.677645788336933
+MaxDepth:13
+MinDepth:0
+Nodes:1781626
+TotalBranches:5794720
+AverageBranches:3.2524895797434477
+MaxBranches:15
+MinBranches:0
+Prunings:352321
+SumOfPrunings:960229
+AveragedPrunings:2.725437881931534
+SumOfTiles:4062
+AverageTile:253.875
+MaxCacheSize: 314584
+CacheFlushed: 11
+CacheHits:6686586
+CacheMisses:707242
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2803
+TotalDepth:19630
+AverageDepth:7.003210845522655
+MaxDepth:135
+MinDepth:0
+Nodes:2804001
+TotalBranches:8585258
+AverageBranches:3.0617884943692957
+MaxBranches:14
+MinBranches:0
+Prunings:586999
+SumOfPrunings:1446723
+AveragedPrunings:2.464608968669453
+SumOfTiles:6144
+AverageTile:384.0
+MaxCacheSize: 286397
+CacheFlushed: 12
+CacheHits:9843415
+CacheMisses:969166
+
+Game 4 Stats:
+MaxTile:256
+Searches: 389
+TotalDepth:2660
+AverageDepth:6.838046272493573
+MaxDepth:14
+MinDepth:0
+Nodes:355132
+TotalBranches:1207326
+AverageBranches:3.399654213081333
+MaxBranches:14
+MinBranches:0
+Prunings:78061
+SumOfPrunings:218424
+AveragedPrunings:2.798119419428396
+SumOfTiles:850
+AverageTile:53.125
+MaxCacheSize: 97316
+CacheFlushed: 8
+CacheHits:1444213
+CacheMisses:163226
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 90, 'mergeableWeight': 889, 'montonicWeight': 815, 'totalValueWeight': 844}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=90, mergeableWeight=889, montonicWeight=815, totalValueWeight=844)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1873
+TotalDepth:12888
+AverageDepth:6.880939668980246
+MaxDepth:25
+MinDepth:0
+Nodes:1856467
+TotalBranches:5792312
+AverageBranches:3.120072697225429
+MaxBranches:15
+MinBranches:0
+Prunings:380974
+SumOfPrunings:965713
+AveragedPrunings:2.5348527721051832
+SumOfTiles:4152
+AverageTile:259.5
+MaxCacheSize: 308620
+CacheFlushed: 11
+CacheHits:6645783
+CacheMisses:668497
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1875
+TotalDepth:12633
+AverageDepth:6.7376
+MaxDepth:15
+MinDepth:0
+Nodes:1826925
+TotalBranches:5891782
+AverageBranches:3.224972015818931
+MaxBranches:15
+MinBranches:0
+Prunings:351682
+SumOfPrunings:962307
+AveragedPrunings:2.7362987016679843
+SumOfTiles:4110
+AverageTile:256.875
+MaxCacheSize: 317239
+CacheFlushed: 11
+CacheHits:6776562
+CacheMisses:703162
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2095
+TotalDepth:14125
+AverageDepth:6.742243436754177
+MaxDepth:13
+MinDepth:0
+Nodes:2009328
+TotalBranches:6500955
+AverageBranches:3.2353876519911133
+MaxBranches:14
+MinBranches:0
+Prunings:418942
+SumOfPrunings:1118977
+AveragedPrunings:2.670959225859427
+SumOfTiles:4640
+AverageTile:290.0
+MaxCacheSize: 322860
+CacheFlushed: 12
+CacheHits:7497971
+CacheMisses:785057
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2789
+TotalDepth:18945
+AverageDepth:6.792757260666906
+MaxDepth:13
+MinDepth:0
+Nodes:2725520
+TotalBranches:8620546
+AverageBranches:3.162899556781825
+MaxBranches:14
+MinBranches:0
+Prunings:572787
+SumOfPrunings:1475579
+AveragedPrunings:2.576139123269208
+SumOfTiles:6132
+AverageTile:383.25
+MaxCacheSize: 367711
+CacheFlushed: 11
+CacheHits:9879740
+CacheMisses:1002742
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1535
+TotalDepth:10063
+AverageDepth:6.555700325732899
+MaxDepth:13
+MinDepth:0
+Nodes:1474200
+TotalBranches:4915008
+AverageBranches:3.334017094017094
+MaxBranches:14
+MinBranches:0
+Prunings:285738
+SumOfPrunings:825769
+AveragedPrunings:2.889951634014377
+SumOfTiles:3362
+AverageTile:210.125
+MaxCacheSize: 211864
+CacheFlushed: 11
+CacheHits:5643455
+CacheMisses:600048
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 149, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=149, mergeableWeight=419, montonicWeight=821, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1489
+TotalDepth:9663
+AverageDepth:6.4895903290799195
+MaxDepth:13
+MinDepth:0
+Nodes:1434226
+TotalBranches:4839557
+AverageBranches:3.3743336126942336
+MaxBranches:15
+MinBranches:0
+Prunings:272859
+SumOfPrunings:803210
+AveragedPrunings:2.943681535151855
+SumOfTiles:3268
+AverageTile:204.25
+MaxCacheSize: 184635
+CacheFlushed: 11
+CacheHits:5577331
+CacheMisses:592354
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1030
+TotalDepth:6931
+AverageDepth:6.729126213592233
+MaxDepth:11
+MinDepth:0
+Nodes:982102
+TotalBranches:3205359
+AverageBranches:3.2637740275450002
+MaxBranches:14
+MinBranches:0
+Prunings:196212
+SumOfPrunings:533122
+AveragedPrunings:2.7170713310093166
+SumOfTiles:2276
+AverageTile:142.25
+MaxCacheSize: 170174
+CacheFlushed: 11
+CacheHits:3724848
+CacheMisses:395682
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2216
+TotalDepth:15053
+AverageDepth:6.792870036101083
+MaxDepth:22
+MinDepth:0
+Nodes:2156448
+TotalBranches:6864797
+AverageBranches:3.1833816535339596
+MaxBranches:14
+MinBranches:0
+Prunings:428409
+SumOfPrunings:1123595
+AveragedPrunings:2.622715675907836
+SumOfTiles:4864
+AverageTile:304.0
+MaxCacheSize: 334373
+CacheFlushed: 12
+CacheHits:7924949
+CacheMisses:819953
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2961
+TotalDepth:20438
+AverageDepth:6.902397838568051
+MaxDepth:17
+MinDepth:0
+Nodes:2952187
+TotalBranches:9143281
+AverageBranches:3.0971212189471737
+MaxBranches:15
+MinBranches:0
+Prunings:596708
+SumOfPrunings:1507311
+AveragedPrunings:2.526044564510615
+SumOfTiles:6482
+AverageTile:405.125
+MaxCacheSize: 376893
+CacheFlushed: 12
+CacheHits:10470936
+CacheMisses:1036583
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1899
+TotalDepth:12790
+AverageDepth:6.735123749341759
+MaxDepth:25
+MinDepth:0
+Nodes:1859248
+TotalBranches:5975120
+AverageBranches:3.2137294217877335
+MaxBranches:14
+MinBranches:0
+Prunings:377602
+SumOfPrunings:1014790
+AveragedPrunings:2.6874592825249866
+SumOfTiles:4140
+AverageTile:258.75
+MaxCacheSize: 315766
+CacheFlushed: 11
+CacheHits:6851165
+CacheMisses:709040
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 421, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=220, montonicWeight=421, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 8192
+MinTile: 1024
+AvgTile: 2867.2
+StdDevTile: 3020.3660705285374
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1379
+TotalDepth:9060
+AverageDepth:6.5699782451051485
+MaxDepth:10
+MinDepth:0
+Nodes:1359987
+TotalBranches:4512123
+AverageBranches:3.317769213970428
+MaxBranches:14
+MinBranches:0
+Prunings:258008
+SumOfPrunings:746566
+AveragedPrunings:2.8935769433505936
+SumOfTiles:3038
+AverageTile:189.875
+MaxCacheSize: 158651
+CacheFlushed: 11
+CacheHits:5169300
+CacheMisses:543285
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1432
+TotalDepth:9640
+AverageDepth:6.731843575418995
+MaxDepth:33
+MinDepth:0
+Nodes:1363966
+TotalBranches:4450088
+AverageBranches:3.2626091852729466
+MaxBranches:14
+MinBranches:0
+Prunings:264683
+SumOfPrunings:737007
+AveragedPrunings:2.784489370303344
+SumOfTiles:3158
+AverageTile:197.375
+MaxCacheSize: 174030
+CacheFlushed: 10
+CacheHits:5141474
+CacheMisses:549118
+
+Game 2 Stats:
+MaxTile:1024
+Searches: 738
+TotalDepth:4753
+AverageDepth:6.440379403794038
+MaxDepth:16
+MinDepth:0
+Nodes:681053
+TotalBranches:2363235
+AverageBranches:3.469972234172671
+MaxBranches:15
+MinBranches:0
+Prunings:124941
+SumOfPrunings:393447
+AveragedPrunings:3.149062357432708
+SumOfTiles:1602
+AverageTile:100.125
+MaxCacheSize: 96226
+CacheFlushed: 10
+CacheHits:2735849
+CacheMisses:308456
+
+Game 3 Stats:
+MaxTile:8192
+Searches: 4016
+TotalDepth:27896
+AverageDepth:6.946215139442231
+MaxDepth:13
+MinDepth:0
+Nodes:3944155
+TotalBranches:12102907
+AverageBranches:3.0685677920872787
+MaxBranches:14
+MinBranches:0
+Prunings:831529
+SumOfPrunings:2053741
+AveragedPrunings:2.469836890836038
+SumOfTiles:8888
+AverageTile:555.5
+MaxCacheSize: 590987
+CacheFlushed: 13
+CacheHits:13871829
+CacheMisses:1375435
+
+Game 4 Stats:
+MaxTile:1024
+Searches: 594
+TotalDepth:3822
+AverageDepth:6.434343434343434
+MaxDepth:11
+MinDepth:0
+Nodes:547649
+TotalBranches:1905564
+AverageBranches:3.4795352497676433
+MaxBranches:14
+MinBranches:0
+Prunings:98934
+SumOfPrunings:310774
+AveragedPrunings:3.141225463440273
+SumOfTiles:1320
+AverageTile:82.5
+MaxCacheSize: 99245
+CacheFlushed: 9
+CacheHits:2219467
+CacheMisses:249845
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 550, 'mergeableWeight': 914, 'montonicWeight': 769, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=550, mergeableWeight=914, montonicWeight=769, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1330
+TotalDepth:8933
+AverageDepth:6.716541353383459
+MaxDepth:15
+MinDepth:0
+Nodes:1300591
+TotalBranches:4196716
+AverageBranches:3.2267761348494646
+MaxBranches:14
+MinBranches:0
+Prunings:252519
+SumOfPrunings:690966
+AveragedPrunings:2.736293110617419
+SumOfTiles:2882
+AverageTile:180.125
+MaxCacheSize: 183632
+CacheFlushed: 10
+CacheHits:4821688
+CacheMisses:502607
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1258
+TotalDepth:8472
+AverageDepth:6.734499205087441
+MaxDepth:38
+MinDepth:0
+Nodes:1219009
+TotalBranches:3953638
+AverageBranches:3.243321419284025
+MaxBranches:15
+MinBranches:0
+Prunings:236004
+SumOfPrunings:648961
+AveragedPrunings:2.7497881391840817
+SumOfTiles:2760
+AverageTile:172.5
+MaxCacheSize: 181850
+CacheFlushed: 11
+CacheHits:4554243
+CacheMisses:475833
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1437
+TotalDepth:9551
+AverageDepth:6.646485734168406
+MaxDepth:13
+MinDepth:0
+Nodes:1377105
+TotalBranches:4480556
+AverageBranches:3.253605208026984
+MaxBranches:14
+MinBranches:0
+Prunings:264778
+SumOfPrunings:735715
+AveragedPrunings:2.778610760712748
+SumOfTiles:3210
+AverageTile:200.625
+MaxCacheSize: 170199
+CacheFlushed: 11
+CacheHits:5138152
+CacheMisses:540036
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2307
+TotalDepth:15539
+AverageDepth:6.735587342869527
+MaxDepth:13
+MinDepth:0
+Nodes:2245504
+TotalBranches:7166867
+AverageBranches:3.191651851878242
+MaxBranches:14
+MinBranches:0
+Prunings:449145
+SumOfPrunings:1200118
+AveragedPrunings:2.672005699718354
+SumOfTiles:5040
+AverageTile:315.0
+MaxCacheSize: 320103
+CacheFlushed: 11
+CacheHits:8213899
+CacheMisses:840074
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2580
+TotalDepth:17527
+AverageDepth:6.793410852713178
+MaxDepth:15
+MinDepth:0
+Nodes:2525162
+TotalBranches:7967529
+AverageBranches:3.1552545935666703
+MaxBranches:15
+MinBranches:0
+Prunings:504585
+SumOfPrunings:1320735
+AveragedPrunings:2.617467820089777
+SumOfTiles:5650
+AverageTile:353.125
+MaxCacheSize: 321157
+CacheFlushed: 12
+CacheHits:9137134
+CacheMisses:930401
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 411, 'mergeableWeight': 80, 'montonicWeight': 821, 'totalValueWeight': 708}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=411, mergeableWeight=80, montonicWeight=821, totalValueWeight=708)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:4096
+Searches: 3498
+TotalDepth:24586
+AverageDepth:7.028587764436821
+MaxDepth:18
+MinDepth:0
+Nodes:3702568
+TotalBranches:11385035
+AverageBranches:3.0749023380529406
+MaxBranches:14
+MinBranches:0
+Prunings:814873
+SumOfPrunings:1972139
+AveragedPrunings:2.420179586266817
+SumOfTiles:7696
+AverageTile:481.0
+MaxCacheSize: 566858
+CacheFlushed: 11
+CacheHits:13132003
+CacheMisses:1282658
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1474
+TotalDepth:10095
+AverageDepth:6.848710990502036
+MaxDepth:12
+MinDepth:0
+Nodes:1601101
+TotalBranches:5120292
+AverageBranches:3.1979818887128295
+MaxBranches:14
+MinBranches:0
+Prunings:336042
+SumOfPrunings:874668
+AveragedPrunings:2.6028532147767245
+SumOfTiles:3220
+AverageTile:201.25
+MaxCacheSize: 193863
+CacheFlushed: 11
+CacheHits:5890821
+CacheMisses:584817
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2733
+TotalDepth:18936
+AverageDepth:6.928649835345774
+MaxDepth:16
+MinDepth:0
+Nodes:3035358
+TotalBranches:9513230
+AverageBranches:3.1341377195045856
+MaxBranches:14
+MinBranches:0
+Prunings:648454
+SumOfPrunings:1639800
+AveragedPrunings:2.528783845885753
+SumOfTiles:6064
+AverageTile:379.0
+MaxCacheSize: 331040
+CacheFlushed: 12
+CacheHits:10902806
+CacheMisses:1052663
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1190
+TotalDepth:8163
+AverageDepth:6.859663865546218
+MaxDepth:13
+MinDepth:0
+Nodes:1353543
+TotalBranches:4360690
+AverageBranches:3.2216856058507193
+MaxBranches:14
+MinBranches:0
+Prunings:279534
+SumOfPrunings:729739
+AveragedPrunings:2.610555424384869
+SumOfTiles:2576
+AverageTile:161.0
+MaxCacheSize: 193265
+CacheFlushed: 11
+CacheHits:5065744
+CacheMisses:491359
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1926
+TotalDepth:13439
+AverageDepth:6.977673935617861
+MaxDepth:13
+MinDepth:0
+Nodes:2255620
+TotalBranches:7056193
+AverageBranches:3.128272049370018
+MaxBranches:15
+MinBranches:0
+Prunings:463527
+SumOfPrunings:1190802
+AveragedPrunings:2.5690024529315445
+SumOfTiles:4242
+AverageTile:265.125
+MaxCacheSize: 363730
+CacheFlushed: 11
+CacheHits:8093673
+CacheMisses:768518
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 149, 'mergeableWeight': 914, 'montonicWeight': 769, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=149, mergeableWeight=914, montonicWeight=769, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1306
+TotalDepth:8665
+AverageDepth:6.634762633996937
+MaxDepth:22
+MinDepth:0
+Nodes:1304607
+TotalBranches:4283101
+AverageBranches:3.283058422958025
+MaxBranches:14
+MinBranches:0
+Prunings:242508
+SumOfPrunings:693621
+AveragedPrunings:2.8601984264436635
+SumOfTiles:2866
+AverageTile:179.125
+MaxCacheSize: 176937
+CacheFlushed: 11
+CacheHits:4910428
+CacheMisses:505299
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1326
+TotalDepth:8729
+AverageDepth:6.582956259426847
+MaxDepth:14
+MinDepth:0
+Nodes:1314617
+TotalBranches:4430202
+AverageBranches:3.3699564207674175
+MaxBranches:15
+MinBranches:0
+Prunings:251407
+SumOfPrunings:733107
+AveragedPrunings:2.9160166582473837
+SumOfTiles:2894
+AverageTile:180.875
+MaxCacheSize: 207702
+CacheFlushed: 11
+CacheHits:5130242
+CacheMisses:547046
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1556
+TotalDepth:10615
+AverageDepth:6.821979434447301
+MaxDepth:138
+MinDepth:0
+Nodes:1660781
+TotalBranches:5353372
+AverageBranches:3.2234063371389725
+MaxBranches:14
+MinBranches:0
+Prunings:317443
+SumOfPrunings:873954
+AveragedPrunings:2.753105281893127
+SumOfTiles:3442
+AverageTile:215.125
+MaxCacheSize: 207125
+CacheFlushed: 11
+CacheHits:6127537
+CacheMisses:616617
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2807
+TotalDepth:19378
+AverageDepth:6.903455646597791
+MaxDepth:15
+MinDepth:0
+Nodes:3097185
+TotalBranches:9736217
+AverageBranches:3.143569725411947
+MaxBranches:14
+MinBranches:0
+Prunings:660609
+SumOfPrunings:1677082
+AveragedPrunings:2.5386908140821576
+SumOfTiles:6174
+AverageTile:385.875
+MaxCacheSize: 363624
+CacheFlushed: 12
+CacheHits:11167826
+CacheMisses:1070280
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 3298
+TotalDepth:23132
+AverageDepth:7.013947847180109
+MaxDepth:15
+MinDepth:0
+Nodes:3801586
+TotalBranches:11784980
+AverageBranches:3.1000166772499687
+MaxBranches:14
+MinBranches:0
+Prunings:838515
+SumOfPrunings:2056294
+AveragedPrunings:2.4523043714185198
+SumOfTiles:7220
+AverageTile:451.25
+MaxCacheSize: 503185
+CacheFlushed: 12
+CacheHits:13566021
+CacheMisses:1269596
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 268, 'mergeableWeight': 914, 'montonicWeight': 821, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=268, mergeableWeight=914, montonicWeight=821, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1411
+TotalDepth:9320
+AverageDepth:6.6052445074415305
+MaxDepth:13
+MinDepth:0
+Nodes:1338358
+TotalBranches:4491026
+AverageBranches:3.3556238315906506
+MaxBranches:15
+MinBranches:0
+Prunings:255794
+SumOfPrunings:738569
+AveragedPrunings:2.8873585776054167
+SumOfTiles:3128
+AverageTile:195.5
+MaxCacheSize: 176622
+CacheFlushed: 11
+CacheHits:5227477
+CacheMisses:562224
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1648
+TotalDepth:11012
+AverageDepth:6.682038834951456
+MaxDepth:13
+MinDepth:0
+Nodes:1632846
+TotalBranches:5260779
+AverageBranches:3.221846395802176
+MaxBranches:14
+MinBranches:0
+Prunings:312905
+SumOfPrunings:856318
+AveragedPrunings:2.7366708745465878
+SumOfTiles:3634
+AverageTile:227.125
+MaxCacheSize: 244792
+CacheFlushed: 11
+CacheHits:6013109
+CacheMisses:625170
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1106
+TotalDepth:7365
+AverageDepth:6.659132007233273
+MaxDepth:11
+MinDepth:0
+Nodes:1057893
+TotalBranches:3492830
+AverageBranches:3.3016855201802073
+MaxBranches:14
+MinBranches:0
+Prunings:201555
+SumOfPrunings:570711
+AveragedPrunings:2.831539778224306
+SumOfTiles:2408
+AverageTile:150.5
+MaxCacheSize: 187241
+CacheFlushed: 11
+CacheHits:4041562
+CacheMisses:435914
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2326
+TotalDepth:15780
+AverageDepth:6.784178847807395
+MaxDepth:15
+MinDepth:0
+Nodes:2276845
+TotalBranches:7251872
+AverageBranches:3.1850530009728373
+MaxBranches:14
+MinBranches:0
+Prunings:451912
+SumOfPrunings:1194360
+AveragedPrunings:2.64290392819841
+SumOfTiles:5116
+AverageTile:319.75
+MaxCacheSize: 329475
+CacheFlushed: 12
+CacheHits:8342708
+CacheMisses:856706
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2505
+TotalDepth:17160
+AverageDepth:6.850299401197605
+MaxDepth:12
+MinDepth:0
+Nodes:2490008
+TotalBranches:7780099
+AverageBranches:3.1245277123607633
+MaxBranches:14
+MinBranches:0
+Prunings:517844
+SumOfPrunings:1321358
+AveragedPrunings:2.5516526212527326
+SumOfTiles:5502
+AverageTile:343.875
+MaxCacheSize: 321510
+CacheFlushed: 12
+CacheHits:8902334
+CacheMisses:898590
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 421, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=421, mergeableWeight=516, montonicWeight=821, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:1024
+Searches: 922
+TotalDepth:6051
+AverageDepth:6.56290672451193
+MaxDepth:15
+MinDepth:0
+Nodes:870538
+TotalBranches:2956796
+AverageBranches:3.3965157178664227
+MaxBranches:15
+MinBranches:0
+Prunings:163047
+SumOfPrunings:491507
+AveragedPrunings:3.014511153225757
+SumOfTiles:2026
+AverageTile:126.625
+MaxCacheSize: 150725
+CacheFlushed: 10
+CacheHits:3432746
+CacheMisses:377092
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 3228
+TotalDepth:22161
+AverageDepth:6.865241635687732
+MaxDepth:18
+MinDepth:0
+Nodes:3213511
+TotalBranches:10048660
+AverageBranches:3.1270034550994223
+MaxBranches:14
+MinBranches:0
+Prunings:661856
+SumOfPrunings:1692210
+AveragedPrunings:2.55676461345066
+SumOfTiles:7164
+AverageTile:447.75
+MaxCacheSize: 432015
+CacheFlushed: 12
+CacheHits:11495855
+CacheMisses:1153128
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1240
+TotalDepth:8355
+AverageDepth:6.737903225806452
+MaxDepth:14
+MinDepth:0
+Nodes:1208262
+TotalBranches:3927329
+AverageBranches:3.2503951957439696
+MaxBranches:15
+MinBranches:0
+Prunings:240745
+SumOfPrunings:663024
+AveragedPrunings:2.7540509667905875
+SumOfTiles:2706
+AverageTile:169.125
+MaxCacheSize: 194039
+CacheFlushed: 10
+CacheHits:4525945
+CacheMisses:480995
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2429
+TotalDepth:16609
+AverageDepth:6.8377933305887195
+MaxDepth:13
+MinDepth:0
+Nodes:2403275
+TotalBranches:7548424
+AverageBranches:3.1408906596207258
+MaxBranches:15
+MinBranches:0
+Prunings:512280
+SumOfPrunings:1299777
+AveragedPrunings:2.5372394003279455
+SumOfTiles:5394
+AverageTile:337.125
+MaxCacheSize: 326484
+CacheFlushed: 12
+CacheHits:8649639
+CacheMisses:866600
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1884
+TotalDepth:12881
+AverageDepth:6.837048832271762
+MaxDepth:22
+MinDepth:0
+Nodes:1830019
+TotalBranches:5831189
+AverageBranches:3.1864089935678264
+MaxBranches:14
+MinBranches:0
+Prunings:390167
+SumOfPrunings:1004685
+AveragedPrunings:2.575012750950234
+SumOfTiles:4134
+AverageTile:258.375
+MaxCacheSize: 290241
+CacheFlushed: 10
+CacheHits:6736615
+CacheMisses:693583
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 149, 'mergeableWeight': 74, 'montonicWeight': 820, 'totalValueWeight': 537}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=149, mergeableWeight=74, montonicWeight=820, totalValueWeight=537)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1649
+TotalDepth:11091
+AverageDepth:6.725894481503942
+MaxDepth:13
+MinDepth:0
+Nodes:1593464
+TotalBranches:5181925
+AverageBranches:3.251987493912633
+MaxBranches:14
+MinBranches:0
+Prunings:330256
+SumOfPrunings:890174
+AveragedPrunings:2.6954059880819727
+SumOfTiles:3642
+AverageTile:227.625
+MaxCacheSize: 244167
+CacheFlushed: 11
+CacheHits:5970972
+CacheMisses:636779
+
+Game 1 Stats:
+MaxTile:1024
+Searches: 817
+TotalDepth:5418
+AverageDepth:6.631578947368421
+MaxDepth:14
+MinDepth:0
+Nodes:787335
+TotalBranches:2602070
+AverageBranches:3.3049083299993014
+MaxBranches:14
+MinBranches:0
+Prunings:147941
+SumOfPrunings:424055
+AveragedPrunings:2.866379164666996
+SumOfTiles:1832
+AverageTile:114.5
+MaxCacheSize: 120035
+CacheFlushed: 9
+CacheHits:3000756
+CacheMisses:322125
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2069
+TotalDepth:14231
+AverageDepth:6.878202029966167
+MaxDepth:14
+MinDepth:0
+Nodes:2045729
+TotalBranches:6467303
+AverageBranches:3.16136839239215
+MaxBranches:14
+MinBranches:0
+Prunings:425955
+SumOfPrunings:1115972
+AveragedPrunings:2.619929335258419
+SumOfTiles:4586
+AverageTile:286.625
+MaxCacheSize: 341981
+CacheFlushed: 11
+CacheHits:7395020
+CacheMisses:763060
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1406
+TotalDepth:9560
+AverageDepth:6.799431009957326
+MaxDepth:12
+MinDepth:0
+Nodes:1374020
+TotalBranches:4408789
+AverageBranches:3.208678912970699
+MaxBranches:14
+MinBranches:0
+Prunings:291321
+SumOfPrunings:764448
+AveragedPrunings:2.624074474548694
+SumOfTiles:3088
+AverageTile:193.0
+MaxCacheSize: 181141
+CacheFlushed: 11
+CacheHits:5071793
+CacheMisses:528763
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2769
+TotalDepth:19253
+AverageDepth:6.953051643192488
+MaxDepth:14
+MinDepth:0
+Nodes:2672739
+TotalBranches:8233384
+AverageBranches:3.0805043066307634
+MaxBranches:15
+MinBranches:0
+Prunings:598390
+SumOfPrunings:1460291
+AveragedPrunings:2.4403666505122077
+SumOfTiles:6116
+AverageTile:382.25
+MaxCacheSize: 302404
+CacheFlushed: 12
+CacheHits:9460599
+CacheMisses:955681
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 550, 'mergeableWeight': 900, 'montonicWeight': 282, 'totalValueWeight': 346}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=550, mergeableWeight=900, montonicWeight=282, totalValueWeight=346)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2343
+TotalDepth:15957
+AverageDepth:6.810499359795134
+MaxDepth:13
+MinDepth:0
+Nodes:2309894
+TotalBranches:7311562
+AverageBranches:3.165323603593931
+MaxBranches:14
+MinBranches:0
+Prunings:478256
+SumOfPrunings:1236387
+AveragedPrunings:2.5851991402094274
+SumOfTiles:5152
+AverageTile:322.0
+MaxCacheSize: 325659
+CacheFlushed: 12
+CacheHits:8384780
+CacheMisses:853301
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2408
+TotalDepth:16293
+AverageDepth:6.766196013289036
+MaxDepth:11
+MinDepth:0
+Nodes:2332920
+TotalBranches:7380016
+AverageBranches:3.1634243780326803
+MaxBranches:14
+MinBranches:0
+Prunings:460710
+SumOfPrunings:1217003
+AveragedPrunings:2.641581472075709
+SumOfTiles:5326
+AverageTile:332.875
+MaxCacheSize: 314549
+CacheFlushed: 12
+CacheHits:8446690
+CacheMisses:861144
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1907
+TotalDepth:13003
+AverageDepth:6.818563188253802
+MaxDepth:24
+MinDepth:0
+Nodes:1853018
+TotalBranches:5853302
+AverageBranches:3.1587939242899963
+MaxBranches:15
+MinBranches:0
+Prunings:370536
+SumOfPrunings:968072
+AveragedPrunings:2.612626033637757
+SumOfTiles:4148
+AverageTile:259.25
+MaxCacheSize: 313267
+CacheFlushed: 11
+CacheHits:6722300
+CacheMisses:685160
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1538
+TotalDepth:10322
+AverageDepth:6.711313394018205
+MaxDepth:28
+MinDepth:0
+Nodes:1483715
+TotalBranches:4812077
+AverageBranches:3.2432623515971732
+MaxBranches:15
+MinBranches:0
+Prunings:296823
+SumOfPrunings:796914
+AveragedPrunings:2.6848121607826885
+SumOfTiles:3360
+AverageTile:210.0
+MaxCacheSize: 182666
+CacheFlushed: 11
+CacheHits:5551811
+CacheMisses:575234
+
+Game 4 Stats:
+MaxTile:1024
+Searches: 1126
+TotalDepth:7492
+AverageDepth:6.653641207815276
+MaxDepth:13
+MinDepth:0
+Nodes:1070030
+TotalBranches:3509846
+AverageBranches:3.2801379400577555
+MaxBranches:15
+MinBranches:0
+Prunings:218380
+SumOfPrunings:592144
+AveragedPrunings:2.71153035992307
+SumOfTiles:2474
+AverageTile:154.625
+MaxCacheSize: 223642
+CacheFlushed: 10
+CacheHits:4065830
+CacheMisses:430628
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 531, 'mergeableWeight': 74, 'montonicWeight': 518, 'totalValueWeight': 537}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=531, mergeableWeight=74, montonicWeight=518, totalValueWeight=537)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2324
+TotalDepth:16073
+AverageDepth:6.916092943201377
+MaxDepth:16
+MinDepth:0
+Nodes:2419058
+TotalBranches:7518772
+AverageBranches:3.1081404414445624
+MaxBranches:15
+MinBranches:0
+Prunings:505867
+SumOfPrunings:1263501
+AveragedPrunings:2.497694057924316
+SumOfTiles:5190
+AverageTile:324.375
+MaxCacheSize: 349984
+CacheFlushed: 12
+CacheHits:8639463
+CacheMisses:845437
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 3290
+TotalDepth:23176
+AverageDepth:7.044376899696049
+MaxDepth:14
+MinDepth:0
+Nodes:3599315
+TotalBranches:11042663
+AverageBranches:3.067990159238633
+MaxBranches:14
+MinBranches:0
+Prunings:766905
+SumOfPrunings:1873563
+AveragedPrunings:2.443018366029691
+SumOfTiles:7242
+AverageTile:452.625
+MaxCacheSize: 501853
+CacheFlushed: 11
+CacheHits:12704227
+CacheMisses:1214006
+
+Game 2 Stats:
+MaxTile:1024
+Searches: 675
+TotalDepth:4310
+AverageDepth:6.385185185185185
+MaxDepth:15
+MinDepth:0
+Nodes:700583
+TotalBranches:2468597
+AverageBranches:3.5236324603937006
+MaxBranches:14
+MinBranches:0
+Prunings:118516
+SumOfPrunings:390443
+AveragedPrunings:3.294432819197408
+SumOfTiles:1464
+AverageTile:91.5
+MaxCacheSize: 107295
+CacheFlushed: 9
+CacheHits:2852937
+CacheMisses:307560
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1107
+TotalDepth:7594
+AverageDepth:6.859981933152665
+MaxDepth:13
+MinDepth:0
+Nodes:1206133
+TotalBranches:3891250
+AverageBranches:3.2262196623423787
+MaxBranches:14
+MinBranches:0
+Prunings:245290
+SumOfPrunings:660365
+AveragedPrunings:2.692180684088222
+SumOfTiles:2482
+AverageTile:155.125
+MaxCacheSize: 165838
+CacheFlushed: 11
+CacheHits:4479559
+CacheMisses:453611
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1172
+TotalDepth:8017
+AverageDepth:6.840443686006826
+MaxDepth:15
+MinDepth:0
+Nodes:1291499
+TotalBranches:4143805
+AverageBranches:3.2085235838355275
+MaxBranches:15
+MinBranches:0
+Prunings:257605
+SumOfPrunings:691716
+AveragedPrunings:2.6851808000621107
+SumOfTiles:2582
+AverageTile:161.375
+MaxCacheSize: 190913
+CacheFlushed: 11
+CacheHits:4761511
+CacheMisses:474978
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 531, 'mergeableWeight': 419, 'montonicWeight': 421, 'totalValueWeight': 537}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=531, mergeableWeight=419, montonicWeight=421, totalValueWeight=537)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1695
+TotalDepth:11145
+AverageDepth:6.575221238938053
+MaxDepth:14
+MinDepth:0
+Nodes:1616079
+TotalBranches:5312536
+AverageBranches:3.2872996926511635
+MaxBranches:14
+MinBranches:0
+Prunings:302582
+SumOfPrunings:855565
+AveragedPrunings:2.8275475738807994
+SumOfTiles:3734
+AverageTile:233.375
+MaxCacheSize: 265373
+CacheFlushed: 11
+CacheHits:6107950
+CacheMisses:641549
+
+Game 1 Stats:
+MaxTile:1024
+Searches: 935
+TotalDepth:6209
+AverageDepth:6.6406417112299465
+MaxDepth:15
+MinDepth:0
+Nodes:869958
+TotalBranches:2872349
+AverageBranches:3.3017099676076316
+MaxBranches:14
+MinBranches:0
+Prunings:165151
+SumOfPrunings:465557
+AveragedPrunings:2.8189777839673997
+SumOfTiles:2084
+AverageTile:130.25
+MaxCacheSize: 164386
+CacheFlushed: 9
+CacheHits:3323826
+CacheMisses:359437
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2268
+TotalDepth:15509
+AverageDepth:6.838183421516755
+MaxDepth:14
+MinDepth:0
+Nodes:2162966
+TotalBranches:6839441
+AverageBranches:3.162065885455435
+MaxBranches:15
+MinBranches:0
+Prunings:445990
+SumOfPrunings:1153346
+AveragedPrunings:2.5860355613354558
+SumOfTiles:5000
+AverageTile:312.5
+MaxCacheSize: 300732
+CacheFlushed: 12
+CacheHits:7871195
+CacheMisses:812664
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1294
+TotalDepth:8594
+AverageDepth:6.641421947449768
+MaxDepth:16
+MinDepth:0
+Nodes:1214723
+TotalBranches:3984666
+AverageBranches:3.280308350134146
+MaxBranches:14
+MinBranches:0
+Prunings:235114
+SumOfPrunings:664639
+AveragedPrunings:2.8268797264305827
+SumOfTiles:2802
+AverageTile:175.125
+MaxCacheSize: 163614
+CacheFlushed: 10
+CacheHits:4584360
+CacheMisses:487873
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 3222
+TotalDepth:22450
+AverageDepth:6.96772191185599
+MaxDepth:19
+MinDepth:0
+Nodes:3162772
+TotalBranches:9767847
+AverageBranches:3.0883816474915045
+MaxBranches:14
+MinBranches:0
+Prunings:648556
+SumOfPrunings:1624260
+AveragedPrunings:2.5044252154016
+SumOfTiles:7126
+AverageTile:445.375
+MaxCacheSize: 431467
+CacheFlushed: 12
+CacheHits:11254950
+CacheMisses:1142700
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 655, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=655, mergeableWeight=220, montonicWeight=821, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2258
+TotalDepth:15586
+AverageDepth:6.902568644818423
+MaxDepth:15
+MinDepth:0
+Nodes:2244502
+TotalBranches:7016344
+AverageBranches:3.126013699252663
+MaxBranches:15
+MinBranches:0
+Prunings:480929
+SumOfPrunings:1203442
+AveragedPrunings:2.5023277864300137
+SumOfTiles:4960
+AverageTile:310.0
+MaxCacheSize: 307507
+CacheFlushed: 12
+CacheHits:8093332
+CacheMisses:818332
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1589
+TotalDepth:10487
+AverageDepth:6.599748269351793
+MaxDepth:15
+MinDepth:0
+Nodes:1545803
+TotalBranches:5117227
+AverageBranches:3.310400484408427
+MaxBranches:14
+MinBranches:0
+Prunings:289841
+SumOfPrunings:835298
+AveragedPrunings:2.881918017119731
+SumOfTiles:3490
+AverageTile:218.125
+MaxCacheSize: 229925
+CacheFlushed: 10
+CacheHits:5886306
+CacheMisses:624954
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1211
+TotalDepth:8132
+AverageDepth:6.715111478117258
+MaxDepth:16
+MinDepth:0
+Nodes:1180884
+TotalBranches:3838474
+AverageBranches:3.250508940759634
+MaxBranches:14
+MinBranches:0
+Prunings:237654
+SumOfPrunings:639770
+AveragedPrunings:2.692022856758144
+SumOfTiles:2648
+AverageTile:165.5
+MaxCacheSize: 194600
+CacheFlushed: 10
+CacheHits:4435836
+CacheMisses:463724
+
+Game 3 Stats:
+MaxTile:1024
+Searches: 874
+TotalDepth:5965
+AverageDepth:6.824942791762013
+MaxDepth:15
+MinDepth:0
+Nodes:848447
+TotalBranches:2738517
+AverageBranches:3.2276818705234387
+MaxBranches:15
+MinBranches:0
+Prunings:163576
+SumOfPrunings:444930
+AveragedPrunings:2.7200200518413458
+SumOfTiles:1954
+AverageTile:122.125
+MaxCacheSize: 120906
+CacheFlushed: 10
+CacheHits:3165786
+CacheMisses:337562
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 1995
+TotalDepth:13980
+AverageDepth:7.007518796992481
+MaxDepth:14
+MinDepth:0
+Nodes:2038997
+TotalBranches:6278475
+AverageBranches:3.079197762429273
+MaxBranches:14
+MinBranches:0
+Prunings:432365
+SumOfPrunings:1060025
+AveragedPrunings:2.4516901229285444
+SumOfTiles:4390
+AverageTile:274.375
+MaxCacheSize: 266696
+CacheFlushed: 11
+CacheHits:7247680
+CacheMisses:715943
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 149, 'mergeableWeight': 914, 'montonicWeight': 769, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=149, mergeableWeight=914, montonicWeight=769, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1855
+TotalDepth:12418
+AverageDepth:6.694339622641509
+MaxDepth:13
+MinDepth:0
+Nodes:1836250
+TotalBranches:5929266
+AverageBranches:3.2290080326752895
+MaxBranches:15
+MinBranches:0
+Prunings:369502
+SumOfPrunings:1005353
+AveragedPrunings:2.7208323635596017
+SumOfTiles:4086
+AverageTile:255.375
+MaxCacheSize: 312379
+CacheFlushed: 11
+CacheHits:6786135
+CacheMisses:697174
+
+Game 1 Stats:
+MaxTile:1024
+Searches: 988
+TotalDepth:6663
+AverageDepth:6.743927125506073
+MaxDepth:135
+MinDepth:0
+Nodes:947681
+TotalBranches:3148782
+AverageBranches:3.3226180539654164
+MaxBranches:15
+MinBranches:0
+Prunings:189898
+SumOfPrunings:530557
+AveragedPrunings:2.7939051490800324
+SumOfTiles:2164
+AverageTile:135.25
+MaxCacheSize: 169994
+CacheFlushed: 10
+CacheHits:3642188
+CacheMisses:386316
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 3550
+TotalDepth:24522
+AverageDepth:6.907605633802817
+MaxDepth:14
+MinDepth:0
+Nodes:3577161
+TotalBranches:11023144
+AverageBranches:3.0815342110684982
+MaxBranches:15
+MinBranches:0
+Prunings:734412
+SumOfPrunings:1845559
+AveragedPrunings:2.512975005855024
+SumOfTiles:7864
+AverageTile:491.5
+MaxCacheSize: 568372
+CacheFlushed: 12
+CacheHits:12582127
+CacheMisses:1249283
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2270
+TotalDepth:15337
+AverageDepth:6.756387665198238
+MaxDepth:12
+MinDepth:0
+Nodes:2255762
+TotalBranches:7208809
+AverageBranches:3.1957311985927594
+MaxBranches:15
+MinBranches:0
+Prunings:459516
+SumOfPrunings:1222159
+AveragedPrunings:2.6596658222999854
+SumOfTiles:4976
+AverageTile:311.0
+MaxCacheSize: 330306
+CacheFlushed: 12
+CacheHits:8242196
+CacheMisses:847237
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1886
+TotalDepth:12850
+AverageDepth:6.813361611876989
+MaxDepth:11
+MinDepth:0
+Nodes:1856047
+TotalBranches:5886626
+AverageBranches:3.171593176250386
+MaxBranches:14
+MinBranches:0
+Prunings:378738
+SumOfPrunings:981244
+AveragedPrunings:2.5908253198781215
+SumOfTiles:4200
+AverageTile:262.5
+MaxCacheSize: 286299
+CacheFlushed: 11
+CacheHits:6785225
+CacheMisses:696490
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=220, montonicWeight=821, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:1024
+Searches: 1012
+TotalDepth:6655
+AverageDepth:6.576086956521739
+MaxDepth:9
+MinDepth:0
+Nodes:1014454
+TotalBranches:3362579
+AverageBranches:3.3146687774901573
+MaxBranches:14
+MinBranches:0
+Prunings:186701
+SumOfPrunings:537644
+AveragedPrunings:2.879706054065056
+SumOfTiles:2230
+AverageTile:139.375
+MaxCacheSize: 185637
+CacheFlushed: 10
+CacheHits:3872977
+CacheMisses:401293
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2177
+TotalDepth:14737
+AverageDepth:6.769407441433165
+MaxDepth:11
+MinDepth:0
+Nodes:2134444
+TotalBranches:6799363
+AverageBranches:3.1855429329605274
+MaxBranches:14
+MinBranches:0
+Prunings:419561
+SumOfPrunings:1114355
+AveragedPrunings:2.656002345308549
+SumOfTiles:4750
+AverageTile:296.875
+MaxCacheSize: 330788
+CacheFlushed: 12
+CacheHits:7811891
+CacheMisses:799479
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2234
+TotalDepth:15515
+AverageDepth:6.944941808415399
+MaxDepth:14
+MinDepth:0
+Nodes:2224919
+TotalBranches:6877083
+AverageBranches:3.0909363441994966
+MaxBranches:15
+MinBranches:0
+Prunings:461704
+SumOfPrunings:1159494
+AveragedPrunings:2.5113362673920956
+SumOfTiles:4920
+AverageTile:307.5
+MaxCacheSize: 325965
+CacheFlushed: 12
+CacheHits:7886503
+CacheMisses:798604
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1447
+TotalDepth:9612
+AverageDepth:6.6427090532135455
+MaxDepth:13
+MinDepth:0
+Nodes:1389067
+TotalBranches:4559947
+AverageBranches:3.2827408613119453
+MaxBranches:15
+MinBranches:0
+Prunings:275351
+SumOfPrunings:764418
+AveragedPrunings:2.7761584305123277
+SumOfTiles:3134
+AverageTile:195.875
+MaxCacheSize: 182752
+CacheFlushed: 11
+CacheHits:5241353
+CacheMisses:552429
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1319
+TotalDepth:8931
+AverageDepth:6.7710386656558
+MaxDepth:15
+MinDepth:0
+Nodes:1268934
+TotalBranches:4119100
+AverageBranches:3.246110514810069
+MaxBranches:14
+MinBranches:0
+Prunings:250266
+SumOfPrunings:685848
+AveragedPrunings:2.740476133394069
+SumOfTiles:2916
+AverageTile:182.25
+MaxCacheSize: 222184
+CacheFlushed: 11
+CacheHits:4767855
+CacheMisses:506746
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 189, 'montonicWeight': 769, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=189, montonicWeight=769, totalValueWeight=911)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:1024
+Searches: 958
+TotalDepth:6389
+AverageDepth:6.66910229645094
+MaxDepth:17
+MinDepth:0
+Nodes:921693
+TotalBranches:3051380
+AverageBranches:3.3106251213798954
+MaxBranches:14
+MinBranches:0
+Prunings:186616
+SumOfPrunings:511556
+AveragedPrunings:2.7412226175676255
+SumOfTiles:2086
+AverageTile:130.375
+MaxCacheSize: 160678
+CacheFlushed: 10
+CacheHits:3546445
+CacheMisses:373923
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2888
+TotalDepth:19816
+AverageDepth:6.861495844875346
+MaxDepth:16
+MinDepth:0
+Nodes:2863150
+TotalBranches:8954354
+AverageBranches:3.127448439655624
+MaxBranches:14
+MinBranches:0
+Prunings:598002
+SumOfPrunings:1527833
+AveragedPrunings:2.554896137471112
+SumOfTiles:6364
+AverageTile:397.75
+MaxCacheSize: 339529
+CacheFlushed: 12
+CacheHits:10248340
+CacheMisses:1039348
+
+Game 2 Stats:
+MaxTile:2048
+Searches: 1788
+TotalDepth:11990
+AverageDepth:6.705816554809844
+MaxDepth:14
+MinDepth:0
+Nodes:1742408
+TotalBranches:5649417
+AverageBranches:3.242304328262956
+MaxBranches:15
+MinBranches:0
+Prunings:353018
+SumOfPrunings:953115
+AveragedPrunings:2.6999048207173573
+SumOfTiles:3996
+AverageTile:249.75
+MaxCacheSize: 295801
+CacheFlushed: 11
+CacheHits:6500307
+CacheMisses:679461
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1860
+TotalDepth:12872
+AverageDepth:6.920430107526882
+MaxDepth:20
+MinDepth:0
+Nodes:1865674
+TotalBranches:5818700
+AverageBranches:3.1188192578124583
+MaxBranches:14
+MinBranches:0
+Prunings:389433
+SumOfPrunings:982886
+AveragedPrunings:2.523889860386767
+SumOfTiles:4120
+AverageTile:257.5
+MaxCacheSize: 280012
+CacheFlushed: 11
+CacheHits:6670800
+CacheMisses:672638
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2104
+TotalDepth:14435
+AverageDepth:6.86074144486692
+MaxDepth:16
+MinDepth:0
+Nodes:2095161
+TotalBranches:6559685
+AverageBranches:3.1308739519301856
+MaxBranches:14
+MinBranches:0
+Prunings:442852
+SumOfPrunings:1118670
+AveragedPrunings:2.5260583671294246
+SumOfTiles:4592
+AverageTile:287.0
+MaxCacheSize: 301859
+CacheFlushed: 12
+CacheHits:7533527
+CacheMisses:749326
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 268, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=268, mergeableWeight=220, montonicWeight=821, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2423
+TotalDepth:16753
+AverageDepth:6.914156004952538
+MaxDepth:20
+MinDepth:0
+Nodes:2405160
+TotalBranches:7494646
+AverageBranches:3.116069616990138
+MaxBranches:14
+MinBranches:0
+Prunings:497911
+SumOfPrunings:1250849
+AveragedPrunings:2.5121939463076735
+SumOfTiles:5324
+AverageTile:332.75
+MaxCacheSize: 319955
+CacheFlushed: 12
+CacheHits:8624842
+CacheMisses:872063
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1127
+TotalDepth:7524
+AverageDepth:6.676131322094055
+MaxDepth:11
+MinDepth:0
+Nodes:1092640
+TotalBranches:3578714
+AverageBranches:3.2752910382193585
+MaxBranches:14
+MinBranches:0
+Prunings:216857
+SumOfPrunings:604766
+AveragedPrunings:2.788777858219933
+SumOfTiles:2488
+AverageTile:155.5
+MaxCacheSize: 171332
+CacheFlushed: 11
+CacheHits:4105586
+CacheMisses:432763
+
+Game 2 Stats:
+MaxTile:1024
+Searches: 953
+TotalDepth:6373
+AverageDepth:6.687303252885624
+MaxDepth:15
+MinDepth:0
+Nodes:912673
+TotalBranches:2997958
+AverageBranches:3.284810660554218
+MaxBranches:14
+MinBranches:0
+Prunings:179801
+SumOfPrunings:503220
+AveragedPrunings:2.798760852275571
+SumOfTiles:2104
+AverageTile:131.5
+MaxCacheSize: 162955
+CacheFlushed: 10
+CacheHits:3469396
+CacheMisses:370688
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1864
+TotalDepth:12560
+AverageDepth:6.738197424892704
+MaxDepth:16
+MinDepth:0
+Nodes:1807136
+TotalBranches:5840605
+AverageBranches:3.231967599560852
+MaxBranches:14
+MinBranches:0
+Prunings:356417
+SumOfPrunings:965758
+AveragedPrunings:2.709629450896001
+SumOfTiles:4124
+AverageTile:257.75
+MaxCacheSize: 317471
+CacheFlushed: 11
+CacheHits:6749401
+CacheMisses:702443
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2812
+TotalDepth:19232
+AverageDepth:6.839260312944523
+MaxDepth:22
+MinDepth:0
+Nodes:2793039
+TotalBranches:8826031
+AverageBranches:3.160009938994765
+MaxBranches:15
+MinBranches:0
+Prunings:557331
+SumOfPrunings:1462295
+AveragedPrunings:2.6237460324295614
+SumOfTiles:6188
+AverageTile:386.75
+MaxCacheSize: 324887
+CacheFlushed: 12
+CacheHits:10126991
+CacheMisses:1033207
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 889, 'montonicWeight': 821, 'totalValueWeight': 919}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=889, montonicWeight=821, totalValueWeight=919)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 256
+AvgTile: 2611.2
+StdDevTile: 2035.1597480296234
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2113
+TotalDepth:14752
+AverageDepth:6.981542830099385
+MaxDepth:13
+MinDepth:0
+Nodes:2110844
+TotalBranches:6462441
+AverageBranches:3.0615436289939
+MaxBranches:14
+MinBranches:0
+Prunings:447703
+SumOfPrunings:1085504
+AveragedPrunings:2.4246073848064453
+SumOfTiles:4592
+AverageTile:287.0
+MaxCacheSize: 315557
+CacheFlushed: 12
+CacheHits:7439398
+CacheMisses:729350
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2433
+TotalDepth:16567
+AverageDepth:6.809288943690917
+MaxDepth:14
+MinDepth:0
+Nodes:2455664
+TotalBranches:7779255
+AverageBranches:3.1678824953250935
+MaxBranches:15
+MinBranches:0
+Prunings:509981
+SumOfPrunings:1318067
+AveragedPrunings:2.5845413848751226
+SumOfTiles:5318
+AverageTile:332.375
+MaxCacheSize: 313105
+CacheFlushed: 12
+CacheHits:8924534
+CacheMisses:899852
+
+Game 2 Stats:
+MaxTile:256
+Searches: 301
+TotalDepth:2009
+AverageDepth:6.674418604651163
+MaxDepth:13
+MinDepth:0
+Nodes:305718
+TotalBranches:1039336
+AverageBranches:3.3996558920312183
+MaxBranches:14
+MinBranches:0
+Prunings:62583
+SumOfPrunings:180031
+AveragedPrunings:2.8766757745713694
+SumOfTiles:670
+AverageTile:41.875
+MaxCacheSize: 61500
+CacheFlushed: 8
+CacheHits:1215644
+CacheMisses:133327
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2793
+TotalDepth:19517
+AverageDepth:6.9878267096312205
+MaxDepth:67
+MinDepth:0
+Nodes:3059844
+TotalBranches:9512393
+AverageBranches:3.1087836504083213
+MaxBranches:14
+MinBranches:0
+Prunings:637407
+SumOfPrunings:1614928
+AveragedPrunings:2.5335899982271926
+SumOfTiles:6184
+AverageTile:386.5
+MaxCacheSize: 329669
+CacheFlushed: 12
+CacheHits:10918536
+CacheMisses:1060618
+
+Game 4 Stats:
+MaxTile:512
+Searches: 454
+TotalDepth:2911
+AverageDepth:6.4118942731277535
+MaxDepth:9
+MinDepth:0
+Nodes:461233
+TotalBranches:1620077
+AverageBranches:3.512491517302535
+MaxBranches:15
+MinBranches:0
+Prunings:81161
+SumOfPrunings:258845
+AveragedPrunings:3.1892781015512375
+SumOfTiles:984
+AverageTile:61.5
+MaxCacheSize: 78976
+CacheFlushed: 9
+CacheHits:1885817
+CacheMisses:204742
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 531, 'mergeableWeight': 74, 'montonicWeight': 997, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=531, mergeableWeight=74, montonicWeight=997, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 256
+AvgTile: 2611.2
+StdDevTile: 2035.1597480296234
+MedianTile: 4096
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 1988
+TotalDepth:13517
+AverageDepth:6.799295774647887
+MaxDepth:14
+MinDepth:0
+Nodes:1964679
+TotalBranches:6296853
+AverageBranches:3.2050289131201586
+MaxBranches:15
+MinBranches:0
+Prunings:419366
+SumOfPrunings:1098028
+AveragedPrunings:2.618304774349852
+SumOfTiles:4394
+AverageTile:274.625
+MaxCacheSize: 336915
+CacheFlushed: 12
+CacheHits:7270050
+CacheMisses:748793
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2378
+TotalDepth:16410
+AverageDepth:6.900756938603869
+MaxDepth:12
+MinDepth:0
+Nodes:2503714
+TotalBranches:7850015
+AverageBranches:3.135348126822792
+MaxBranches:14
+MinBranches:0
+Prunings:544473
+SumOfPrunings:1371880
+AveragedPrunings:2.519647438899633
+SumOfTiles:5294
+AverageTile:330.875
+MaxCacheSize: 304449
+CacheFlushed: 12
+CacheHits:9022936
+CacheMisses:895278
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 3615
+TotalDepth:25729
+AverageDepth:7.11728907330567
+MaxDepth:13
+MinDepth:0
+Nodes:3990822
+TotalBranches:12123893
+AverageBranches:3.03794381207681
+MaxBranches:15
+MinBranches:0
+Prunings:874005
+SumOfPrunings:2100474
+AveragedPrunings:2.4032745808090343
+SumOfTiles:7958
+AverageTile:497.375
+MaxCacheSize: 565788
+CacheFlushed: 12
+CacheHits:13970963
+CacheMisses:1339411
+
+Game 3 Stats:
+MaxTile:256
+Searches: 405
+TotalDepth:2900
+AverageDepth:7.160493827160494
+MaxDepth:14
+MinDepth:0
+Nodes:449539
+TotalBranches:1436478
+AverageBranches:3.1954468911484875
+MaxBranches:15
+MinBranches:0
+Prunings:102939
+SumOfPrunings:255854
+AveragedPrunings:2.485491407532616
+SumOfTiles:898
+AverageTile:56.125
+MaxCacheSize: 74117
+CacheFlushed: 8
+CacheHits:1700908
+CacheMisses:171512
+
+Game 4 Stats:
+MaxTile:512
+Searches: 360
+TotalDepth:2385
+AverageDepth:6.625
+MaxDepth:11
+MinDepth:0
+Nodes:394514
+TotalBranches:1362434
+AverageBranches:3.4534490537724896
+MaxBranches:14
+MinBranches:0
+Prunings:76255
+SumOfPrunings:233461
+AveragedPrunings:3.0615828470264246
+SumOfTiles:788
+AverageTile:49.25
+MaxCacheSize: 47532
+CacheFlushed: 9
+CacheHits:1589300
+CacheMisses:166335
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 898, 'mergeableWeight': 914, 'montonicWeight': 421, 'totalValueWeight': 713}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=898, mergeableWeight=914, montonicWeight=421, totalValueWeight=713)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 4096
+Game 0 Stats:
+MaxTile:4096
+Searches: 2729
+TotalDepth:18702
+AverageDepth:6.853059728838402
+MaxDepth:28
+MinDepth:0
+Nodes:2731552
+TotalBranches:8616625
+AverageBranches:3.154479577910287
+MaxBranches:14
+MinBranches:0
+Prunings:559192
+SumOfPrunings:1456220
+AveragedPrunings:2.6041502739667233
+SumOfTiles:6048
+AverageTile:378.0
+MaxCacheSize: 307473
+CacheFlushed: 11
+CacheHits:9887108
+CacheMisses:995313
+
+Game 1 Stats:
+MaxTile:2048
+Searches: 1129
+TotalDepth:7593
+AverageDepth:6.725420726306466
+MaxDepth:13
+MinDepth:0
+Nodes:1183569
+TotalBranches:3879271
+AverageBranches:3.27760443201875
+MaxBranches:14
+MinBranches:0
+Prunings:224210
+SumOfPrunings:634267
+AveragedPrunings:2.828897016190179
+SumOfTiles:2460
+AverageTile:153.75
+MaxCacheSize: 184774
+CacheFlushed: 11
+CacheHits:4465847
+CacheMisses:462014
+
+Game 2 Stats:
+MaxTile:512
+Searches: 492
+TotalDepth:3354
+AverageDepth:6.817073170731708
+MaxDepth:13
+MinDepth:0
+Nodes:504287
+TotalBranches:1658057
+AverageBranches:3.28792334523793
+MaxBranches:15
+MinBranches:0
+Prunings:98309
+SumOfPrunings:275827
+AveragedPrunings:2.8057146344688686
+SumOfTiles:1072
+AverageTile:67.0
+MaxCacheSize: 76563
+CacheFlushed: 9
+CacheHits:1930083
+CacheMisses:207492
+
+Game 3 Stats:
+MaxTile:4096
+Searches: 2466
+TotalDepth:16994
+AverageDepth:6.891321978913219
+MaxDepth:32
+MinDepth:0
+Nodes:2657337
+TotalBranches:8401777
+AverageBranches:3.161728075889509
+MaxBranches:14
+MinBranches:0
+Prunings:544166
+SumOfPrunings:1412033
+AveragedPrunings:2.594857084051558
+SumOfTiles:5412
+AverageTile:338.25
+MaxCacheSize: 307986
+CacheFlushed: 12
+CacheHits:9658727
+CacheMisses:947080
+
+Game 4 Stats:
+MaxTile:2048
+Searches: 1957
+TotalDepth:13487
+AverageDepth:6.8916709248850285
+MaxDepth:12
+MinDepth:0
+Nodes:2201983
+TotalBranches:6948936
+AverageBranches:3.1557627829097683
+MaxBranches:15
+MinBranches:0
+Prunings:457441
+SumOfPrunings:1179569
+AveragedPrunings:2.5786254402207063
+SumOfTiles:4366
+AverageTile:272.875
+MaxCacheSize: 356220
+CacheFlushed: 11
+CacheHits:7974418
+CacheMisses:768727
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 82, 'mergeableWeight': 74, 'montonicWeight': 821, 'totalValueWeight': 919}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=82, mergeableWeight=74, montonicWeight=821, totalValueWeight=919)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1117
+TotalDepth:7444
+AverageDepth:6.664279319606088
+MaxDepth:13
+MinDepth:0
+Nodes:1074869
+TotalBranches:3530304
+AverageBranches:3.284403959924419
+MaxBranches:14
+MinBranches:0
+Prunings:217499
+SumOfPrunings:597223
+AveragedPrunings:2.7458654982321757
+SumOfTiles:2472
+AverageTile:154.5
+MaxCacheSize: 155810
+CacheFlushed: 11
+CacheHits:4079960
+CacheMisses:427481
+
+Game 1 Stats:
+MaxTile:512
+Searches: 542
+TotalDepth:3524
+AverageDepth:6.501845018450185
+MaxDepth:13
+MinDepth:0
+Nodes:508265
+TotalBranches:1741919
+AverageBranches:3.427186605412531
+MaxBranches:14
+MinBranches:0
+Prunings:98226
+SumOfPrunings:291205
+AveragedPrunings:2.964642762608678
+SumOfTiles:1214
+AverageTile:75.875
+MaxCacheSize: 108512
+CacheFlushed: 9
+CacheHits:2023538
+CacheMisses:226176
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2332
+TotalDepth:15368
+AverageDepth:6.590051457975986
+MaxDepth:14
+MinDepth:0
+Nodes:2181168
+TotalBranches:7206246
+AverageBranches:3.3038472964943555
+MaxBranches:15
+MinBranches:0
+Prunings:416648
+SumOfPrunings:1182411
+AveragedPrunings:2.837913538526526
+SumOfTiles:5100
+AverageTile:318.75
+MaxCacheSize: 329150
+CacheFlushed: 12
+CacheHits:8334224
+CacheMisses:891165
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1617
+TotalDepth:10868
+AverageDepth:6.72108843537415
+MaxDepth:19
+MinDepth:0
+Nodes:1526724
+TotalBranches:4930063
+AverageBranches:3.229177637870368
+MaxBranches:15
+MinBranches:0
+Prunings:302986
+SumOfPrunings:812680
+AveragedPrunings:2.6822361429240953
+SumOfTiles:3582
+AverageTile:223.875
+MaxCacheSize: 219662
+CacheFlushed: 11
+CacheHits:5693619
+CacheMisses:601908
+
+Game 4 Stats:
+MaxTile:4096
+Searches: 2694
+TotalDepth:18148
+AverageDepth:6.73645137342242
+MaxDepth:13
+MinDepth:0
+Nodes:2705067
+TotalBranches:8668110
+AverageBranches:3.2043975250890275
+MaxBranches:15
+MinBranches:0
+Prunings:516343
+SumOfPrunings:1404674
+AveragedPrunings:2.720428087530963
+SumOfTiles:5938
+AverageTile:371.125
+MaxCacheSize: 341260
+CacheFlushed: 12
+CacheHits:9938466
+CacheMisses:1009056
+
+----------------------------
+
+----------------------------
+
+Weights: {'emptyWeight': 421, 'mergeableWeight': 914, 'montonicWeight': 629, 'totalValueWeight': 919}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=421, mergeableWeight=914, montonicWeight=629, totalValueWeight=919)
+TimePerTurn: 0.05
+Games: 5
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 2048
+Game 0 Stats:
+MaxTile:2048
+Searches: 1850
+TotalDepth:12700
+AverageDepth:6.864864864864865
+MaxDepth:15
+MinDepth:0
+Nodes:1893777
+TotalBranches:5968962
+AverageBranches:3.151882190986584
+MaxBranches:15
+MinBranches:0
+Prunings:372979
+SumOfPrunings:981405
+AveragedPrunings:2.6312607412213556
+SumOfTiles:4062
+AverageTile:253.875
+MaxCacheSize: 268797
+CacheFlushed: 11
+CacheHits:6828252
+CacheMisses:688167
+
+Game 1 Stats:
+MaxTile:4096
+Searches: 2477
+TotalDepth:16787
+AverageDepth:6.777149777957206
+MaxDepth:20
+MinDepth:0
+Nodes:2448804
+TotalBranches:7794763
+AverageBranches:3.18308978587098
+MaxBranches:14
+MinBranches:0
+Prunings:494435
+SumOfPrunings:1300270
+AveragedPrunings:2.6298097828834934
+SumOfTiles:5452
+AverageTile:340.75
+MaxCacheSize: 343442
+CacheFlushed: 12
+CacheHits:8936390
+CacheMisses:907042
+
+Game 2 Stats:
+MaxTile:4096
+Searches: 2416
+TotalDepth:16547
+AverageDepth:6.8489238410596025
+MaxDepth:135
+MinDepth:0
+Nodes:2401694
+TotalBranches:7598119
+AverageBranches:3.1636499071072333
+MaxBranches:14
+MinBranches:0
+Prunings:481750
+SumOfPrunings:1258495
+AveragedPrunings:2.6123404255319147
+SumOfTiles:5244
+AverageTile:327.75
+MaxCacheSize: 329816
+CacheFlushed: 12
+CacheHits:8696880
+CacheMisses:880891
+
+Game 3 Stats:
+MaxTile:2048
+Searches: 1659
+TotalDepth:11632
+AverageDepth:7.011452682338758
+MaxDepth:19
+MinDepth:0
+Nodes:1685775
+TotalBranches:5174557
+AverageBranches:3.069541902092509
+MaxBranches:14
+MinBranches:0
+Prunings:349541
+SumOfPrunings:863633
+AveragedPrunings:2.4707630864476555
+SumOfTiles:3646
+AverageTile:227.875
+MaxCacheSize: 217520
+CacheFlushed: 11
+CacheHits:5954140
+CacheMisses:584591
+
+Game 4 Stats:
+MaxTile:512
+Searches: 482
+TotalDepth:3256
+AverageDepth:6.755186721991701
+MaxDepth:13
+MinDepth:0
+Nodes:479464
+TotalBranches:1600148
+AverageBranches:3.3373683947074233
+MaxBranches:14
+MinBranches:0
+Prunings:95134
+SumOfPrunings:274091
+AveragedPrunings:2.881104547270166
+SumOfTiles:1074
+AverageTile:67.125
+MaxCacheSize: 69873
+CacheFlushed: 9
+CacheHits:1858790
+CacheMisses:200876
+
+----------------------------
+
+----------------------------
+
