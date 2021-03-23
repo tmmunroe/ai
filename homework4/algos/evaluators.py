@@ -1,7 +1,7 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=82, mergeableWeight=220, montonicWeight=821, totalValueWeight=713):
+    def __init__(self, emptyWeight=200, mergeableWeight=0, montonicWeight=200, totalValueWeight=200):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -154,9 +154,8 @@ class Snake(Evaluator):
         return self.maxValue
 
 
-
 class Corner(Evaluator):
-    def __init__(self, emptyWeight=50, mergeableWeight=50, cornerWeight=50, totalValueWeight=0, unsmoothPenaltyWeight=50):
+    def __init__(self, emptyWeight=800, mergeableWeight=800, cornerWeight=800, totalValueWeight=200, unsmoothPenaltyWeight=800):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight

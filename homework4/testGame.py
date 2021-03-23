@@ -20,6 +20,8 @@ from algos.alphabeta import AlphaBeta
 from algos.expectiminimax import ExpectiMinimax
 from algos.alphabetaExpecti import ExpectiAlphaBeta
 
+from itertools import combinations_with_replacement, permutations
+
 
 Algorithms = {
     "abexpecti": ExpectiAlphaBeta
@@ -415,6 +417,144 @@ def _getReproductiveProbabilityForIndividuals(population: List[OptimizationScena
 
     return probabilities
     
+def _iterateOverStateSpaceCorner():
+    pStart = time.time()
+    algo = Algorithms['abexpecti']
+    evaluator = Heuristics['corner']
+    timePerMove = 0.05
+    gamesPerIteration = 3
+    maxWeight = 1000
+    displayGames = False
+    maxFitnessGroupSize = 50
+
+    values = list(range(0,1000, 200))
+    a = { (i,j,k,l,m) for i in values
+            for j in values
+            for k in values
+            for l in values
+            for m in values 
+        }
+
+    weights = [
+        {'emptyWeight': i, 'mergeableWeight': j, 'cornerWeight':k, 'totalValueWeight': l, 'unsmoothPenaltyWeight':m}
+           for i,j,k,l,m in a
+    ]
+    
+    def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
+        return OptimizationScenario(
+            weights=weights,
+            config=GameConfig(algo=algo, evaluator=evaluator(**weights), timePerTurn=timePerMove),
+            generation=generation,
+            games = games,
+            display = display)
+
+    individualFitnesses: List[OptimizationScenario] = []
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+        start = time.time()
+        print("......")
+        print(f"Running scenarios {len(weights)}......")
+        
+        """run new population"""
+        optimizationScenarios = [ toOptimizationScenario(w, 1, gamesPerIteration, displayGames) for w in weights ]
+        futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
+        """add results to individualFitnesses"""
+        totalCount = len(futures)
+        totalDone = 0
+        for future in concurrent.futures.as_completed(futures):
+            op = future.result()
+            individualFitnesses.append(op)
+            print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
+            with open('populationResultsStateSpaceCorner.txt', 'a') as fout:
+                print(op.report(), file=fout)
+                print("----------------------------\n", file=fout)
+                print("----------------------------\n", file=fout)
+            totalDone += 1
+            if totalDone % 5 == 0:
+                print(f"{totalCount -  totalDone} of {totalCount} remaining...")
+    
+        individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
+        individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
+        with open('bestResultsStateSpaceCorner.txt', 'a') as fout:
+            for op in individualFitnesses:
+                print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
+                print(op.report(), file=fout)
+                print("----------------------------\n", file=fout)
+                print("----------------------------\n", file=fout)
+
+    
+    print(f"Start: {pStart}")
+    print(f"End: {pEnd}")
+    pEnd = time.time()
+
+def _iterateOverStateSpaceMonotonic():
+    pStart = time.time()
+    algo = Algorithms['abexpecti']
+    evaluator = Heuristics['monotonic']
+    timePerMove = 0.18
+    gamesPerIteration = 10
+    maxWeight = 1000
+    displayGames = False
+    maxFitnessGroupSize = 50
+
+    values = list(range(0,1000, 200))
+    a = { (i,j,k,l) for i in values
+            for j in values
+            for k in values
+            for l in values }
+    weights = [
+        {'emptyWeight': i, 'mergeableWeight': j, 'montonicWeight': k, 'totalValueWeight': l}
+           for i,j,k,l in a
+    ]
+    weights = [
+        {'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 4096, 4096, 4096, 4096, 4096, 0.0
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400}     # 3584, 8192, 512, 2048, 2048, 4063.8740137952113
+    ]
+    
+    def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
+        return OptimizationScenario(
+            weights=weights,
+            config=GameConfig(algo=algo, evaluator=evaluator(**weights), timePerTurn=timePerMove),
+            generation=generation,
+            games = games,
+            display = display)
+
+    individualFitnesses: List[OptimizationScenario] = []
+    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
+        start = time.time()
+        print("......")
+        print(f"Running scenarios {len(weights)}......")
+        
+        """run new population"""
+        optimizationScenarios = [ toOptimizationScenario(w, 1, gamesPerIteration, displayGames) for w in weights ]
+        futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
+        """add results to individualFitnesses"""
+        totalCount = len(futures)
+        totalDone = 0
+        for future in concurrent.futures.as_completed(futures):
+            op = future.result()
+            individualFitnesses.append(op)
+            print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
+            with open('populationResultsStateSpace.txt', 'a') as fout:
+                print(op.report(), file=fout)
+                print("----------------------------\n", file=fout)
+                print("----------------------------\n", file=fout)
+            totalDone += 1
+            if totalDone % 5 == 0:
+                print(f"{totalCount -  totalDone} of {totalCount} remaining...")
+    
+        individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
+        individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
+        with open('bestResultsStateSpace.txt', 'a') as fout:
+            for op in individualFitnesses:
+                print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
+                print(op.report(), file=fout)
+                print("----------------------------\n", file=fout)
+                print("----------------------------\n", file=fout)
+
+    
+    print(f"Start: {pStart}")
+    print(f"End: {pEnd}")
+    pEnd = time.time()
 
 def _optimizeMonotonic():
     pStart = time.time()
@@ -537,7 +677,7 @@ def _playGameAndReport(algorithm:str, heuristicName:str, timePerMove:float):
     algo = Algorithms[algorithm]
     evaluator = Heuristics[heuristicName]()
     config = GameConfig(algo=algo, evaluator=evaluator, timePerTurn=timePerMove)
-    stats = _playConfig(config, display=False)
+    stats = _playConfig(config, display=True)
     print(f"--Config--\n{config}\n")
     print(f"--Statistics--\n{stats}\n")
 
@@ -548,8 +688,12 @@ def run():
 
 
 @run.command()
+def optimizecorner():
+    _iterateOverStateSpaceCorner()
+
+@run.command()
 def optimizemonotonic():
-    _optimizeMonotonic()
+    _iterateOverStateSpaceMonotonic()
 
 
 @run.command()
