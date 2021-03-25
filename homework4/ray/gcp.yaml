@@ -8,16 +8,6 @@ provider:
     availability_zone: us-west1-a
     project_id: coms4143 # Globally unique project id
 
-#autoscaling cpu cluster
-min_workers: 0
-max_workers: 10
-head_node:
-    InstanceType: m4.large
-worker_nodes:
-    InstanceMarketOptions:
-        MarketType: spot
-    InstanceType: m4.16xlarge
-
 # How Ray will authenticate with newly launched nodes.
 auth:
     ssh_user: ubuntu
@@ -36,7 +26,7 @@ docker:
 # Files or directories to copy to the head and worker nodes. The format is a
 # dictionary from REMOTE_PATH: LOCAL_PATH, e.g.
 file_mounts: {
-#    "/path1/on/remote/machine": "/path1/on/local/machine",
+    "/tmp/ai": "/home/tmandevi/artificialIntelligence"
 #    "/path2/on/remote/machine": "/path2/on/local/machine",
 }
 
@@ -60,3 +50,17 @@ rsync_exclude:
 # as a value, the behavior will match git's behavior for finding and using .gitignore files.
 rsync_filter:
     - ".gitignore"
+
+head_setup_commands:
+  - sudo chown ray ~/ray_bootstrap_key.pem
+  - sudo chown ray ~/ray_bootstrap_config.yaml
+
+# Command to start ray on the head node. You don't need to change this.
+head_start_ray_commands:
+    - ray stop
+    - ulimit -n 65536; ray start --head --port=6379 --object-manager-port=8076 --autoscaling-config=~/ray_bootstrap_config.yaml
+
+# Command to start ray on worker nodes. You don't need to change this.
+worker_start_ray_commands:
+    - ray stop
+    - ulimit -n 65536; ray start --address=$RAY_HEAD_IP:6379 --object-manager-port=8076

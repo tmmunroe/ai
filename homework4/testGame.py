@@ -10,6 +10,8 @@ import concurrent.futures
 import copy
 import statistics
 import time
+import ray
+import multiprocessing
 
 from typing import Dict, List, Iterable, Sequence, Tuple, Optional
 
@@ -22,6 +24,7 @@ from algos.alphabetaExpecti import ExpectiAlphaBeta
 
 from itertools import combinations_with_replacement, permutations
 
+#ray.init(address='auto', _redis_password='5241590000000000')
 
 Algorithms = {
     "abexpecti": ExpectiAlphaBeta
@@ -361,6 +364,7 @@ def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -
     return stats
 
 
+#@ray.remote
 def _playOptimizationScenario(op: OptimizationScenario) -> OptimizationScenario:
     stats = _playMultipleGames(op.config, op.games, op.display)
     op.addStatistics(stats)
@@ -495,7 +499,7 @@ def _iterateOverStateSpaceMonotonic():
     maxWeight = 1000
     displayGames = False
     maxFitnessGroupSize = 50
-
+    """
     values = list(range(0,1000, 200))
     a = { (i,j,k,l) for i in values
             for j in values
@@ -505,9 +509,11 @@ def _iterateOverStateSpaceMonotonic():
         {'emptyWeight': i, 'mergeableWeight': j, 'montonicWeight': k, 'totalValueWeight': l}
            for i,j,k,l in a
     ]
+    """
     weights = [
         {'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 4096, 4096, 4096, 4096, 4096, 0.0
-        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400}     # 3584, 8192, 512, 2048, 2048, 4063.8740137952113
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 3584, 8192, 512, 2048, 2048, 4063.8740137952113
+        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200}     #
     ]
     
     def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
@@ -519,19 +525,20 @@ def _iterateOverStateSpaceMonotonic():
             display = display)
 
     individualFitnesses: List[OptimizationScenario] = []
-    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
-        start = time.time()
-        print("......")
-        print(f"Running scenarios {len(weights)}......")
-        
+    start = time.time()
+    print("......")
+    print(f"Running scenarios {len(weights)}......")
+    
+    with multiprocessing.Pool() as pool:
         """run new population"""
         optimizationScenarios = [ toOptimizationScenario(w, 1, gamesPerIteration, displayGames) for w in weights ]
-        futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
+        results = pool.map([ _playOptimizationScenario.remote(op) for op in optimizationScenarios ])
+
         """add results to individualFitnesses"""
-        totalCount = len(futures)
+        totalCount = len(results)
         totalDone = 0
-        for future in concurrent.futures.as_completed(futures):
-            op = future.result()
+        for result in results:
+            op = result.result()
             individualFitnesses.append(op)
             print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
             with open('populationResultsStateSpace.txt', 'a') as fout:
@@ -541,7 +548,7 @@ def _iterateOverStateSpaceMonotonic():
             totalDone += 1
             if totalDone % 5 == 0:
                 print(f"{totalCount -  totalDone} of {totalCount} remaining...")
-    
+
         individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
         individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
         with open('bestResultsStateSpace.txt', 'a') as fout:

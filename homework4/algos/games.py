@@ -1,7 +1,7 @@
 import random
 import threading
 import time
-from typing import Any, Callable, Iterable, NewType, Protocol, Sequence, Tuple, Optional, Union, Type, List, Dict
+from typing import Any, Callable, Iterable, NewType, Sequence, Tuple, Optional, Union, Type, List, Dict
 import Grid
 import random
 
@@ -13,12 +13,10 @@ Player = int
 MinPlayer, MaxPlayer = Player(0), Player(1)
 
 class GameState:
-    def __init__(self, state: Grid.Grid, newTile: int = 0):
+    def __init__(self, state: Grid.Grid, newTile: int = 2):
         self.state = state
         self.newTile = newTile
         self.gridHash = None
-        if self.newTile == 0:
-            self.newTile = 2 if random.uniform(0,1) < 0.9 else 4
     
     def hashGrid(self):
         if self.gridHash is None:
@@ -29,20 +27,34 @@ class GameState:
         actionStates = self.state.getAvailableMoves()
         return [ (a, GameState(grid)) for a,grid in actionStates ]
 
+    def toBoard(self, cell):
+        if cell and self.state.canInsert(cell):
+            gridCopy = self.state.clone()
+            #print(f"Adding new tile: {self.newTile}")
+            gridCopy.setCellValue(cell, self.newTile)
+            return GameState(gridCopy)
+        return None
+
+    def minMovesRaw(self):
+        return self.state.getAvailableCells()
+
     def minMoves(self):
         actionStates = []
-        availableCells = self.state.getAvailableCells()
+        availableCells = self.minMovesRaw()
         for cell in availableCells:
-            if cell and self.state.canInsert(cell):
-                gridCopy = self.state.clone()
-                gridCopy.setCellValue(cell, self.newTile)
-                actionStates.append((cell, GameState(gridCopy)))
+            b = self.toBoard(cell)
+            if b is not None:
+                actionStates.append((cell, b))
         return actionStates
 
     def chanceMoves(self):
         twoTile = 0.9, GameState(self.state.clone(), 2)
         fourTile = 0.1, GameState(self.state.clone(), 4)
         return [ twoTile, fourTile ]
+        """
+        twoTile = 1.0, GameState(self.state.clone(), 2)
+        return [ twoTile ]
+        """
 
 
 class Evaluator:

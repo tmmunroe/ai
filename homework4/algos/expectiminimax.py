@@ -28,7 +28,7 @@ class ExpectiMinimax(GameAlgo):
         
         best:Action = NullAction
         value:Value = self.evaluator.MaxValue
-
+        """
         actionStates = state.minMoves()
         self.sortMoves(actionStates, reverse=True)
         self.stats.addBranchFactor(len(actionStates))
@@ -36,6 +36,14 @@ class ExpectiMinimax(GameAlgo):
             _, maxValue = self.expectedValue(state, depth-1)
             if maxValue < value:
                 best, value = action, maxValue
+        """
+        actions = state.minMovesRaw()
+        for action in actions:
+            b = state.toBoard(action)
+            if b is not None:
+                _, maxValue = self.expectedValue(b, depth-1)
+                if maxValue < value:
+                    best, value = action, maxValue
         
         return best, value
 
