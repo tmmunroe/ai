@@ -338,8 +338,7 @@ def getTestGrids(h: str) -> Dict[str, Sequence[Grid.Grid]]:
     return grids
 
 
-def testHeuristic(heuristicNames: Sequence[str]):
-    heuristicName = heuristicNames[0]
+def testHeuristic(heuristicName: str):
     heuristic = Heuristics[heuristicName]()
     testGrids = getTestGrids(heuristicName)
     for testSet, grids in testGrids.items():
