@@ -11,6 +11,7 @@ import copy
 import statistics
 import time
 import ray
+import multiprocessing
 
 from typing import Dict, List, Iterable, Sequence, Tuple, Optional
 
@@ -52,7 +53,7 @@ class OptimizationScenario:
     def __str__(self):
         return f"{self.config} ({self.games} games)"
     
-    def report(self):
+    def report(self, includeGames=False):
         rep = [
             f"Weights: {self.weights}",
             f"Config: {self.config}",
@@ -62,9 +63,11 @@ class OptimizationScenario:
             f"AvgTile: {self.averageTile()}",
             f"StdDevTile: {self.stdDevTile()}",
             f"MedianTile: {self.medianTile()}",
-            f"ModeTile: {self.modeTile()}"
+            f"ModeTile: {self.modeTile()}",
+            f"Game max tiles: { sorted(self._maxTiles(), reverse=True) }"
         ]
-        rep.extend([f"Game {i} Stats:\n{stat}\n" for i, stat in enumerate(self.statistics)])
+        if includeGames:
+            rep.extend([f"Game {i} Stats:\n{stat}\n" for i, stat in enumerate(self.statistics)])
         return '\n'.join(rep)
 
     def addStatistics(self, stats: List[GameStatistics]):
@@ -363,7 +366,6 @@ def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -
     for game in range(games):
         stats.append(_playConfig(config, display=display))
     return stats
-
 
 @ray.remote
 def _playOptimizationScenario(op: OptimizationScenario) -> OptimizationScenario:
@@ -715,7 +717,7 @@ def _iterateOverStateSpaceMonotonicByGame():
     scenarios.sort(key=lambda op: op.averageTile(), reverse=True)
     with open('bestResultsStateSpace2.txt', 'a') as fout:
         for op in scenarios:
-            print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
+            print(op.report())
             print(op.report(), file=fout)
             print("----------------------------\n", file=fout)
             print("----------------------------\n", file=fout)
@@ -925,6 +927,22 @@ def _playGameAndReport(algorithm:str, heuristicName:str, timePerMove:float):
     print(f"--Statistics--\n{stats}\n")
 
 
+def _playMultipleGamesAndReport(algorithm:str, heuristicName:str, games:int, timePerMove:float):
+    algo = Algorithms[algorithm]
+    evaluator = Heuristics[heuristicName]()
+    config = GameConfig(algo=algo, evaluator=evaluator, timePerTurn=timePerMove)
+    stats = []
+    with multiprocessing.Pool() as pool:
+        stats = pool.map(_playConfig, [config for i in range(games)])
+    op = OptimizationScenario({}, config, 1, games, False)
+    op.addStatistics(stats)
+    print(f"--Config--\n{config}\n")
+    print(f"--Statistics--\n{stats}\n")
+    print(f"Scenario: ")
+    print(op.report())
+    
+    
+
 @click.group()
 def run():
     pass
@@ -954,11 +972,15 @@ def checkheuristic(heuristic):
     default=DefaultHeuristic,
     type=click.Choice(list(Heuristics), case_sensitive=True))
 @click.option('--timepermove', '-t', default=DefaultTimePerMove)
-def playgame(algorithm, heuristic, timepermove):
+@click.option('--games', '-g', default=1)
+def playgame(algorithm, heuristic, timepermove, games):
     print(f'Algorithm: {algorithm}')
     print(f'Heuristics: {heuristic}')
     print(f'Time per move: {timepermove}')
-    _playGameAndReport(algorithm, heuristic, timepermove)
+    if games == 1:
+        _playGameAndReport(algorithm, heuristic, timepermove)
+    else:
+        _playMultipleGamesAndReport(algorithm, heuristic, games, timepermove)
 
 if __name__ == "__main__":
     run()

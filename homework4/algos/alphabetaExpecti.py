@@ -89,7 +89,7 @@ class ExpectiAlphaBeta(GameAlgo):
                 break
             depth += 1
             if PrintDebuggingOutput:
-                if depth == 3:
+                if depth == 4:
                     sys.exit()
                 print()
         self.stats.addSearchDepth(depth)
