@@ -1,7 +1,7 @@
 import click
 import GameManager
 import Grid
-import IntelligentAgent
+from IntelligentAgent import Evaluator, GameAlgo, GameConfig, GameState, GameStatistics, Monotonic, ExpectiAlphaBeta, IntelligentAgent
 import ComputerAI
 import Displayer
 import BaseDisplayer
@@ -15,25 +15,14 @@ import multiprocessing
 
 from typing import Dict, List, Iterable, Sequence, Tuple, Optional
 
-from algos.games import CompositeEvaluator,Evaluator, GameAlgo, GameConfig, GameState, GameStatistics
-from algos.evaluators import Monotonic, Snake, Corner
-from algos.minimax import Minimax
-from algos.alphabeta import AlphaBeta
-from algos.expectiminimax import ExpectiMinimax
-from algos.alphabetaExpecti import ExpectiAlphaBeta
-
-from itertools import combinations_with_replacement, permutations
-
-ray.init(address='auto', _redis_password='5241590000000000')
+#ray.init(address='auto', _redis_password='5241590000000000')
 
 Algorithms = {
     "abexpecti": ExpectiAlphaBeta
 }
 
 Heuristics = {
-    "monotonic": Monotonic,
-    "snake": Snake,
-    "corner": Corner
+    "monotonic": Monotonic
 }
 
 DefaultTimePerMove = 0.18
@@ -352,7 +341,7 @@ def testHeuristic(heuristicName: str):
 
 def _playConfig(config: GameConfig, display:bool = False) -> GameStatistics:
     #GameManager.main()
-    intelligentAgent = IntelligentAgent.IntelligentAgent(config=config)
+    intelligentAgent = IntelligentAgent(config=config)
     computerAI  = ComputerAI.ComputerAI()
     displayer   = Displayer.Displayer() if display else BaseDisplayer.BaseDisplayer()
     gameManager = GameManager.GameManager(4, intelligentAgent, computerAI, displayer)
