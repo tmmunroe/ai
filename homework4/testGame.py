@@ -24,7 +24,7 @@ from algos.alphabetaExpecti import ExpectiAlphaBeta
 
 from itertools import combinations_with_replacement, permutations
 
-#ray.init(address='auto', _redis_password='5241590000000000')
+ray.init(address='auto', _redis_password='5241590000000000')
 
 Algorithms = {
     "abexpecti": ExpectiAlphaBeta
@@ -100,7 +100,7 @@ class OptimizationScenario:
             return 0.0
     
     def valueTile(self) -> float:
-        return (self.maxTile() + self.minTile() + self.averageTile() + self.medianTile() + self.modeTile()) / 5
+        return (self.maxTile() + self.minTile() + self.averageTile() + self.medianTile()) / 5
 
 def printBoardAndValue(grid: Grid.Grid, heuristicName:str, heuristic: Evaluator):
     print('[')
@@ -500,187 +500,108 @@ def _iterateOverStateSpaceMonotonicByGame():
     evaluator = Heuristics['monotonic']
     timePerMove = 0.15
     gamesPerIteration = 10
+    minWeight = 1
     maxWeight = 1000
+    randomSamples = 300
     displayGames = False
     maxFitnessGroupSize = 50
     
-    values = list(range(0,1000, 200))
-    a = { (i,j,k,l) for i in values
-            for j in values
-            for k in values
-            for l in values }
+    """
     weights = [
-        {'emptyWeight': i, 'mergeableWeight': j, 'montonicWeight': k, 'totalValueWeight': l}
-           for i,j,k,l in a
+        {'emptyWeight':random.randint(minWeight, maxWeight),
+         'mergeableWeight':random.randint(minWeight, maxWeight),
+         'montonicWeight':random.randint(minWeight, maxWeight),
+         'totalValueWeight':random.randint(minWeight, maxWeight) }
+         for i in range(randomSamples)
     ]
+    """
     weights = [
-        {'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 4096, 4096, 4096, 4096, 4096, 0.0
-        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 3584, 8192, 512, 2048, 2048, 4063.8740137952113
-        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200},     #
-        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 400},     # 4096, 4096, 4096, 4096, 4096, 0.0
-{'emptyWeight': 400, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400},     # 4096, 8192, 2048, 2048, 2048, 3547.2400539010605
-{'emptyWeight': 600, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 800},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 400},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 400},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 400},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 200},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 600},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 600},     # 3413.3333333333335, 4096, 2048, 4096, 4096, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200},     # 3072, 4096, 1024, 4096, 4096, 1773.6200269505302
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 400, 'totalValueWeight': 600},     # 3072, 4096, 1024, 4096, 4096, 1773.6200269505302
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 800},     # 3072, 4096, 1024, 4096, 4096, 1773.6200269505302
-{'emptyWeight': 800, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 600},     # 3072, 4096, 1024, 4096, 4096, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 600},     # 3072, 4096, 1024, 4096, 4096, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2901.3333333333335, 4096, 512, 4096, 4096, 2069.223364775619
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2901.3333333333335, 4096, 512, 4096, 4096, 2069.223364775619
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2901.3333333333335, 4096, 512, 4096, 4096, 2069.223364775619
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2901.3333333333335, 4096, 512, 4096, 4096, 2069.223364775619
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2816, 4096, 256, 4096, 4096, 2217.025033688163
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 0, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 0, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2730.6666666666665, 4096, 2048, 2048, 2048, 1182.4133513003535
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2389.3333333333335, 4096, 1024, 2048, 0.0, 1564.1858372115935
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 0, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 400, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2218.6666666666665, 4096, 512, 2048, 0.0, 1798.0849071535342
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2133.3333333333335, 4096, 256, 2048, 0.0, 1921.4216958630745
-{'emptyWeight': 0, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2133.3333333333335, 4096, 256, 2048, 0.0, 1921.4216958630745
-{'emptyWeight': 200, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2133.3333333333335, 4096, 256, 2048, 0.0, 1921.4216958630745
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2090.6666666666665, 4096, 128, 2048, 0.0, 1984.3440561891814
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 200},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 600, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 600, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 400, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 0, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 800},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 800, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 200},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 0},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 600},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 800, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 800, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 400, 'mergeableWeight': 0, 'montonicWeight': 600, 'totalValueWeight': 400},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 0, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 400, 'totalValueWeight': 800},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 0, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 200},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 200},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 200, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 800},     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
-{'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800},     # 2048, 2048, 2048, 2048, 2048, 0.0
-{'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 400}     # 2048, 4096, 1024, 1024, 1024, 1773.6200269505302
+        {'emptyWeight': 695, 'mergeableWeight': 812, 'montonicWeight': 727, 'totalValueWeight': 617},
+        {'emptyWeight': 60, 'mergeableWeight': 679, 'montonicWeight': 942, 'totalValueWeight': 716},
+        {'emptyWeight': 172, 'mergeableWeight': 294, 'montonicWeight': 245, 'totalValueWeight': 410},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 600},
+        {'emptyWeight': 430, 'mergeableWeight': 829, 'montonicWeight': 895, 'totalValueWeight': 775},
+        {'emptyWeight': 49, 'mergeableWeight': 566, 'montonicWeight': 723, 'totalValueWeight': 506},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911},
+        {'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400},
+        {'emptyWeight': 210, 'mergeableWeight': 834, 'montonicWeight': 209, 'totalValueWeight': 763},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 865, 'mergeableWeight': 886, 'montonicWeight': 740, 'totalValueWeight': 515},
+        {'emptyWeight': 713, 'mergeableWeight': 733, 'montonicWeight': 235, 'totalValueWeight': 999},
+        {'emptyWeight': 922, 'mergeableWeight': 176, 'montonicWeight': 336, 'totalValueWeight': 194},
+        {'emptyWeight': 107, 'mergeableWeight': 448, 'montonicWeight': 233, 'totalValueWeight': 365},
+        {'emptyWeight': 406, 'mergeableWeight': 712, 'montonicWeight': 945, 'totalValueWeight': 628},
+        {'emptyWeight': 134, 'mergeableWeight': 535, 'montonicWeight': 463, 'totalValueWeight': 776},
+        {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 828, 'mergeableWeight': 56, 'montonicWeight': 938, 'totalValueWeight': 660},
+        {'emptyWeight': 124, 'mergeableWeight': 637, 'montonicWeight': 593, 'totalValueWeight': 236},
+        {'emptyWeight': 387, 'mergeableWeight': 788, 'montonicWeight': 163, 'totalValueWeight': 528},
+        {'emptyWeight': 445, 'mergeableWeight': 258, 'montonicWeight': 813, 'totalValueWeight': 736},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 200},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 400},
+        {'emptyWeight': 691, 'mergeableWeight': 874, 'montonicWeight': 202, 'totalValueWeight': 241},
+        {'emptyWeight': 631, 'mergeableWeight': 79, 'montonicWeight': 430, 'totalValueWeight': 776},
+        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},
+        {'emptyWeight': 718, 'mergeableWeight': 71, 'montonicWeight': 390, 'totalValueWeight': 669},
+        {'emptyWeight': 434, 'mergeableWeight': 290, 'montonicWeight': 446, 'totalValueWeight': 678},
+        {'emptyWeight': 533, 'mergeableWeight': 266, 'montonicWeight': 801, 'totalValueWeight': 824},
+        {'emptyWeight': 723, 'mergeableWeight': 17, 'montonicWeight': 777, 'totalValueWeight': 321},
+        {'emptyWeight': 601, 'mergeableWeight': 672, 'montonicWeight': 697, 'totalValueWeight': 571},
+        {'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 565, 'mergeableWeight': 376, 'montonicWeight': 408, 'totalValueWeight': 679},
+        {'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 400},
+        {'emptyWeight': 368, 'mergeableWeight': 536, 'montonicWeight': 805, 'totalValueWeight': 204},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
+        {'emptyWeight': 5, 'mergeableWeight': 396, 'montonicWeight': 71, 'totalValueWeight': 75},
+        {'emptyWeight': 367, 'mergeableWeight': 582, 'montonicWeight': 157, 'totalValueWeight': 347},
+        {'emptyWeight': 39, 'mergeableWeight': 414, 'montonicWeight': 394, 'totalValueWeight': 147},
+        {'emptyWeight': 468, 'mergeableWeight': 545, 'montonicWeight': 486, 'totalValueWeight': 264},
+        {'emptyWeight': 405, 'mergeableWeight': 603, 'montonicWeight': 996, 'totalValueWeight': 652},
+        {'emptyWeight': 362, 'mergeableWeight': 349, 'montonicWeight': 205, 'totalValueWeight': 799},
+        {'emptyWeight': 481, 'mergeableWeight': 367, 'montonicWeight': 583, 'totalValueWeight': 567},
+        {'emptyWeight': 504, 'mergeableWeight': 953, 'montonicWeight': 277, 'totalValueWeight': 766},
+        {'emptyWeight': 375, 'mergeableWeight': 388, 'montonicWeight': 405, 'totalValueWeight': 731},
+        {'emptyWeight': 23, 'mergeableWeight': 195, 'montonicWeight': 946, 'totalValueWeight': 531},
+        {'emptyWeight': 908, 'mergeableWeight': 472, 'montonicWeight': 524, 'totalValueWeight': 574},
+        {'emptyWeight': 604, 'mergeableWeight': 28, 'montonicWeight': 243, 'totalValueWeight': 546},
+        {'emptyWeight': 776, 'mergeableWeight': 916, 'montonicWeight': 722, 'totalValueWeight': 574},
+        {'emptyWeight': 669, 'mergeableWeight': 4, 'montonicWeight': 865, 'totalValueWeight': 465},
+        {'emptyWeight': 742, 'mergeableWeight': 729, 'montonicWeight': 838, 'totalValueWeight': 589},
+        {'emptyWeight': 227, 'mergeableWeight': 787, 'montonicWeight': 234, 'totalValueWeight': 481},
+        {'emptyWeight': 402, 'mergeableWeight': 582, 'montonicWeight': 268, 'totalValueWeight': 353},
+        {'emptyWeight': 193, 'mergeableWeight': 327, 'montonicWeight': 397, 'totalValueWeight': 594},
+        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200},
+        {'emptyWeight': 104, 'mergeableWeight': 922, 'montonicWeight': 787, 'totalValueWeight': 842},
+        {'emptyWeight': 269, 'mergeableWeight': 212, 'montonicWeight': 236, 'totalValueWeight': 386},
+        {'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 600},
+        {'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 600},
+        {'emptyWeight': 757, 'mergeableWeight': 871, 'montonicWeight': 194, 'totalValueWeight': 558},
+        {'emptyWeight': 52, 'mergeableWeight': 244, 'montonicWeight': 904, 'totalValueWeight': 951},
+        {'emptyWeight': 517, 'mergeableWeight': 218, 'montonicWeight': 570, 'totalValueWeight': 990},
+        {'emptyWeight': 732, 'mergeableWeight': 130, 'montonicWeight': 847, 'totalValueWeight': 387},
+        {'emptyWeight': 608, 'mergeableWeight': 289, 'montonicWeight': 21, 'totalValueWeight': 155},
+        {'emptyWeight': 19, 'mergeableWeight': 935, 'montonicWeight': 361, 'totalValueWeight': 894},
+        {'emptyWeight': 398, 'mergeableWeight': 818, 'montonicWeight': 57, 'totalValueWeight': 39},
+        {'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 200},
+        {'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 600},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 400},
+        {'emptyWeight': 902, 'mergeableWeight': 473, 'montonicWeight': 268, 'totalValueWeight': 770},
+        {'emptyWeight': 879, 'mergeableWeight': 681, 'montonicWeight': 273, 'totalValueWeight': 535},
+        {'emptyWeight': 997, 'mergeableWeight': 318, 'montonicWeight': 675, 'totalValueWeight': 545},
+        {'emptyWeight': 561, 'mergeableWeight': 704, 'montonicWeight': 717, 'totalValueWeight': 733},
+        {'emptyWeight': 333, 'mergeableWeight': 848, 'montonicWeight': 537, 'totalValueWeight': 775},
+        {'emptyWeight': 584, 'mergeableWeight': 494, 'montonicWeight': 954, 'totalValueWeight': 952},
+        {'emptyWeight': 992, 'mergeableWeight': 547, 'montonicWeight': 816, 'totalValueWeight': 746},
+        {'emptyWeight': 475, 'mergeableWeight': 656, 'montonicWeight': 165, 'totalValueWeight': 775},
+        {'emptyWeight': 716, 'mergeableWeight': 961, 'montonicWeight': 923, 'totalValueWeight': 856}
     ]
 
     def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
@@ -698,8 +619,8 @@ def _iterateOverStateSpaceMonotonicByGame():
     """run new population"""
     optimizationScenarios: List[OptimizationScenario] = [ toOptimizationScenario(w, 1, 1, displayGames) for w in weights
                     for i in range(gamesPerIteration) ]
-    print(f"Running scenarios {len(weights)}......")
-    futures = [ _playOptimizationScenario.remote(op) for op in optimizationScenarios]
+    print(f"Running scenarios {len(weights)} ({len(optimizationScenarios)} games)......")
+    futures = [ _playOptimizationScenario.remote(op) for op in optimizationScenarios ]
 
     totalCount = len(futures)
     totalDone = 0
@@ -714,13 +635,75 @@ def _iterateOverStateSpaceMonotonicByGame():
         if totalDone % 10 == 0:
             print(f"Finished {totalDone} of {totalCount}")
 
+    scenarios.sort(key=lambda op: op.valueTile(), reverse=True)
+    print("===================================")
+    print("===================================")
+    print("Best Value Tiles:")
+    for op in scenarios[:maxFitnessGroupSize]:
+        print(op.report())
+        print("===================================")
+
+    scenarios.sort(key=lambda op: op.minTile(), reverse=True)
+    print("===================================")
+    print("===================================")
+    print("Best Min Tiles:")
+    for op in scenarios[:maxFitnessGroupSize]:
+        print(op.report())
+        print("===================================")
+
     scenarios.sort(key=lambda op: op.averageTile(), reverse=True)
-    with open('bestResultsStateSpace2.txt', 'a') as fout:
+    print("===================================")
+    print("===================================")
+    print("Best Averages:")
+    for op in scenarios[:maxFitnessGroupSize]:
+        print(op.report())
+        print("===================================")
+
+    scenarios.sort(key=lambda op: op.medianTile(), reverse=True)
+    print("===================================")
+    print("===================================")
+    print("Best Medians:")
+    for op in scenarios[:maxFitnessGroupSize]:
+        print(op.report())
+        print("===================================")
+
+    with open('bestResultsStateSpace_GCP_SelectVersions.txt', 'w') as fout:
         for op in scenarios:
-            print(op.report())
             print(op.report(), file=fout)
             print("----------------------------\n", file=fout)
             print("----------------------------\n", file=fout)
+            
+        scenarios.sort(key=lambda op: op.valueTile(), reverse=True)
+        print("===================================", file=fout)
+        print("===================================", file=fout)
+        print("Best Value Tiles:", file=fout)
+        for op in scenarios[:maxFitnessGroupSize]:
+            print(op.report(), file=fout)
+            print("===================================", file=fout)
+
+        scenarios.sort(key=lambda op: op.minTile(), reverse=True)
+        print("===================================", file=fout)
+        print("===================================", file=fout)
+        print("Best Min Tiles:", file=fout)
+        for op in scenarios[:maxFitnessGroupSize]:
+            print(op.report(), file=fout)
+            print("===================================", file=fout)
+
+        scenarios.sort(key=lambda op: op.averageTile(), reverse=True)
+        print("===================================", file=fout)
+        print("===================================", file=fout)
+        print("Best Average Tiles:", file=fout)
+        for op in scenarios[:maxFitnessGroupSize]:
+            print(op.report(), file=fout)
+            print("===================================", file=fout)
+
+        scenarios.sort(key=lambda op: op.medianTile(), reverse=True)
+        print("===================================", file=fout)
+        print("===================================", file=fout)
+        print("Best Median Tiles:", file=fout)
+        for op in scenarios[:maxFitnessGroupSize]:
+            print(op.report(), file=fout)
+            print("===================================", file=fout)
 
     
     pEnd = time.time()
@@ -728,120 +711,112 @@ def _iterateOverStateSpaceMonotonicByGame():
     print(f"End: {pEnd}")
 
 
-
-def _iterateOverStateSpaceMonotonic():
+def _monotonicGeneticAlgorithm():
     pStart = time.time()
     algo = Algorithms['abexpecti']
     evaluator = Heuristics['monotonic']
-    timePerMove = 0.18
-    gamesPerIteration = 10
-    maxWeight = 1000
-    displayGames = False
-    maxFitnessGroupSize = 50
-    """
-    values = list(range(0,1000, 200))
-    a = { (i,j,k,l) for i in values
-            for j in values
-            for k in values
-            for l in values }
-    weights = [
-        {'emptyWeight': i, 'mergeableWeight': j, 'montonicWeight': k, 'totalValueWeight': l}
-           for i,j,k,l in a
-    ]
-    """
-    weights = [
-        {'emptyWeight': 200, 'mergeableWeight': 0, 'montonicWeight': 200, 'totalValueWeight': 200},     # 4096, 4096, 4096, 4096, 4096, 0.0
-        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},     # 3584, 8192, 512, 2048, 2048, 4063.8740137952113
-        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200}     #
-    ]
-    
-    def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
-        return OptimizationScenario(
-            weights=weights,
-            config=GameConfig(algo=algo, evaluator=evaluator(**weights), timePerTurn=timePerMove),
-            generation=generation,
-            games = games,
-            display = display)
-
-    individualFitnesses: List[OptimizationScenario] = []
-    start = time.time()
-    print("......")
-    print(f"Running scenarios {len(weights)}......")
-    
-    """run new population"""
-    optimizationScenarios = [ toOptimizationScenario(w, 1, gamesPerIteration, displayGames) for w in weights ]
-    futures = [ _playOptimizationScenario.remote(op) for op in optimizationScenarios]
-    results = ray.get(futures)
-
-    """add results to individualFitnesses"""
-    totalCount = len(results)
-    totalDone = 0
-    for op in results:
-        individualFitnesses.append(op)
-        print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
-        with open('populationResultsStateSpace2.txt', 'a') as fout:
-            print(op.report(), file=fout)
-            print("----------------------------\n", file=fout)
-            print("----------------------------\n", file=fout)
-        totalDone += 1
-        if totalDone % 5 == 0:
-            print(f"{totalCount -  totalDone} of {totalCount} remaining...")
-
-    individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
-    individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
-    with open('bestResultsStateSpace2.txt', 'a') as fout:
-        for op in individualFitnesses:
-            print(f"{op.weights}:::: {op.averageTile()}, {op.maxTile()}, {op.minTile()}, {op.medianTile()}, {op.modeTile()}, {op.stdDevTile()}")
-            print(op.report(), file=fout)
-            print("----------------------------\n", file=fout)
-            print("----------------------------\n", file=fout)
-
-    
-    print(f"Start: {pStart}")
-    print(f"End: {pEnd}")
-    pEnd = time.time()
-
-def _optimizeMonotonic():
-    pStart = time.time()
-    algo = Algorithms['abexpecti']
-    evaluator = Heuristics['monotonic']
-    timePerMove = 0.05
+    timePerMove = 0.15
     gamesPerIteration = 5
-    crossoverCount = 10
-    initialPopulationSize = 50  #start with a very large initial population
-    maxFitnessGroupSize = 30
+    crossoverCount = 50
+    initialPopulationSize = 100  #start with a very large initial population
+    maxFitnessGroupSize = 100
     maxIter = 25
+    immigrantsPerGeneration = 4
     crossOverProbabilty = 0.9
-    mutationProbability = 0.3
+    mutationProbability = 0.2
     minWeight = 0
     maxWeight = 1000
     displayGames = False
     population = [
-        {'emptyWeight': 82, 'mergeableWeight': 220, 'montonicWeight': 821, 'totalValueWeight': 713},
-        {'emptyWeight': 655, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 919},
-        {'emptyWeight': 578, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
-        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 919},
-        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 343, 'totalValueWeight': 919},
-        {'emptyWeight': 655, 'mergeableWeight': 872, 'montonicWeight': 821, 'totalValueWeight': 919},
+        {'emptyWeight': 695, 'mergeableWeight': 812, 'montonicWeight': 727, 'totalValueWeight': 617},
+        {'emptyWeight': 60, 'mergeableWeight': 679, 'montonicWeight': 942, 'totalValueWeight': 716},
+        {'emptyWeight': 172, 'mergeableWeight': 294, 'montonicWeight': 245, 'totalValueWeight': 410},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 600},
+        {'emptyWeight': 430, 'mergeableWeight': 829, 'montonicWeight': 895, 'totalValueWeight': 775},
+        {'emptyWeight': 49, 'mergeableWeight': 566, 'montonicWeight': 723, 'totalValueWeight': 506},
+        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911},
+        {'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400},
+        {'emptyWeight': 210, 'mergeableWeight': 834, 'montonicWeight': 209, 'totalValueWeight': 763},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 865, 'mergeableWeight': 886, 'montonicWeight': 740, 'totalValueWeight': 515},
+        {'emptyWeight': 713, 'mergeableWeight': 733, 'montonicWeight': 235, 'totalValueWeight': 999},
+        {'emptyWeight': 922, 'mergeableWeight': 176, 'montonicWeight': 336, 'totalValueWeight': 194},
+        {'emptyWeight': 107, 'mergeableWeight': 448, 'montonicWeight': 233, 'totalValueWeight': 365},
+        {'emptyWeight': 406, 'mergeableWeight': 712, 'montonicWeight': 945, 'totalValueWeight': 628},
+        {'emptyWeight': 134, 'mergeableWeight': 535, 'montonicWeight': 463, 'totalValueWeight': 776},
+        {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 828, 'mergeableWeight': 56, 'montonicWeight': 938, 'totalValueWeight': 660},
+        {'emptyWeight': 124, 'mergeableWeight': 637, 'montonicWeight': 593, 'totalValueWeight': 236},
+        {'emptyWeight': 387, 'mergeableWeight': 788, 'montonicWeight': 163, 'totalValueWeight': 528},
+        {'emptyWeight': 445, 'mergeableWeight': 258, 'montonicWeight': 813, 'totalValueWeight': 736},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 200},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 400},
+        {'emptyWeight': 691, 'mergeableWeight': 874, 'montonicWeight': 202, 'totalValueWeight': 241},
+        {'emptyWeight': 631, 'mergeableWeight': 79, 'montonicWeight': 430, 'totalValueWeight': 776},
+        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 600},
+        {'emptyWeight': 718, 'mergeableWeight': 71, 'montonicWeight': 390, 'totalValueWeight': 669},
+        {'emptyWeight': 434, 'mergeableWeight': 290, 'montonicWeight': 446, 'totalValueWeight': 678},
+        {'emptyWeight': 533, 'mergeableWeight': 266, 'montonicWeight': 801, 'totalValueWeight': 824},
+        {'emptyWeight': 723, 'mergeableWeight': 17, 'montonicWeight': 777, 'totalValueWeight': 321},
+        {'emptyWeight': 601, 'mergeableWeight': 672, 'montonicWeight': 697, 'totalValueWeight': 571},
+        {'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400},
+        {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 565, 'mergeableWeight': 376, 'montonicWeight': 408, 'totalValueWeight': 679},
+        {'emptyWeight': 800, 'mergeableWeight': 800, 'montonicWeight': 800, 'totalValueWeight': 400},
+        {'emptyWeight': 368, 'mergeableWeight': 536, 'montonicWeight': 805, 'totalValueWeight': 204},
         {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
-        {'emptyWeight': 578, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 919},
-        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911},
-        {'emptyWeight': 151, 'mergeableWeight': 716, 'montonicWeight': 629, 'totalValueWeight': 286},
-        {'emptyWeight': 421, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 919},
-        {'emptyWeight': 578, 'mergeableWeight': 716, 'montonicWeight': 200, 'totalValueWeight': 143},
-        {'emptyWeight': 421, 'mergeableWeight': 516, 'montonicWeight': 821, 'totalValueWeight': 911},
-        {'emptyWeight': 655, 'mergeableWeight': 872, 'montonicWeight': 629, 'totalValueWeight': 919},
-        {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911}
+        {'emptyWeight': 5, 'mergeableWeight': 396, 'montonicWeight': 71, 'totalValueWeight': 75},
+        {'emptyWeight': 367, 'mergeableWeight': 582, 'montonicWeight': 157, 'totalValueWeight': 347},
+        {'emptyWeight': 39, 'mergeableWeight': 414, 'montonicWeight': 394, 'totalValueWeight': 147},
+        {'emptyWeight': 468, 'mergeableWeight': 545, 'montonicWeight': 486, 'totalValueWeight': 264},
+        {'emptyWeight': 405, 'mergeableWeight': 603, 'montonicWeight': 996, 'totalValueWeight': 652},
+        {'emptyWeight': 362, 'mergeableWeight': 349, 'montonicWeight': 205, 'totalValueWeight': 799},
+        {'emptyWeight': 481, 'mergeableWeight': 367, 'montonicWeight': 583, 'totalValueWeight': 567},
+        {'emptyWeight': 504, 'mergeableWeight': 953, 'montonicWeight': 277, 'totalValueWeight': 766},
+        {'emptyWeight': 375, 'mergeableWeight': 388, 'montonicWeight': 405, 'totalValueWeight': 731},
+        {'emptyWeight': 23, 'mergeableWeight': 195, 'montonicWeight': 946, 'totalValueWeight': 531},
+        {'emptyWeight': 908, 'mergeableWeight': 472, 'montonicWeight': 524, 'totalValueWeight': 574},
+        {'emptyWeight': 604, 'mergeableWeight': 28, 'montonicWeight': 243, 'totalValueWeight': 546},
+        {'emptyWeight': 776, 'mergeableWeight': 916, 'montonicWeight': 722, 'totalValueWeight': 574},
+        {'emptyWeight': 669, 'mergeableWeight': 4, 'montonicWeight': 865, 'totalValueWeight': 465},
+        {'emptyWeight': 742, 'mergeableWeight': 729, 'montonicWeight': 838, 'totalValueWeight': 589},
+        {'emptyWeight': 227, 'mergeableWeight': 787, 'montonicWeight': 234, 'totalValueWeight': 481},
+        {'emptyWeight': 402, 'mergeableWeight': 582, 'montonicWeight': 268, 'totalValueWeight': 353},
+        {'emptyWeight': 193, 'mergeableWeight': 327, 'montonicWeight': 397, 'totalValueWeight': 594},
+        {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200},
+        {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200},
+        {'emptyWeight': 104, 'mergeableWeight': 922, 'montonicWeight': 787, 'totalValueWeight': 842},
+        {'emptyWeight': 269, 'mergeableWeight': 212, 'montonicWeight': 236, 'totalValueWeight': 386},
+        {'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 600},
+        {'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 600},
+        {'emptyWeight': 757, 'mergeableWeight': 871, 'montonicWeight': 194, 'totalValueWeight': 558},
+        {'emptyWeight': 52, 'mergeableWeight': 244, 'montonicWeight': 904, 'totalValueWeight': 951},
+        {'emptyWeight': 517, 'mergeableWeight': 218, 'montonicWeight': 570, 'totalValueWeight': 990},
+        {'emptyWeight': 732, 'mergeableWeight': 130, 'montonicWeight': 847, 'totalValueWeight': 387},
+        {'emptyWeight': 608, 'mergeableWeight': 289, 'montonicWeight': 21, 'totalValueWeight': 155},
+        {'emptyWeight': 19, 'mergeableWeight': 935, 'montonicWeight': 361, 'totalValueWeight': 894},
+        {'emptyWeight': 398, 'mergeableWeight': 818, 'montonicWeight': 57, 'totalValueWeight': 39},
+        {'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 200, 'totalValueWeight': 200},
+        {'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 600},
+        {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 800},
+        {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 200, 'totalValueWeight': 400},
+        {'emptyWeight': 902, 'mergeableWeight': 473, 'montonicWeight': 268, 'totalValueWeight': 770},
+        {'emptyWeight': 879, 'mergeableWeight': 681, 'montonicWeight': 273, 'totalValueWeight': 535},
+        {'emptyWeight': 997, 'mergeableWeight': 318, 'montonicWeight': 675, 'totalValueWeight': 545},
+        {'emptyWeight': 561, 'mergeableWeight': 704, 'montonicWeight': 717, 'totalValueWeight': 733},
+        {'emptyWeight': 333, 'mergeableWeight': 848, 'montonicWeight': 537, 'totalValueWeight': 775},
+        {'emptyWeight': 584, 'mergeableWeight': 494, 'montonicWeight': 954, 'totalValueWeight': 952},
+        {'emptyWeight': 992, 'mergeableWeight': 547, 'montonicWeight': 816, 'totalValueWeight': 746},
+        {'emptyWeight': 475, 'mergeableWeight': 656, 'montonicWeight': 165, 'totalValueWeight': 775},
+        {'emptyWeight': 716, 'mergeableWeight': 961, 'montonicWeight': 923, 'totalValueWeight': 856}
     ]
-    population.extend([
-        {'emptyWeight':random.randint(minWeight, maxWeight),
-         'mergeableWeight':random.randint(minWeight, maxWeight),
-         'montonicWeight':random.randint(minWeight, maxWeight),
-         'totalValueWeight':random.randint(minWeight, maxWeight) }
-         for i in range(initialPopulationSize)
-    ])
     
-    with open('populationEvolution.txt', 'w') as fout:
+    with open('populationEvolution_GCP.txt', 'w') as fout:
         print("Population evolutions\n\n",file=fout)
     
     def toOptimizationScenario(weights:Dict[str, int], generation:int, games:int, display:bool):
@@ -852,64 +827,78 @@ def _optimizeMonotonic():
             games = games,
             display = display)
 
-    individualFitnesses: List[OptimizationScenario] = []
-    with concurrent.futures.ProcessPoolExecutor(max_workers=8) as executor:
-        for generation in range(maxIter):
-            start = time.time()
-            print(f"----------------------------")
-            print(f"----------------------------")
-            print(f"Generation {generation} (Population Size: {len(population)})...")
+    for generation in range(maxIter):
+        start = time.time()
+        print(f"----------------------------")
+        print(f"----------------------------")
+        print(f"Generation {generation} (Population Size: {len(population)})...")
 
-            """record new population"""
-            with open('populationEvolution.txt', 'a') as fout:
-                for p in population:
-                    print(p, file=fout)
-                    print(p)
+        population.extend(
+            [ { 'emptyWeight': random.randint(minWeight, maxWeight), 
+                'mergeableWeight': random.randint(minWeight, maxWeight), 
+                'montonicWeight': random.randint(minWeight, maxWeight), 
+                'totalValueWeight': random.randint(minWeight, maxWeight) }
+                 for i in range(immigrantsPerGeneration) ]
+        )
 
-            print("......")
-            print("Running scenarios......")
-            
-            """run new population"""
-            optimizationScenarios = [ toOptimizationScenario(w, generation, gamesPerIteration, displayGames) for w in population ]
-            futures = [ executor.submit(_playOptimizationScenario, op) for op in optimizationScenarios ]
-            """add results to individualFitnesses"""
-            totalCount = len(futures)
-            totalDone = 0
-            for future in concurrent.futures.as_completed(futures):
-                individualFitnesses.append(future.result())
-                totalDone += 1
-                if totalDone % 5 == 0:
-                    print(f"{totalCount -  totalDone} of {totalCount} remaining...")
+        """record new population"""
+        with open('populationEvolution_GCP.txt', 'a') as fout:
+            for p in population:
+                print(p, file=fout)
+                print(p)
 
-            
-            """take top [maxFitnessGroupSize] fitnesses, write to file"""
-            print("Recording results......")
-            individualFitnesses.sort(key=lambda op: op.averageTile(), reverse=True)
-            individualFitnesses = individualFitnesses[:maxFitnessGroupSize]
-            with open('populationResults.txt', 'w') as fout:
-                print("Population results\n\n", file=fout)
-                for op in individualFitnesses:
-                    print(op.report(), file=fout)
-                    print("----------------------------\n", file=fout)
-                    print("----------------------------\n", file=fout)
-            
-            """get new population with individuals with top fitnesses"""
-            print("Evolving population......")
-            individuals = [op.weights for op in individualFitnesses]
-            reproductiveProbability = _getReproductiveProbabilityForIndividuals(individualFitnesses)
-            population = _evolvePopulation(
-                individuals=individuals,
-                individualReproductiveProbability=reproductiveProbability,
-                crossOverProbabilty=crossOverProbabilty,
-                mutationProbability=mutationProbability,
-                crossovers=crossoverCount,
-                minWeight=minWeight,
-                maxWeight=maxWeight)
-            end = time.time()
+        print("......")
+        print("Running scenarios......")
+        
+        """run new population"""
+        scenarios: List[OptimizationScenario] = [ toOptimizationScenario(w, 1, 1, displayGames) for w in population ]
+        """run new population"""
+        optimizationScenarios: List[OptimizationScenario] = [ toOptimizationScenario(w, 1, 1, displayGames) for w in population
+                        for i in range(gamesPerIteration) ]
+        print(f"Running scenarios {len(population)} ({len(optimizationScenarios)} games)......")
+        futures = [ _playOptimizationScenario.remote(op) for op in optimizationScenarios ]
 
-            print(f"Started: {start}")
-            print(f"Ended: {end}")
-            print(f"Total time: {end - start}")
+        totalCount = len(futures)
+        totalDone = 0
+        while len(futures):
+            done, futures = ray.wait(futures)
+            totalDone += len(done)
+            for d in done:
+                result = ray.get(d)
+                for scenario in scenarios:
+                    if result.weights == scenario.weights:
+                        scenario.addStatistics(result.statistics)
+            if totalDone % 10 == 0:
+                print(f"Finished {totalDone} of {totalCount}")
+
+        """take top [maxFitnessGroupSize] fitnesses, write to file"""
+        print("Recording results......")
+        scenarios.sort(key=lambda op: op.valueTile(), reverse=True)
+        scenarios = scenarios[:maxFitnessGroupSize]
+        with open('populationResults_GCP.txt', 'w') as fout:
+            print("Population results\n\n", file=fout)
+            for op in scenarios:
+                print(op.report(), file=fout)
+                print("----------------------------\n", file=fout)
+                print("----------------------------\n", file=fout)
+        
+        """get new population with individuals with top fitnesses"""
+        print("Evolving population......")
+        individuals = [op.weights for op in scenarios]
+        reproductiveProbability = _getReproductiveProbabilityForIndividuals(scenarios)
+        population = _evolvePopulation(
+            individuals=individuals,
+            individualReproductiveProbability=reproductiveProbability,
+            crossOverProbabilty=crossOverProbabilty,
+            mutationProbability=mutationProbability,
+            crossovers=crossoverCount,
+            minWeight=minWeight,
+            maxWeight=maxWeight)
+        end = time.time()
+
+        print(f"Started: {start}")
+        print(f"Ended: {end}")
+        print(f"Total time: {end - start}")
     
     pEnd = time.time()
     print("Genetic Algorithm stats:")
@@ -956,6 +945,9 @@ def optimizecorner():
 def optimizemonotonic():
     _iterateOverStateSpaceMonotonicByGame()
 
+@run.command()
+def geneticmonotonic():
+    _monotonicGeneticAlgorithm()
 
 @run.command()
 @click.option('--heuristic', '-h',

@@ -1,7 +1,14 @@
 from algos.games import Evaluator, CompositeEvaluator, GameAlgo, GameConfig, GameState, Value
 
 class Monotonic(Evaluator):
-    def __init__(self, emptyWeight=200, mergeableWeight=200, montonicWeight=800, totalValueWeight=400):
+    """primarily informed by stackoverflow article referenced in homework, particularly the approach to
+        applying monotonicity as a penalty that scales with the size of the tiles involved
+       other than weighting, the main difference is that I add the total value measure to the score
+         rather than subtracting it
+       I return -inf if the board is unplayable
+       'emptyWeight': 695, 'mergeableWeight': 812, 'montonicWeight': 727, 'totalValueWeight': 617
+       """
+    def __init__(self, emptyWeight=695, mergeableWeight=812, montonicWeight=727, totalValueWeight=617):
         self.minValue = float('-inf')
         self.maxValue = float('inf')
         self.emptyWeight = emptyWeight
@@ -13,11 +20,6 @@ class Monotonic(Evaluator):
         return f"Monotonic(emptyWeight={self.emptyWeight}, mergeableWeight={self.mergeableWeight}, montonicWeight={self.montonicWeight}, totalValueWeight={self.totalValueWeight})"
 
     def __call__(self,state:GameState) -> Value:
-        """
-        TODO:
-        figure out best way to impose smoothness
-        try non-snake pattern, weighting a corner heavily
-        """
         baseValue = 10000
         mergeable = 0
         empty = 0
