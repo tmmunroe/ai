@@ -176,4 +176,4 @@ if __name__ == '__main__':
 
         v = input()
 
-        g.move(int(v))
+        g.move(v)

@@ -40,7 +40,6 @@ class GameManager:
     def updateAlarm(self) -> None:
         """ Checks if move exceeded the time limit and updates the alarm """
         if time.process_time() - self.prevTime > maxTime:
-            print("Exceeded time limit!")
             self.over = True
         
         self.prevTime = time.process_time()
@@ -73,10 +72,10 @@ class GameManager:
             move = None
 
             if turn == PLAYER_TURN:
-                #print("Player's Turn: ", end="")
+                print("Player's Turn: ", end="")
                 move = self.intelligentAgent.getMove(gridCopy)
                 
-                #print(actionDic[move])
+                print(actionDic[move])
 
                 # If move is valid, attempt to move the grid
                 if move != None and 0 <= move < 4:
@@ -87,12 +86,10 @@ class GameManager:
                         print("Invalid intelligentAgent Move - Cannot move")
                         self.over = True
                 else:
-                    print(f"Invalid intelligentAgent Move - Invalid input {move}")
-                    for r in self.grid.map:
-                        print(r)
+                    print("Invalid intelligentAgent Move - Invalid input")
                     self.over = True
             else:
-                #print("Computer's turn: ")
+                print("Computer's turn: ")
                 move = self.computerAI.getMove(gridCopy)
 
                 # Validate Move
@@ -110,7 +107,6 @@ class GameManager:
             self.updateAlarm()
             turn = 1 - turn
 
-        #self.displayer.display(self.grid)
         return self.grid.getMaxTile()
 
 def main():

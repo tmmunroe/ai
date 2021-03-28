@@ -1,7 +1,7 @@
 import click
 import GameManager
 import Grid
-from IntelligentAgent import Evaluator, GameAlgo, GameConfig, GameState, GameStatistics, Monotonic, ExpectiAlphaBeta, IntelligentAgent
+from IntelligentAgent import Evaluator, GameAlgo, GameConfig, GameState, GameStatistics, Monotonic, ExpectiAlphaBeta, IntelligentAgent, getGameConfig
 import ComputerAI
 import Displayer
 import BaseDisplayer
@@ -349,6 +349,15 @@ def _playConfig(config: GameConfig, display:bool = False) -> GameStatistics:
     maxTile     = gameManager.start()
     return intelligentAgent.Statistics
 
+def _playGame(display:bool = False) -> GameStatistics:
+    #GameManager.main()
+    intelligentAgent = IntelligentAgent()
+    computerAI  = ComputerAI.ComputerAI()
+    displayer   = Displayer.Displayer() if display else BaseDisplayer.BaseDisplayer()
+    gameManager = GameManager.GameManager(4, intelligentAgent, computerAI, displayer)
+
+    maxTile     = gameManager.start()
+    return intelligentAgent.Statistics
 
 def _playMultipleGames(config: GameConfig, games:int = 3, display:bool = True) -> List[GameStatistics]:
     stats = []
@@ -920,6 +929,18 @@ def _playMultipleGamesAndReport(algorithm:str, heuristicName:str, games:int, tim
     print(op.report())
     
     
+def _playMultipleGamesAndReportBase(games:int):
+    stats = []
+    print(f"Playing {games} games")
+    with multiprocessing.Pool() as pool:
+        stats = pool.map(_playGame, [False for i in range(games)])
+    op = OptimizationScenario({}, getGameConfig(), 1, games, False)
+    op.addStatistics(stats)
+    print(f"--Config--\n{op.config}\n")
+    print(f"--Statistics--\n{stats}\n")
+    print(f"Scenario: ")
+    print(op.report())
+    
 
 @click.group()
 def run():
@@ -962,6 +983,12 @@ def playgame(algorithm, heuristic, timepermove, games):
         _playGameAndReport(algorithm, heuristic, timepermove)
     else:
         _playMultipleGamesAndReport(algorithm, heuristic, games, timepermove)
+
+
+@run.command()
+@click.option('--games', '-g', default=1)
+def playdefaults(games):
+    _playMultipleGamesAndReportBase(games)
 
 if __name__ == "__main__":
     run()
