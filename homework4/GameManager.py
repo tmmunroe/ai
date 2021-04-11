@@ -72,10 +72,10 @@ class GameManager:
             move = None
 
             if turn == PLAYER_TURN:
-                print("Player's Turn: ", end="")
+                #print("Player's Turn: ", end="")
                 move = self.intelligentAgent.getMove(gridCopy)
                 
-                print(actionDic[move])
+                #print(actionDic[move])
 
                 # If move is valid, attempt to move the grid
                 if move != None and 0 <= move < 4:
@@ -89,7 +89,7 @@ class GameManager:
                     print("Invalid intelligentAgent Move - Invalid input")
                     self.over = True
             else:
-                print("Computer's turn: ")
+                #print("Computer's turn: ")
                 move = self.computerAI.getMove(gridCopy)
 
                 # Validate Move

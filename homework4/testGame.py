@@ -15,7 +15,7 @@ import multiprocessing
 
 from typing import Dict, List, Iterable, Sequence, Tuple, Optional
 
-#ray.init(address='auto', _redis_password='5241590000000000')
+ray.init(address='auto', _redis_password='5241590000000000')
 
 Algorithms = {
     "abexpecti": ExpectiAlphaBeta
