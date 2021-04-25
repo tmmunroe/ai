@@ -355,7 +355,7 @@ class ExpectiAlphaBeta(GameAlgo):
             #    print(f"{state.prefix}Min Action: {action}, ExpectedValue: {maxValue}, Depth: {depth}, Alpha: {alpha}, Beta: {beta}, Best: {best}, BestValue: {value}")
             if maxValue <= value:
                 best, value = action, maxValue
-                if value <= beta:
+                if value <= beta:  
                     #print(f"{state.prefix}Setting Beta:{value} from {beta}, Depth:{depth}")
                     beta = value
                     if alpha >= beta:
