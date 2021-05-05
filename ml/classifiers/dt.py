@@ -1,10 +1,7 @@
-import numpy as np
 from typing import Any, Callable, Dict, Hashable, List, Tuple
-from common import Vector, Matrix, Measure
 import statistics
-from collections import namedtuple, Counter
+from collections import namedtuple, Counter, UserList
 from math import log2
-from collections import namedtuple, UserList
 
 def entropy(labels: List) -> float:
     total = len(labels)
@@ -47,8 +44,6 @@ class Population(UserList):
             return True
         first = self[0]
         return all((s.attributes == first.attributes for s in self))
-
-
 
 def splitPopulation(population:Population, feature:int) -> Dict[Hashable, Population]:
     subpopulations: Dict[Hashable, Population] = {}
