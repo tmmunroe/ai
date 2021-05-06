@@ -5,6 +5,10 @@ from typing import Optional, Iterable, Tuple, Set, List, Dict, Hashable, Any, Ca
 import sys
 import time
 import math
+import copy
+import csp.csp.CSP as CSP
+import csp.constraint.BinaryConstraint as BinaryConstraint
+import csp.search
 
 """
 Each sudoku board is represented as a dictionary with string keys and
@@ -35,49 +39,6 @@ class BoardStats:
         self.finalBoard = finalBoard
         self.solved = True
 
-class BinaryConstraint:
-    def __init__(self, first:Hashable, second:Hashable, testFunc:Callable):
-        self.first = first
-        self.second = second
-        self.testFunc = testFunc
-    
-    def __contains__(self, member:Hashable):
-        return (member == self.first) or (member == self.second)
-    
-    def other(self, member:Hashable):
-        if member == self.first:
-            return self.second
-        return self.first
-
-    def check(self, assignmentA:Tuple[Hashable,Any], assignmentB:Tuple[Hashable,Any]) -> bool:
-        firstVal = secondVal = None
-        if (assignmentA[0] == self.first) and (assignmentB[0] == self.second):
-            firstVal, secondVal = assignmentA[1], assignmentB[1]
-        elif (assignmentA[0] == self.second) and (assignmentB[0] == self.first):
-            firstVal, secondVal = assignmentB[1], assignmentA[1]
-        else:
-            raise Exception(f"Invalid inputs checking {self}: {assignmentA}, {assignmentB}")
-
-        return self.testFunc(firstVal, secondVal)
-
-    def checkAssignments(self, assignments:Dict) -> bool:
-        if (self.first not in assignments) or (self.second not in assignments):
-            return False
-        return self.testFunc(assignments[self.first], assignments[self.second])
-
-class CSP:
-    def __init__(self, variables:Iterable[Hashable], constraints:Iterable[BinaryConstraint]):
-        self.variables = list(variables)
-        self.constraints = list(constraints)
-        self.varConstraints = { var: [c for c in constraints if var in c] for var in variables }
-    
-    def forVariable(self, variable:Hashable) -> Iterable[BinaryConstraint]:
-        if variable in self.varConstraints:
-            return self.varConstraints[variable]
-        return []
-    
-    def checkAssignments(self, assignments:Dict):
-        return all((constraint.checkAssignments(assignments) for constraint in self.constraints))
 
 def print_board(board:Dict):
     """Helper function to print board in a square."""
@@ -144,7 +105,6 @@ def generateConstraints():
     
     return [ BinaryConstraint(first, second, notEqual) for first,second in uniqueArcs ]
 
-
 def generateInitialState(board:Dict) -> Tuple[Tuple,Dict,Dict]:
     variables = []
     assignments = {}
@@ -158,93 +118,11 @@ def generateInitialState(board:Dict) -> Tuple[Tuple,Dict,Dict]:
             domains[cell] = set(initial_domains)
     return tuple(variables), assignments, domains
 
-def forward_check(assignment:Tuple[Hashable,Any], domains:Dict, csp:CSP) -> Tuple[bool, Dict]:
-    """takes in assignments and applies forward checking to the variable domains
-    according to the given constraints
-    returns a tuple indicating if the forward check was consistent and the new domains it generated"""
-    new_domains = dict(domains)
-    var,val = assignment
-    constraints_for_var = csp.forVariable(var)
-    for constraint in constraints_for_var:
-        other = constraint.other(var)
-        domain = domains.get(other, None)
-        if not domain:
-            continue
-
-        fc_domain = { value for value in domain if constraint.check(assignment, (other,value)) }
-        if len(fc_domain) == 0:
-            return False, {}
-        
-        new_domains[other] = fc_domain
-
-    return True, new_domains
-
-def pop_minimum_remaining_value(domains:Dict) -> Tuple[str, Iterable]:
-    def domain_size(key) -> int:
-        return len(domains[key])
-
-    minEntry = min(domains.keys(), key=domain_size)
-    return minEntry, domains.pop(minEntry)
-
-def order_domain_values(variable, domain:Iterable, domains:Dict, csp:CSP) -> Iterable:
-    fc_domains = []
-
-    for value in domain:
-        ok, new_domains = forward_check((variable, value), domains, csp)
-        if not ok:
-            continue
-        total_domain_size = sum((len(d) for d in new_domains.values()))
-        fc_domains.append((value, new_domains, total_domain_size))
-    
-    def domain_size(tup) -> int:
-        return tup[2]
-
-    return sorted(fc_domains, key=domain_size, reverse=True)
-
-def goal_test(assignments:Dict, variables:Tuple, csp:CSP) -> bool:
-    if len(assignments) != len(variables):
-        return False
-    return csp.checkAssignments(assignments)
-
-
-def backtracking_recursive(variables:Tuple, assignments:Dict, domains:Dict, csp:CSP) -> Optional[Dict]:
-    """returns None if no solution was found or a solved board"""
-    if goal_test(assignments, variables, csp):
-        return assignments
-
-    var, values = pop_minimum_remaining_value(domains)
-    '''
-    ordered_values = order_domain_values(var, values, domains, csp)
-    for value, fc_domains, _ in ordered_values:
-    '''
-    
-    for value in values:
-        ok, fc_domains = forward_check((var,value), domains, csp)
-        if not ok:
-            continue
-    
-        assignments[var] = value
-        result = backtracking_recursive(variables, assignments, fc_domains, csp)
-        if result:
-            return result
-        del assignments[var]
-
-    domains[var] = values
-    return None
-
 def backtracking(board:Dict):
     """Takes a board and returns solved board."""
     variables, assignments, domains = generateInitialState(board)
-    csp: CSP = CSP(variables, generateConstraints())
-
-    for assigment in assignments.items():
-        ok, new_domains = forward_check(assigment, domains, csp)
-        if not ok:
-            raise Exception("Unsolvable board???")
-        domains = new_domains
-
-    solved_board = backtracking_recursive(variables, assignments, domains, csp)
-    return solved_board
+    constraints =  generateConstraints()
+    return csp.search.backtracking_general(variables, assignments, domains, constraints)
 
 def solve_line_board(line:str) -> Tuple[str, BoardStats]:
     # Parse boards to dict representation, scanning board L to R, Up to Down
