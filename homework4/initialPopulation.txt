@@ -1,8 +1,0 @@
-{'emptyWeight': 364, 'mergeableWeight': 745, 'montonicWeight': 509, 'totalValueWeight': 394}
-{'emptyWeight': 786, 'mergeableWeight': 268, 'montonicWeight': 105, 'totalValueWeight': 662}
-{'emptyWeight': 260, 'mergeableWeight': 535, 'montonicWeight': 857, 'totalValueWeight': 647}
-{'emptyWeight': 259, 'mergeableWeight': 714, 'montonicWeight': 982, 'totalValueWeight': 823}
-{'emptyWeight': 888, 'mergeableWeight': 419, 'montonicWeight': 407, 'totalValueWeight': 787}
-{'emptyWeight': 473, 'mergeableWeight': 246, 'montonicWeight': 680, 'totalValueWeight': 756}
-{'emptyWeight': 401, 'mergeableWeight': 490, 'montonicWeight': 164, 'totalValueWeight': 259}
-{'emptyWeight': 774, 'mergeableWeight': 535, 'montonicWeight': 618, 'totalValueWeight': 846}

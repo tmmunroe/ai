@@ -1,8 +1,0 @@
-dfs;3,1,2,0,4,5,6,7,8
-path_to_goal: ['Up']
-cost_of_path: 1
-nodes_expanded: 1
-search_depth: 1
-max_search_depth: 1
-running_time: 0.00188088
-max_ram_usage: 0.07812500
