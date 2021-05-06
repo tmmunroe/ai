@@ -1,0 +1,652 @@
+Best Average Tiles:
+Weights: {'emptyWeight': 695, 'mergeableWeight': 812, 'montonicWeight': 727, 'totalValueWeight': 617}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=695, mergeableWeight=812, montonicWeight=727, totalValueWeight=617)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 8192
+MinTile: 512
+AvgTile: 3788.8
+StdDevTile: 2887.244222437721
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [8192, 4096, 4096, 2048, 512]
+===================================
+Weights: {'emptyWeight': 60, 'mergeableWeight': 679, 'montonicWeight': 942, 'totalValueWeight': 716}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=60, mergeableWeight=679, montonicWeight=942, totalValueWeight=716)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 3276.8
+StdDevTile: 1121.7357977705801
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 172, 'mergeableWeight': 294, 'montonicWeight': 245, 'totalValueWeight': 410}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=172, mergeableWeight=294, montonicWeight=245, totalValueWeight=410)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 3276.8
+StdDevTile: 1121.7357977705801
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 800, 'totalValueWeight': 600}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=400, mergeableWeight=600, montonicWeight=800, totalValueWeight=600)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 3276.8
+StdDevTile: 1121.7357977705801
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 430, 'mergeableWeight': 829, 'montonicWeight': 895, 'totalValueWeight': 775}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=430, mergeableWeight=829, montonicWeight=895, totalValueWeight=775)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3072
+StdDevTile: 1448.1546878700494
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 49, 'mergeableWeight': 566, 'montonicWeight': 723, 'totalValueWeight': 506}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=49, mergeableWeight=566, montonicWeight=723, totalValueWeight=506)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3072
+StdDevTile: 1448.1546878700494
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 821, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=655, mergeableWeight=419, montonicWeight=821, totalValueWeight=911)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3072
+StdDevTile: 1448.1546878700494
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 800, 'mergeableWeight': 200, 'montonicWeight': 400, 'totalValueWeight': 400}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=800, mergeableWeight=200, montonicWeight=400, totalValueWeight=400)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 3072
+StdDevTile: 1448.1546878700494
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 210, 'mergeableWeight': 834, 'montonicWeight': 209, 'totalValueWeight': 763}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=210, mergeableWeight=834, montonicWeight=209, totalValueWeight=763)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2969.6
+StdDevTile: 1635.1968688815423
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 512]
+===================================
+Weights: {'emptyWeight': 865, 'mergeableWeight': 886, 'montonicWeight': 740, 'totalValueWeight': 515}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=865, mergeableWeight=886, montonicWeight=740, totalValueWeight=515)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 128
+AvgTile: 2892.8
+StdDevTile: 1781.914476062193
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 2048, 128]
+===================================
+Weights: {'emptyWeight': 713, 'mergeableWeight': 733, 'montonicWeight': 235, 'totalValueWeight': 999}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=713, mergeableWeight=733, montonicWeight=235, totalValueWeight=999)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 922, 'mergeableWeight': 176, 'montonicWeight': 336, 'totalValueWeight': 194}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=922, mergeableWeight=176, montonicWeight=336, totalValueWeight=194)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 107, 'mergeableWeight': 448, 'montonicWeight': 233, 'totalValueWeight': 365}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=107, mergeableWeight=448, montonicWeight=233, totalValueWeight=365)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 406, 'mergeableWeight': 712, 'montonicWeight': 945, 'totalValueWeight': 628}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=406, mergeableWeight=712, montonicWeight=945, totalValueWeight=628)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 134, 'mergeableWeight': 535, 'montonicWeight': 463, 'totalValueWeight': 776}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=134, mergeableWeight=535, montonicWeight=463, totalValueWeight=776)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=600, montonicWeight=600, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 400, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=400, mergeableWeight=600, montonicWeight=600, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2867.2
+StdDevTile: 1121.7357977705801
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 4096, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=600, mergeableWeight=200, montonicWeight=600, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2764.8
+StdDevTile: 1831.7868871678277
+MedianTile: 4096
+ModeTile: 4096
+Game max tiles: [4096, 4096, 4096, 1024, 512]
+===================================
+Weights: {'emptyWeight': 23, 'mergeableWeight': 195, 'montonicWeight': 946, 'totalValueWeight': 531}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=23, mergeableWeight=195, montonicWeight=946, totalValueWeight=531)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 908, 'mergeableWeight': 472, 'montonicWeight': 524, 'totalValueWeight': 574}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=908, mergeableWeight=472, montonicWeight=524, totalValueWeight=574)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 604, 'mergeableWeight': 28, 'montonicWeight': 243, 'totalValueWeight': 546}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=604, mergeableWeight=28, montonicWeight=243, totalValueWeight=546)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 776, 'mergeableWeight': 916, 'montonicWeight': 722, 'totalValueWeight': 574}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=776, mergeableWeight=916, montonicWeight=722, totalValueWeight=574)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 669, 'mergeableWeight': 4, 'montonicWeight': 865, 'totalValueWeight': 465}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=669, mergeableWeight=4, montonicWeight=865, totalValueWeight=465)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 742, 'mergeableWeight': 729, 'montonicWeight': 838, 'totalValueWeight': 589}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=742, mergeableWeight=729, montonicWeight=838, totalValueWeight=589)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 227, 'mergeableWeight': 787, 'montonicWeight': 234, 'totalValueWeight': 481}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=227, mergeableWeight=787, montonicWeight=234, totalValueWeight=481)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 402, 'mergeableWeight': 582, 'montonicWeight': 268, 'totalValueWeight': 353}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=402, mergeableWeight=582, montonicWeight=268, totalValueWeight=353)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 193, 'mergeableWeight': 327, 'montonicWeight': 397, 'totalValueWeight': 594}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=193, mergeableWeight=327, montonicWeight=397, totalValueWeight=594)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 400, 'mergeableWeight': 800, 'montonicWeight': 400, 'totalValueWeight': 200}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=400, mergeableWeight=800, montonicWeight=400, totalValueWeight=200)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 600, 'mergeableWeight': 600, 'montonicWeight': 600, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=600, mergeableWeight=600, montonicWeight=600, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 200}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=200, montonicWeight=600, totalValueWeight=200)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 200, 'totalValueWeight': 200}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=200, montonicWeight=200, totalValueWeight=200)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2662.4
+StdDevTile: 1373.8401653758708
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=655, mergeableWeight=419, montonicWeight=629, totalValueWeight=911)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2560
+StdDevTile: 1106.046412528275
+MedianTile: 2048.0
+ModeTile: 2048
+Game max tiles: [4096, 4096, 4096, 2048, 2048, 2048, 2048, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 655, 'mergeableWeight': 419, 'montonicWeight': 629, 'totalValueWeight': 911}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=655, mergeableWeight=419, montonicWeight=629, totalValueWeight=911)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2560
+StdDevTile: 1106.046412528275
+MedianTile: 2048.0
+ModeTile: 2048
+Game max tiles: [4096, 4096, 4096, 2048, 2048, 2048, 2048, 2048, 2048, 1024]
+===================================
+Weights: {'emptyWeight': 104, 'mergeableWeight': 922, 'montonicWeight': 787, 'totalValueWeight': 842}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=104, mergeableWeight=922, montonicWeight=787, totalValueWeight=842)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 512]
+===================================
+Weights: {'emptyWeight': 269, 'mergeableWeight': 212, 'montonicWeight': 236, 'totalValueWeight': 386}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=269, mergeableWeight=212, montonicWeight=236, totalValueWeight=386)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 512]
+===================================
+Weights: {'emptyWeight': 800, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 600}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=800, mergeableWeight=600, montonicWeight=400, totalValueWeight=600)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 512]
+===================================
+Weights: {'emptyWeight': 400, 'mergeableWeight': 400, 'montonicWeight': 400, 'totalValueWeight': 600}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=400, mergeableWeight=400, montonicWeight=400, totalValueWeight=600)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 512
+AvgTile: 2560
+StdDevTile: 1536.0
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 512]
+===================================
+Weights: {'emptyWeight': 757, 'mergeableWeight': 871, 'montonicWeight': 194, 'totalValueWeight': 558}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=757, mergeableWeight=871, montonicWeight=194, totalValueWeight=558)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 256
+AvgTile: 2508.8
+StdDevTile: 1623.1288303766896
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 2048, 256]
+===================================
+Weights: {'emptyWeight': 718, 'mergeableWeight': 71, 'montonicWeight': 390, 'totalValueWeight': 669}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=718, mergeableWeight=71, montonicWeight=390, totalValueWeight=669)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 434, 'mergeableWeight': 290, 'montonicWeight': 446, 'totalValueWeight': 678}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=434, mergeableWeight=290, montonicWeight=446, totalValueWeight=678)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 533, 'mergeableWeight': 266, 'montonicWeight': 801, 'totalValueWeight': 824}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=533, mergeableWeight=266, montonicWeight=801, totalValueWeight=824)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 723, 'mergeableWeight': 17, 'montonicWeight': 777, 'totalValueWeight': 321}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=723, mergeableWeight=17, montonicWeight=777, totalValueWeight=321)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 601, 'mergeableWeight': 672, 'montonicWeight': 697, 'totalValueWeight': 571}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=601, mergeableWeight=672, montonicWeight=697, totalValueWeight=571)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 400, 'montonicWeight': 800, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=400, montonicWeight=800, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 600, 'montonicWeight': 400, 'totalValueWeight': 400}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=600, montonicWeight=400, totalValueWeight=400)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 600, 'mergeableWeight': 200, 'montonicWeight': 600, 'totalValueWeight': 400}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=600, mergeableWeight=200, montonicWeight=600, totalValueWeight=400)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 200, 'mergeableWeight': 200, 'montonicWeight': 800, 'totalValueWeight': 800}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=200, mergeableWeight=200, montonicWeight=800, totalValueWeight=800)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 2048
+AvgTile: 2457.6
+StdDevTile: 915.8934435839138
+MedianTile: 2048
+ModeTile: 2048
+Game max tiles: [4096, 2048, 2048, 2048, 2048]
+===================================
+Weights: {'emptyWeight': 52, 'mergeableWeight': 244, 'montonicWeight': 904, 'totalValueWeight': 951}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=52, mergeableWeight=244, montonicWeight=904, totalValueWeight=951)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2457.6
+StdDevTile: 1552.9728909417577
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 1024, 1024]
+===================================
+Weights: {'emptyWeight': 517, 'mergeableWeight': 218, 'montonicWeight': 570, 'totalValueWeight': 990}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=517, mergeableWeight=218, montonicWeight=570, totalValueWeight=990)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2457.6
+StdDevTile: 1552.9728909417577
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 1024, 1024]
+===================================
+Weights: {'emptyWeight': 732, 'mergeableWeight': 130, 'montonicWeight': 847, 'totalValueWeight': 387}
+Config: Algo: <class 'algos.alphabetaExpecti.ExpectiAlphaBeta'>
+Evaluator: Monotonic(emptyWeight=732, mergeableWeight=130, montonicWeight=847, totalValueWeight=387)
+TimePerTurn: 0.15
+Games: 1
+MaxTile: 4096
+MinTile: 1024
+AvgTile: 2457.6
+StdDevTile: 1552.9728909417577
+MedianTile: 2048
+ModeTile: 0.0
+Game max tiles: [4096, 4096, 2048, 1024, 1024]
+===================================
+===================================
