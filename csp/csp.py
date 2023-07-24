@@ -3,7 +3,7 @@ from typing import Optional, Iterable, Tuple, Set, List, Dict, Hashable, Any, Ca
 import sys
 import time
 import math
-import csp.constraint.BinaryConstraint as BinaryConstraint
+from constraint import BinaryConstraint
 
 class CSP:
     def __init__(self, variables:Iterable[Hashable], constraints:Iterable[BinaryConstraint]):

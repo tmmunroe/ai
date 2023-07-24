@@ -4,8 +4,8 @@ import sys
 import time
 import math
 import copy
-import csp.csp.CSP as CSP
-import csp.constraint.BinaryConstraint as BinaryConstraint
+from csp import CSP
+from constraint import BinaryConstraint
 
 def forward_check(assignment:Tuple[Hashable,Any], domains:Dict, csp:CSP) -> Tuple[bool, Dict]:
     """takes in assignments and applies forward checking to the variable domains
@@ -84,10 +84,13 @@ def backtracking_recursive(variables:Tuple, assignments:Dict, domains:Dict, csp:
     return None
 
 
-def trim_assigned_domains(domains:Dict, assigments:Dict) -> Dict:
+def trim_assigned_domains(domains:Dict, assigments:Dict, strict:bool=True) -> Dict:
     new_domains = copy.deepcopy(domains)
     for assigned in assigments:
-        del new_domains[assigned]
+        if assigned in new_domains:
+            del new_domains[assigned]
+        elif strict:
+            raise ValueError(f'Strict trimming enforced. Expected all new assignments to be in original domain, but did not find {assigned} there')
     return new_domains
 
 
@@ -104,8 +107,9 @@ def backtracking_general(variables:Tuple, assignments:Dict, domains:Dict, constr
     '''
     csp: CSP = CSP(variables, constraints)
     all_variables = tuple(variables)
-
-    unassigned_domains = trim_assigned_domains(domains, assignments)
+    # print('Domains: ', domains)
+    # print('Assignments: ', assignments)
+    unassigned_domains = trim_assigned_domains(domains, assignments, strict=False)
     for assigment in assignments.items():
         ok, new_domains = forward_check(assigment, unassigned_domains, csp)
         if not ok:

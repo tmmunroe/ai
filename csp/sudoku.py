@@ -6,9 +6,9 @@ import sys
 import time
 import math
 import copy
-import csp.csp.CSP as CSP
-import csp.constraint.BinaryConstraint as BinaryConstraint
-import csp.search
+from csp import CSP
+from constraint import BinaryConstraint
+import search
 
 """
 Each sudoku board is represented as a dictionary with string keys and
@@ -122,7 +122,7 @@ def backtracking(board:Dict):
     """Takes a board and returns solved board."""
     variables, assignments, domains = generateInitialState(board)
     constraints =  generateConstraints()
-    return csp.search.backtracking_general(variables, assignments, domains, constraints)
+    return search.backtracking_general(variables, assignments, domains, constraints)
 
 def solve_line_board(line:str) -> Tuple[str, BoardStats]:
     # Parse boards to dict representation, scanning board L to R, Up to Down
@@ -203,6 +203,8 @@ def test_batch_file():
                 print(f'{c}: {a} - {e}')
                 if a != e:
                     raise Exception(f'Error at character {c} {a} vs {e}')
+
+    print('All boards solved correctly')
 
 if __name__ == '__main__':
     '''
