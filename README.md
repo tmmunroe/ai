@@ -1,2 +1,2 @@
 # ai
-Columbia AI Course
+Various AI algorithms ranging from CSPs to games to search
