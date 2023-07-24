@@ -175,7 +175,7 @@ def batch_file():
         outfile.write(solved_board)
         outfile.write('\n')
 
-    with open('README.txt', 'w') as f:
+    with open('stats.txt', 'w') as f:
         totalTime = sum((bs.runTime() for bs in allBs))
         mean = totalTime / len(allBs)
         variance = sum(((bs.runTime() - mean)**2 for bs in allBs)) / len(allBs)

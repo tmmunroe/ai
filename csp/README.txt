@@ -1,5 +1,3 @@
-Solved: 400 / 400
-Mean runtime: 0.01879658341407776
-Standard Deviation: 0.011142444795239589
-Max runtime: 0.10396504402160645
-Min runtime: 0.010903596878051758
+Usage:
+
+python sudoku.py
